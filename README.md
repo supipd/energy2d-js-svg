@@ -7,6 +7,8 @@ This repository is successor of [energy2d-js](https://github.com/concord-consort
 
 Aim of this rework is javascript port fully compliant (in term of comparable results) with main Java version.
 
+Testing implementation: [working demo](http://www.sbmintegral.sk/GITHUB/energy2d-js-svg/model2d-demo.html)
+
 # Work in progress
 
 ### Warning:
