@@ -10,6 +10,7 @@ model2d.RadiositySolver2D = function(model) {
     this.model = model;
     
 	this.segments = [];
+	this.segmentJoins = [];
 	this.patchSize;
 	this.patchSizePercentage = model.perimeterStepSize; //0.05;
 	this.reflection = [];  //[][];
@@ -109,11 +110,11 @@ model2d.RadiositySolver2D.prototype.solve = function() {
         if (m > 1) {
             power = (s.absorption - s.emission) / (m - 1);
             // equally divide and add energy to the power density array (the last round of radiation energy has been stored as thermal energy by the heat solver)
-            dx = (s.x2 - s.x1) / m;
-            dy = (s.y2 - s.y1) / m;
+            dx = (s.e.x - s.s.x) / m;
+            dy = (s.e.y - s.s.y) / m;
             // somehow we have to bypass the end points to avoid duplicating energy around a corner
             for (var a = 1; a < m; a++)
-                this.model.changePowerAt(s.s.x + dx * a, s.y1 + dy * a, power);
+                this.model.changePowerAt(s.s.x + dx * a, s.s.y + dy * a, power);
         }
     }
 }
@@ -121,14 +122,21 @@ model2d.RadiositySolver2D.prototype.solve = function() {
 // populate the reflection matrix and the absorption matrix using visibility and view factors
 model2d.RadiositySolver2D.prototype.computeReflectionAndAbsorptionMatrices = function() {
 
-    var G = model2d.G;
-    
+    var G = model2d.G
+    ,   dVFM = model2d.drawerViewFactorMesh
+    ;
+    dVFM.init(this.model);
+
     var n = this.segments.length;
     var ni, nij, nj, nji;
     var/*Segment*/ s1, s2;
     var vf;
     for (var i = 0; i < n; i++) {
         ni = n * i;
+
+        s1 = this.segments[i];
+        s1.svgLine = dVFM.genSegment(s1);
+
         for (var j = 0; j < n; j++) {
             nij = ni + j;
             this.reflection[nij] = i == j ? 1 : 0; // the diagonal elements must be one because a segment is a line (hence the view factor must be zero)
@@ -137,24 +145,37 @@ model2d.RadiositySolver2D.prototype.computeReflectionAndAbsorptionMatrices = fun
     }
     for (var i = 0; i < n - 1; i++) {
         ni = n * i;
-        nj = n * j;
         s1 = this.segments[i];
+DEBUGABLE_BY_VIEW && (s1.svgLine.style.strokeWidth = 10);
         for (var j = i + 1; j < n; j++) {
             nij = ni + j;
-            nji = nj + i;
+            nji = n * j + i;
             s2 = this.segments[j];
-            if (this.isVisible(s1, s2)) {
-                vf = G.viewFactor(s1, s2);
-                if (vf > 1) // FIXME: Why is our view factor larger than 1 when two patches are very close?
-                    vf = 1;
-                // the order of s1 and s2 is important below
-                var lengthRatio = G.lineLength(s1) / G.lineLength(s2); // apply the reciprocity rule
-                this.reflection[nij] = -s1.part.reflection * vf;
-                this.reflection[nji] = -s2.part.reflection * vf * lengthRatio;
-                this.absorption[nij] = s1.part.absorption * vf;
-                this.absorption[nji] = s2.part.absorption * vf * lengthRatio;
+DEBUGABLE_BY_VIEW && (s2.svgLine.style.strokeWidth = 10, s2.svgLine.style.stroke = 'red');
+//set breakpoint to next row if DEBUGABLE_BY_VIEW = true 
+            if ( ! G.intersection(s1, s2).colinear) {
+				if (this.isVisible(s1, s2)) {
+					vf = G.viewFactor(s1, s2);
+					if (vf > 1) // FIXME: Why is our view factor larger than 1 when two patches are very close?
+						vf = 1;
+					// the order of s1 and s2 is important below
+					var lengthRatio = G.lineLength(s1) / G.lineLength(s2); // apply the reciprocity rule
+					this.reflection[nij] = -s1.part.reflection * vf;
+					this.reflection[nji] = -s2.part.reflection * vf * lengthRatio;
+					this.absorption[nij] = s1.part.absorption * vf;
+					this.absorption[nji] = s2.part.absorption * vf * lengthRatio;
+
+                    this.segmentJoins.push( {
+                    	s:s1.c,
+                    	e:s2.c,
+                    	vf:vf,
+                    	line: dVFM.genSegmentsJoin(s1, s2)
+                    } );
+                }
             }
-        }
+DEBUGABLE_BY_VIEW && (s2.svgLine.style.strokeWidth = '', s2.svgLine.style.stroke = '');
+		}
+DEBUGABLE_BY_VIEW && (s1.svgLine.style.strokeWidth = '');
     }
 }
 
@@ -168,6 +189,12 @@ model2d.RadiositySolver2D.prototype.segmentizePerimeters = function() {
         //this.segmentizePerimeter(part);
         this.segments = this.segments.concat(part.segments);
     }
+    // init segment deefaault physical properties ... aka object Segment
+    this.segments.forEach(seg => {
+    	seg.radiation = 0;
+    	seg.absorption = 0;
+    	seg.emission = 0;
+    })
     var n = this.segments.length;
     this.reflection = createArray(n, 0);
     this.absorption = createArray(n, 0);

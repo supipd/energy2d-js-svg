@@ -8,9 +8,6 @@ function rounder( num, decs_m ) {
 	return isNbr(val) ? Math.round( val * decs_m ) / decs_m : val; 
 }
 
-
-//  function model2d_svg_extension( model2d ) {
-
 model2d.setSvgParams = function(model) {
 
     var svg = model.svg;
@@ -19,10 +16,16 @@ model2d.setSvgParams = function(model) {
     var scene_width = model.lx;
     var scene_height = model.ly;
 
-    var svg_width = parseFloat(svgG.ownerSVGElement.getAttribute('width'))
-    var svg_height = parseFloat(svgG.ownerSVGElement.getAttribute('height'))
-    var scale_x = (svg_width - 1) / scene_width;
-    var scale_y = (svg_height - 1) / scene_height;
+    var dataSize = svgG.ownerSVGElement.dataset.sizes 
+    ,   sizes = JSON5.parseOr(dataSize, {
+            width: parseFloat(svgG.ownerSVGElement.getAttribute('width'))
+        ,   height: parseFloat(svgG.ownerSVGElement.getAttribute('height'))
+        })
+    ,   svg_width = sizes.width
+    ,   svg_height = sizes.height
+    ,   scale_x = (svg_width - 1) / scene_width
+    ,   scale_y = (svg_height - 1) / scene_height
+    ;
 
     model.svg.scale_x = scale_x;
     model.svg.scale_y = scale_y;
@@ -33,33 +36,54 @@ model2d.setSvgParams = function(model) {
     // Find your root SVG element
     var svgRoot = svgG.ownerSVGElement;  //document.querySelector('svg');
 
-    // Create an SVGPoint for future math
-    var pt = svgRoot.createSVGPoint();
+/*    if (! svgRoot.dataset.measured) {
+        // Create an SVGPoint for future math
+        var pt = svgRoot.createSVGPoint();
 
-    // Get point in global SVG space
-    function cursorPoint(evt){
-      pt.x = evt.clientX; pt.y = evt.clientY;
-      return pt.matrixTransform(svgRoot.getScreenCTM().inverse());
+        // Get point in global SVG space
+        function cursorPoint(evt){
+          pt.x = evt.clientX; pt.y = evt.clientY;
+          return pt.matrixTransform(svgRoot.getScreenCTM().inverse());
+        }
+
+        svgRoot.addEventListener('mousemove',function(evt){
+          var loc = cursorPoint(evt);
+          // Use loc.x and loc.y here
+            model2d.measuring.update(loc.x,loc.y, model);
+        },false);
+
+        svgRoot.dataset.measured = true;
     }
-
-    svgRoot.addEventListener('mousemove',function(evt){
-      var loc = cursorPoint(evt);
-      // Use loc.x and loc.y here
-        model2d.measuring.update(loc.x,loc.y, model);
-    },false);
+*/
+    svgRoot.removeEventListener('mousemove', model2d.measuring.listen);
+    model2d.measuring.model = model;
+    svgRoot.addEventListener('mousemove', model2d.measuring.listen);
 }
 
 model2d.measuring = {
     last_x: 0
 ,   last_y: 0
-,   update: function (x, y, model) {
+,   model: null
+,   listen: function(evt) {
+        var svgRoot = evt.currentTarget
+        ,   pt = svgRoot.createSVGPoint()
+        ,   cursorPoint = function(evt) {
+                pt.x = evt.clientX; pt.y = evt.clientY;
+                return pt.matrixTransform(svgRoot.getScreenCTM().inverse());
+            }
+        ,   loc = cursorPoint(evt)
+        ;
+        model2d.measuring.update(loc.x,loc.y);
+    }
+,   update: function (x, y) {
 
-        var frme = document.forms.central.elements
+        var model = this.model
+        ,   frme = document.forms.central.elements
         ,   isX = (typeof x == 'number')
         ,   auto = frme.meas_auto.checked
         ,   fix = frme.meas_fix.checked
         ;
-        if (fix || ! isX && ! auto) {
+        if (! model || fix || ! isX && ! auto) {
             return;
         } 
         var x = isX ? x : this.last_x
@@ -153,16 +177,48 @@ model2d.G = {
         return this.distToPoint(point, line.s.x + t * dx, line.s.y + t * dy);
     }
 //  https://stackoverflow.com/questions/9043805/test-if-two-lines-intersect-javascript-function
-,   isIntersecting: function (line1, line2) {
-        var p1 = line1.s
+//,   isColinear(point, line) {
+//        var dx = line.e.x - line.s.x
+//        ,   dy = line.e.y - line.s.y
+//        ,   px = point.x - line.s.x
+//        ,   py = point.y - line.s.y
+//        ,   ccw = (px * dy) - (py * dx) // px / dx = py / dy
+//        ;
+//        return ccw == 0;
+//    }
+//,   isIntersecting: function (line1, line2) {
+//        var CCW = function (p1, p2, p3) {
+//                return (p3.y - p1.y) * (p2.x - p1.x) > (p2.y - p1.y) * (p3.x - p1.x);
+//            }
+//        ,   p1 = line1.s
+//        ,   p2 = line1.e
+//        ,   p3 = line2.s
+//        ,   p4 = line2.e
+//        ,   c1on34 = CCW(p1, p3, p4)
+//        ,   c2on34 = CCW(p2, p3, p4)
+//        ,   c1on23 = CCW(p1, p2, p3)
+//        ,   c1on24 = CCW(p1, p2, p4)
+//        ;       
+//        return (CCW(p1, p3, p4) != CCW(p2, p3, p4)) && (CCW(p1, p2, p3) != CCW(p1, p2, p4));
+//    }
+,   intersection: function (line1, line2) {
+        var CCW = function (p1, p2, p3) {
+                return (p3.y - p1.y) * (p2.x - p1.x) /*>*/- (p2.y - p1.y) * (p3.x - p1.x);
+            }
+        ,   p1 = line1.s
         ,   p2 = line1.e
         ,   p3 = line2.s
         ,   p4 = line2.e
-        ;
-        function CCW(p1, p2, p3) {
-            return (p3.y - p1.y) * (p2.x - p1.x) > (p2.y - p1.y) * (p3.x - p1.x);
-        }
-        return (CCW(p1, p3, p4) != CCW(p2, p3, p4)) && (CCW(p1, p2, p3) != CCW(p1, p2, p4));
+        ,   c1on34 = CCW(p1, p3, p4)
+        ,   c2on34 = CCW(p2, p3, p4)
+        ,   colinear = (c1on34 == 0) && (c2on34 == 0)
+        ,   b1on34 = c1on34 > 0
+        ,   b2on34 = c2on34 > 0
+        ,   b1on23 = CCW(p1, p2, p3) > 0
+        ,   b1on24 = CCW(p1, p2, p4) > 0
+        ,   intersect = (b1on34 != b2on34) && (b1on23 != b1on24)
+        ;       
+        return { colinear: colinear, intersect : intersect };
     }
 ,   viewFactor(line1, line2) {
 		// calculate the center of this segment
@@ -187,7 +243,6 @@ model2d.genShapeGeometry = function(part/*shape*/, model/*svg*/) {
     var svgG = model.svg.group;
     var scale_x = model.svg.scale_x;
     var scale_y = model.svg.scale_y;
-    var patchSizePercentage = model.radiositySolver.patchSizePercentage;
 
     var svgElemGroup = svgG.ownerDocument.createElementNS(svgNS, 'g');
     var svgElement;
@@ -362,9 +417,8 @@ A${pia} ${pib} 0 0 1 ${px} ${py - pib} Z
     return svgElement;
 }
 
+model2d.DIST_RESOLUTION = 0.001;
 model2d.segmentizeShapePerimeter = function(part, model, groupIt = false) {
-
-    const DIST_RESOLUTION = 1;
 
     var G = this.G;
 
@@ -377,8 +431,8 @@ model2d.segmentizeShapePerimeter = function(part, model, groupIt = false) {
     ;
 
     var offset = 0
+    ,   patchSize = lx * patchSizePercentage * scale_x
     ,   totalLength = svgElement.getTotalLength()
-    ,   patchSize = totalLength * patchSizePercentage
     ,   delta = Math.min(patchSize, totalLength)
     ,   pt0, pt1, pt2, line, lineSvg, distance
     ,   segments = []
@@ -400,8 +454,8 @@ TODO
                 ,   c:{x: 0.5 * (pt0.x + pt2.x) / scale_x, y: 0.5 * (pt0.y + pt2.y) / scale_y}
                 ,   part: part
                 };
-        distance = G.distToSegment(pt1, lineSvg);
-        if (distance < DIST_RESOLUTION) {
+        distance = G.distToSegment(pt1, lineSvg);   // in svg units 
+        if (distance < model2d.DIST_RESOLUTION * scale_x) {
             d+=`L${pt2.x} ${pt2.y}`;
             segments.push(line);
             pt0 = pt2;
@@ -424,9 +478,98 @@ TODO
             var line = gLines.appendChild(doc.createElementNS(svgNS,'line'));
             line.setAttribute('x1', seg.s.x * scale_x);line.setAttribute('y1', seg.s.y * scale_y);
             line.setAttribute('x2', seg.e.x * scale_x);line.setAttribute('y2', seg.e.y * scale_y);
+            line.setAttribute('marker-start', "url(#StartMarker)");
+            line.setAttribute('marker-end', "url(#EndMarker)");
         })
     }
     return {d: d, segments: segments};
+}
+
+model2d.drawerViewFactorMesh = {    // SINGLETON
+    model: null
+,   scale_x: 1
+,   scale_y: 1
+,   init: function(model) {
+        this.model = model;
+
+        this.scale_x = this.model.svg.scale_x;
+        this.scale_y = this.model.svg.scale_y;
+
+        var gSVG = this.model.svg.group
+        ,	gRadiosity = gSVG.querySelector('#radiosity')
+                        || gSVG.appendChild(gSVG.ownerDocument.createElementNS(svgNS,'g'))
+        ,	gSegments = gRadiosity.querySelector('#segments')
+                        || gRadiosity.appendChild(gSVG.ownerDocument.createElementNS(svgNS,'g'))
+        ,	gSegmentsJoins = gRadiosity.querySelector('#segmentsJoins')
+                        || gRadiosity.appendChild(gSVG.ownerDocument.createElementNS(svgNS,'g'))
+        ;
+        gSegments.innerHTML = "";
+        gSegmentsJoins.innerHTML = "";
+
+        gRadiosity.id = "radiosity";
+        gSegments.id = 'segments';
+        gSegments.setAttribute('style','stroke-width:0.5;stroke:white');
+        gSegmentsJoins.id = 'segmentsJoins';
+        gSegmentsJoins.setAttribute('style','stroke-width:0.5;stroke:white;stroke-dasharray:1');
+
+        this.gRadiosity = gRadiosity;
+        this.gSegments = gSegments;
+        this.gSegmentsJoins = gSegmentsJoins;
+    }
+,   genSegment: function(seg) {
+        var line = this.gSegments.appendChild(this.gSegments.ownerDocument.createElementNS(svgNS,'line'))
+        ;
+        line.setAttribute('x1', seg.s.x * this.scale_x);
+        line.setAttribute('y1', seg.s.y * this.scale_y);
+        line.setAttribute('x2', seg.e.x * this.scale_x);
+        line.setAttribute('y2', seg.e.y * this.scale_y);
+        //        g.setColor(Color.BLACK);
+        //        g.fill(new Ellipse2D.Float(x1 - 2, y1 - 2, 4, 4));
+        //  use SVG marker-start, marker-end
+        return line;    //seg.svgLine = line;
+    }
+,   genSegmentsJoin: function(s1, s2, viewFactorMin, viewFactorMax) {
+        viewFactorMin = viewFactorMin || 0;
+        viewFactorMax = viewFactorMax || 1;
+
+        var line = this.gSegmentsJoins.appendChild(this.gSegmentsJoins.ownerDocument.createElementNS(svgNS,'line'));
+        line.setAttribute('x1', s1.c.x * this.scale_x);
+        line.setAttribute('y1', s1.c.y * this.scale_y);
+        line.setAttribute('x2', s2.c.x * this.scale_x);
+        line.setAttribute('y2', s2.c.y * this.scale_y);
+//                    g.setColor(new Color(255, 255, 255, (int) (55 + 200 * (vf - viewFactorMin) / (viewFactorMax - viewFactorMin))));
+//                    g.draw(new Line2D.Float(x1, y1, x2, y2));
+        return line;
+    }
+,   redraw: function(model) {
+        if (model) {
+            this.init(model);
+
+            var segments = model.radiositySolver.segments;
+            segments.forEach(seg => {
+                this.genSegment(seg);
+            })
+
+            var segmentJoins = model.radiositySolver.segmentJoins;
+            var viewFactorMax = -Number.MAX_VALUE;
+            var viewFactorMin = Number.MAX_VALUE;
+            segmentJoins.forEach(seg => {
+                if (seg.vf > viewFactorMax)
+                    viewFactorMax = seg.vf;
+                if (seg.vf < viewFactorMin)
+                    viewFactorMin = seg.vf;
+            })
+            segmentJoins.forEach(seg => {
+                this.genSegment(seg, viewFactorMin, viewFactorMax);
+            })
+        }
+    }
+,   generate: function(model, force) {
+        if (! this.gRadiosity || force) {
+            this.redraw(model);
+        }
+        return this.gRadiosity;
+    }
 }
 
 model2d.containsPoint = function(svgElement, x, y, tolerateRoundOffError, model) {
@@ -437,6 +580,26 @@ model2d.containsPoint = function(svgElement, x, y, tolerateRoundOffError, model)
     point.x = x * model.svg.scale_x; point.y = y * model.svg.scale_y; 
 
     return  svgElement.isPointInFill(point);    // || svgElement.isPointInStroke(point);
+}
+
+model2d.containsLine = function(svgElement, centerLine, model) {
+// https://math.stackexchange.com/questions/175896/finding-a-point-along-a-line-a-certain-distance-away-from-another-point
+    if (! svgElement) {
+        return false;
+    }
+    var d = this.G.lineLength(centerLine)
+    ,   t = 100 * model2d.DIST_RESOLUTION * d   // FIXME ... distance delta recognition
+    ,   point = svgElement.ownerSVGElement.createSVGPoint()
+    ;
+    point.x = ((1-t)*centerLine.s.x + t*centerLine.e.x) * model.svg.scale_x; 
+    point.y = ((1-t)*centerLine.s.y + t*centerLine.e.y) * model.svg.scale_y;
+    if (svgElement.isPointInFill(point)) {
+        return true;
+    }
+    t = ( 1 - 2 * model2d.DIST_RESOLUTION ) * d;
+    point.x = ((1-t)*centerLine.s.x + t*centerLine.e.x) * model.svg.scale_x; 
+    point.y = ((1-t)*centerLine.s.y + t*centerLine.e.y) * model.svg.scale_y;
+    return  svgElement.isPointInFill(point);
 }
 
 model2d.usedPatterns = {}; 
@@ -940,5 +1103,3 @@ model2d.generateBlobPathD = function( x, y ) {
     }
     return d;
 }
-//  return model2d;
-//  }

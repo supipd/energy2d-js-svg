@@ -1,14 +1,24 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:svg="http://www.w3.org/2000/svg"
+	xmlns:xlink="http://www.w3.org/1999/xlink" 
+	xmlns:kres="http://www.sbmintegral.sk/docdefs/kres"
+	xml:lang="sk">
 <head>
     <title>Energy2D-JS Demo</title>
     <link href="stylesheets/style.css" rel="stylesheet" type="text/css"/>
+<!--    
     <script src="lib/sprintf.js" type="text/javascript" ></script>
 
 <script src="lib/globals.js" type="text/javascript" ></script>
 <script src="lib/JXONo.js" type="text/javascript" ></script>
-<script src="lib/my_JSON5_compiled.js" type="text/javascript" ></script>
+-->
+	<script type="text/javascript" src="/LIBRARY/AJAX/loadman.js"></script>
+	<link rel="stylesheet" href="/LIBRARY/UI/portal.css" type="text/css"/>
+
 
     <style type="text/css">
     
@@ -117,6 +127,11 @@ textarea#part_info {
 } 
     </style>
 </head>
+<body>
+<div  class="rc_popup" style="left: 2px; top: 3px; z-index: 10; width: 1094px; height: 1069px;">
+    <div class="rc_div_header">
+    </div>
+    <div class="rc_div_body" style="width: 1094px; height: 1047px;">
 <div id="container">
   <div id="header-inner" style="height: 85px;">
     <div style="width: 60%;float: left;">
@@ -156,17 +171,17 @@ textarea#part_info {
                   <legend>Layers rendering and visibility</legend>
 <table style="width: 563px;"><tbody>
 <tr><td>
-                  <label><input name="show_svgGrid" type="checkbox"> Grid</label>
+                  <label><input name="show_svgGrid" type="checkbox"/> Grid</label>
 </td><td>                  
-                  <label><input name="show_svgTemperatureLayer" type="checkbox" checked="checked"> TemperatureLayer</label>
+                  <label><input name="show_svgTemperatureLayer" type="checkbox" checked="checked"/> TemperatureLayer</label>
 </td><td>
-                  <label><input name="show_svgPartsLayer" type="checkbox" checked="checked"> PartsLayer</label>
+                  <label><input name="show_svgPartsLayer" type="checkbox" checked="checked"/> PartsLayer</label>
 </td><td>
-                  <label><input name="show_svgVelocityLayer" type="checkbox" checked="checked"> LinesLayer</label>
-</td><td class="linesel">
-                  <label><input name="show_Velocity" type="checkbox" checked="checked"> Velocity</label>
+                  <label><input name="show_svgVelocityLayer" type="checkbox" checked="checked"/> LinesLayer</label>
+</td><td>
+
 </td></tr><tr><td>
-                  <label><input name="show_svgColorPalette" type="checkbox"> Palette</label>
+                  <label><input name="show_svgColorPalette" type="checkbox"/> Palette</label>
 </td><td>
                   <label><select name="select_ColorPalette">
                     <option>default</option>
@@ -175,21 +190,21 @@ textarea#part_info {
                     <option>GRAY_RGB</option>
                   </select></label>
 </td><td>
-                  <label>Opacity <input name="opacity_svgPartsLayer" type="number" value="1" min="0.1" max="1" step="0.1"></label>
+                  <label>Opacity <input name="opacity_svgPartsLayer" type="number" value="1" min="0.1" max="1" step="0.1"/></label>
 </td><td class="linesel">
-                  <label><input name="show_Isotherm" type="checkbox"> Isotherm</label>
+                  <label><input name="show_Isotherm" type="checkbox"/> Isotherm</label>
 </td><td class="linesel">
-                  <label><input name="show_HeatFlux" type="checkbox"> HeatFlux</label>
+                  <label><input name="show_Velocity" type="checkbox" checked="checked"/> Velocity</label>
 </td></tr><tr><td>
-                  <label><input name="show_svgBorderTickmarks" type="checkbox"> Tickmarks</label>
-</td><td>
-                  
+                  <label><input name="show_svgBorderTickmarks" type="checkbox"/> Tickmarks</label>
 </td><td>
                   
 </td><td class="linesel">
-                  <label><input name="show_Streams" type="checkbox"> Streams</label>
+                  <label><input name="show_Factors" type="checkbox"/> Factors</label>                  
 </td><td class="linesel">
-                  <label><input name="show_Factors" type="checkbox"> Factors</label>
+                  <label><input name="show_Streams" type="checkbox"/> Streams</label>
+</td><td class="linesel">
+                  <label><input name="show_HeatFlux" type="checkbox"/> HeatFlux</label>
 </td></tr>
 </tbody></table>
                 </fieldset>
@@ -200,7 +215,7 @@ textarea#part_info {
             <canvas id="canvasPartsLayer"></canvas>
             <canvas id="canvasVelocityLayer"></canvas>  -->
 
-                <svg width="600px" height="600px"  style="background-color:white">
+                <svg xmlns="http://www.w3.org/2000/svg" data-sizes="{width:600,height:600}" width="600px" height="600px"  style="background-color:white">
 <defs>
     <marker id = "StartMarker" viewBox = "0 0 12 12" refX = "12" refY = "6" markerWidth = "3" markerHeight = "3" stroke = "green" stroke-width = "2" fill = "none" orient = "auto">
         <circle cx = "6" cy = "6" r = "5"/>
@@ -218,7 +233,7 @@ textarea#part_info {
                     <rect width="600" height="600" class="bg" fill="white"></rect>
                     <g id="svgTemperatureLayer">
                         <foreignObject x="0" y="0" width="600" height="600">
-                            <body>
+                            <body xmlns="http://www.w3.org/1999/xhtml" >
                                 <canvas id="canvasTemperatureLayer" x="0" y="0" width="600" height="600"></canvas>
                             </body>
                         </foreignObject>
@@ -227,14 +242,14 @@ textarea#part_info {
                         <g id="svgPartsSpace" style="stroke-width: 2;fill: gray;stroke-linecap: round;stroke: black;">
                         </g>
                         <foreignObject x="0" y="0" width="600" height="600" style="display:none" >
-                            <body>
+                            <body xmlns="http://www.w3.org/1999/xhtml" >
                                 <canvas id="canvasPartsLayer" x="0" y="0" width="600" height="600"></canvas>
                             </body>
                         </foreignObject>
                     </g>
                     <g id="svgVelocityLayer">
                         <foreignObject x="0" y="0" width="600" height="600">
-                            <body>
+                            <body xmlns="http://www.w3.org/1999/xhtml" >
                                 <canvas id="canvasVelocityLayer" x="0" y="0" width="600" height="600"></canvas>
                             </body>
                         </foreignObject>
@@ -275,7 +290,7 @@ if (typeof loaderE2D != 'undefined'){ loaderE2D.LoadProjectFileE2D(event) }
             <li>
                 <fieldset name="simulation">
                   <legend>Simulation: </legend>
-                  <label><input type="radio" name="simul" value="stop" checked/> (S)top</label>
+                  <label><input type="radio" name="simul" value="stop" checked="checked"/> (S)top</label>
                   <label><input type="radio" name="simul" value="reset"/> (R)eset</label>
                   <label><input type="radio" name="simul" value="step"/> (S)tep</label>
                   <label><input type="radio" name="simul" value="go"/> (G)o</label>
@@ -285,7 +300,7 @@ if (typeof loaderE2D != 'undefined'){ loaderE2D.LoadProjectFileE2D(event) }
                   <select name="steps_per_frame">
                     <option value="1">1</option>
                     <option value="2">2</option>
-                    <option value="3" selected>3</option>
+                    <option value="3" selected="selected">3</option>
                     <option value="4">4</option>
                     <option value="10">10</option>
                     <option value="20">20</option>
@@ -304,15 +319,15 @@ if (typeof loaderE2D != 'undefined'){ loaderE2D.LoadProjectFileE2D(event) }
             <li>
               <fieldset name="choose_array_type">
                 <legend>Type of JavaScript arrays</legend>
-                  <label><input type="radio" name="array" value="regular" checked/> Regular</label>
-                  <label><input type="radio" name="array" value="typed" disabled/> Typed</label>
+                  <label><input type="radio" name="array" value="regular" checked="checked"/> Regular</label>
+                  <label><input type="radio" name="array" value="typed" disabled="disabled"/> Typed</label>
               </fieldset>
             </li>
             <li>
               <fieldset name="active_solvers">
               <legend>Active solvers</legend>
-                  <label><input name="use_heat_solver" type="checkbox" checked disabled/> Heat solver</label>
-                  <label><input name="use_fluid_solver" type="checkbox" checked/> Fluid solver</label>
+                  <label><input name="use_heat_solver" type="checkbox" checked="checked" disabled="disabled"/> Heat solver</label>
+                  <label><input name="use_fluid_solver" type="checkbox" checked="checked"/> Fluid solver</label>
               </fieldset>
             </li>
           </ul>  
@@ -328,7 +343,7 @@ if (typeof loaderE2D != 'undefined'){ loaderE2D.LoadProjectFileE2D(event) }
                       <option value="300">300x300</option>
                       <option value="400">400x400</option>
                       <option value="500">500x500</option>
-                      <option value="600" selected>600x600</option>
+                      <option value="600" selected="selected">600x600</option>
                     </select>
                     Grid dimensions
                   </label>
@@ -424,11 +439,28 @@ if (typeof loaderE2D != 'undefined'){ loaderE2D.LoadProjectFileE2D(event) }
   </div>
 </div>
 
+    </div>
+</div>
+
 <div id="alerter" style="display:none;">
     <h1>TODO</h1>
 </div>
 
-<script src="/LIBRARY/SVGDOM/SVGpzr.js" type="text/javascript" ></script>
+	<script type="text/javascript" id="SCREENS_activator" data-loadman-behaviour="init_and_kill">
+	loadman([
+		'/LIBRARY/UI/UI_forms.css'
+	,	'/LIBRARY/UI/UI_forms.js'
+	,	"/LIBRARY/MODULES/BUTTON/onoffbutton.js"
+	,   '/LIBRARY/GETSET/sprintf.js'
+	,   '/LIBRARY/AJAX/JXONo.js'
+	,   '/LIBRARY/SVGDOM/SVGpzr.js'
+	,   function() {
+            // activate SVGpzr handler
+            SVGpzr( document.getElementById("svgPartsSpace") );
+	    }
+	]);
+	</script>
+<script src="" type="text/javascript" ></script>
 
 <script src="conversions/models_index.js" type="text/javascript" ></script>
 <!--

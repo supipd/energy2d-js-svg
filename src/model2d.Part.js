@@ -95,9 +95,29 @@ model2d.Part.prototype.intersectsLine = function(s1, s2) {
     ,   len = segments.length
     ,   G = model2d.G
     ,   centerLine = {s:{x:s1.c.x, y:s1.c.y}, e:{x:s2.c.x, y:s2.c.y}}
+    ,   seg, intersection
+    ,   oneMine = (s1.part == this) || (s2.part == this)
+    ,   bothMine = (s1.part == this) && (s2.part == this)
     ;
+// must be identified joins, whidh goes through part, which is not transparent
+    if (oneMine && this.transmission == 0) {
+        if (model2d.containsLine(this.svgElement, centerLine, this.model)) {
+            return true;
+        }
+    }
     for(var i = 0; i < len; i++) {
-        if (G.isIntersecting( segments[i], centerLine )) {
+        seg = segments[i];
+        oneMine = (seg === s1) || (seg === s2);
+        if (oneMine) { // filter measured segments
+            continue;
+        } 
+DEBUGABLE_BY_VIEW && (seg.svgLine.style.strokeWidth = 6, seg.svgLine.style.stroke = 'yellow');
+        intersection = G.intersection( seg, centerLine );
+DEBUGABLE_BY_VIEW && (seg.svgLine.style.strokeWidth = '', seg.svgLine.style.stroke = '');
+        if (intersection.colinear) {    // filter "colinear" segments
+            continue;
+        }
+        if (intersection.intersect) {
             return true;
         }
     }

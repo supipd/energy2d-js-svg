@@ -7,9 +7,11 @@
 // *******************************************************
 
 // float x, float y, float energy, float c
-model2d.View2D = function(model) {
+model2d.View2D = function(model, options) {
 
 	this.model = model;
+	this.settings = Object.assign(this.defaultSettings, options);
+	model.view = this;
 }
 
 model2d.View2D.prototype.CONST = {
@@ -68,34 +70,34 @@ model2d.View2D.prototype.CONST = {
 
 model2d.View2D.prototype.defaultSettings = {
     // view properties
-    graphDataType: 0,
-    graphTimeUnit: 0,
-    fahrenheitUsed: false,
-    viewFactorLines: false,
-    borderTickmarks: false,
+    graph_data_type: 0,
+    graph_time_unit: 0,
+    fahrenheit_used: false,
+    view_factor_lines: false,
+    border_tickmarks: false,
     grid: false,
-    snapToGrid: true,
-    gridSize: 10,
+    snap_to_grid: true,
+    grid_size: 10,
     isotherm: false,
     streamline: false,
-    colorPalette: false,
-    colorPaletteType: model2d.View2D.prototype.CONST.RAINBOW,
+    color_palette: false,
+    color_palette_type: model2d.View2D.prototype.CONST.RAINBOW,
 //    colorPaletteX, colorPaletteY, colorPaletteW, colorPaletteH,
     velocity: false,
-    heatFluxArrows: false,
-    heatFluxLines: false,
-    graphOn: false,
+    heat_flux_arrow: false,
+    heat_flux_line: false,
+    graph: false,    // graphOn
     clock: true,
     showLogo: true,
-    controlPanel: false,
-    controlPanelPosition: 0,
+    control_panel: false,
+    control_panel_position: 0,
     smooth: true,
-    minimumTemperature: 0,
-    maximumTemperature: 50,
-    fanRotationSpeedScaleFactor: 1,
-    graphXLabel: null,
-    graphYLabel: null,
-    graphYmin: 0,
-    graphYmax: 50,
-    heatMapType: model2d.View2D.prototype.CONST.HEATMAP_TEMPERATURE,
+    minimum_temperature: 0,
+    maximum_temperature: 50,
+    fan_rotation_speed_scale_factor: 1,
+    graph_xlabel: null,
+    graph_ylabel: null,
+    graph_ymin: 0,
+    graph_ymax: 50,
+    heat_map: model2d.View2D.prototype.CONST.HEATMAP_TEMPERATURE,
 }

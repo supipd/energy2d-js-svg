@@ -156,7 +156,7 @@ model2d.cleanCanvasCtx = function(canvas, clean) {
 };
 
 //TODO: move all properties and functions connected with drawing to another module
-model2d.MAX_DISPLAY_TEMP = 50;
+model2d.MAX_DISPLAY_TEMP = 20;    //50;
 model2d.MIN_DISPLAY_TEMP = 0;
 
 model2d.displayTemperatureCanvas = function(canvas, model, clean = true) {
@@ -175,8 +175,8 @@ model2d.displayTemperatureCanvas = function(canvas, model, clean = true) {
     
     // constants, as looking for min and max temperature caused that  
     // areas with constant temperatures were chaning their color
-    var min = model2d.MIN_DISPLAY_TEMP; // model2d.getMinAnyArray(t);
-    var max = 20;   //model2d.MAX_DISPLAY_TEMP; //model2d.getMaxAnyArray(t);
+    var min = model.view.settings.minimum_temperature;    //model2d.MIN_DISPLAY_TEMP; // model2d.getMinAnyArray(t);
+    var max = model.view.settings.maximum_temperature;    //model2d.MAX_DISPLAY_TEMP; //model2d.getMaxAnyArray(t);
     
     var scale = max_hue / (max - min);
     var hue;
@@ -266,66 +266,66 @@ model2d.displayTemperatureCanvasWithSmoothing = function(canvas, model, clean = 
 };
 
 
-model2d.displayParts = function(canvas, parts, scene_width, scene_height) {
-    var ctx = model2d.cleanCanvasCtx(canvas, true);
-    ctx.fillStyle = "gray";
-    ctx.strokeStyle = "black";
-    ctx.lineCap = "round";
-    ctx.lineWidth = 2;
-    
-    var scale_x = (canvas.width - 1) / scene_width;
-    var scale_y = (canvas.height - 1) / scene_height;
-
-    var part, px, py, pw, ph;
-    var length = parts.length;
-    for (var i = 0; i < length; i++) {
-        part = parts[i];
-        
-        if (part.visible) {
-            if (part.rectangle) {
-               px = part.rectangle.x * scale_x;
-               py = part.rectangle.y * scale_y;
-               pw = part.rectangle.width * scale_x;
-               ph = part.rectangle.height * scale_y;
-               ctx.beginPath();
-               ctx.moveTo(px, py);
-               ctx.lineTo(px + pw, py);
-               ctx.lineTo(px + pw, py + ph);
-               ctx.lineTo(px, py + ph);
-               ctx.lineTo(px, py);
-            }
-
-            ctx.stroke();
-            if (part.filled)
-                ctx.fill();
-        }
-        if (part.wind_speed != 0) {
-/*            FillPattern fp = p.getFillPattern();
-            Color bgColor = g.getColor();
-            if (fp instanceof ColorFill) {
-                bgColor = ((ColorFill) fp).getColor();
-            } else if (fp instanceof Texture) {
-                bgColor = new Color(((Texture) fp).getBackground());
-            }
-            bgColor = bgColor.darker();
-            bgColor = new Color(bgColor.getRed(), bgColor.getGreen(), bgColor.getBlue(), 128);
-            Color fgColor = MiscUtil.getContrastColor(bgColor, 255);
-            float rotation = fanRotationSpeedScaleFactor * p.getWindSpeed() * model.getTime();
-            // float rotation = (float) (Math.PI / 12.0);
-            var r = p.getShape().getBounds2D(); // Rectangle2D
-            px = r.x * scale_x;
-            py = r.y * scale_y;
-            pw = r.width * scale_x;
-            ph = r.height * scale_y;
-            Area a = Fan.getShape(new Rectangle2D.Float(x, y, w, h), p.getWindSpeed(), p.getWindAngle(), (float) Math.abs(Math.sin(rotation)));
-            g.setColor(bgColor);
-            g.fill(a);
-            g.setColor(fgColor);
-            g.draw(a);  */
-        } 
-    }
-//console.log('displayParts',canvas.width, canvas.height, scale_x, scale_y, canvas);
-};
+// replaced by SVG (but some can want it :-)		model2d.displayParts = function(canvas, parts, scene_width, scene_height) {
+//    var ctx = model2d.cleanCanvasCtx(canvas, true);
+//    ctx.fillStyle = "gray";
+//    ctx.strokeStyle = "black";
+//    ctx.lineCap = "round";
+//    ctx.lineWidth = 2;
+//    
+//    var scale_x = (canvas.width - 1) / scene_width;
+//    var scale_y = (canvas.height - 1) / scene_height;
+//
+//    var part, px, py, pw, ph;
+//    var length = parts.length;
+//    for (var i = 0; i < length; i++) {
+//        part = parts[i];
+//        
+//        if (part.visible) {
+//            if (part.rectangle) {
+//               px = part.rectangle.x * scale_x;
+//               py = part.rectangle.y * scale_y;
+//               pw = part.rectangle.width * scale_x;
+//               ph = part.rectangle.height * scale_y;
+//               ctx.beginPath();
+//               ctx.moveTo(px, py);
+//               ctx.lineTo(px + pw, py);
+//               ctx.lineTo(px + pw, py + ph);
+//               ctx.lineTo(px, py + ph);
+//               ctx.lineTo(px, py);
+//            }
+//
+//            ctx.stroke();
+//            if (part.filled)
+//                ctx.fill();
+//        }
+//        if (part.wind_speed != 0) {
+///*            FillPattern fp = p.getFillPattern();
+//            Color bgColor = g.getColor();
+//            if (fp instanceof ColorFill) {
+//                bgColor = ((ColorFill) fp).getColor();
+//            } else if (fp instanceof Texture) {
+//                bgColor = new Color(((Texture) fp).getBackground());
+//            }
+//            bgColor = bgColor.darker();
+//            bgColor = new Color(bgColor.getRed(), bgColor.getGreen(), bgColor.getBlue(), 128);
+//            Color fgColor = MiscUtil.getContrastColor(bgColor, 255);
+//            float rotation = fanRotationSpeedScaleFactor * p.getWindSpeed() * model.getTime();
+//            // float rotation = (float) (Math.PI / 12.0);
+//            var r = p.getShape().getBounds2D(); // Rectangle2D
+//            px = r.x * scale_x;
+//            py = r.y * scale_y;
+//            pw = r.width * scale_x;
+//            ph = r.height * scale_y;
+//            Area a = Fan.getShape(new Rectangle2D.Float(x, y, w, h), p.getWindSpeed(), p.getWindAngle(), (float) Math.abs(Math.sin(rotation)));
+//            g.setColor(bgColor);
+//            g.fill(a);
+//            g.setColor(fgColor);
+//            g.draw(a);  */
+//        } 
+//    }
+////console.log('displayParts',canvas.width, canvas.height, scale_x, scale_y, canvas);
+//};
 
 model2d.displayVectorField = function(canvas, u, v, nx, ny, spacing, clean = true) {  
 
@@ -455,7 +455,7 @@ model2d.displayTemperatureTable = function(destination, model) {
 
 
 
-// ---------------------------------------------------------
+// ------------------------------ rework ------------------
 
 //    Isotherms
 //    iii = new model2d.ContourMap(canvasVelocityLenDestination, e2dUI.model)
@@ -709,5 +709,5 @@ model2d.FieldLines.prototype = {
 		this.canvas_ctx.lineTo(Math.round(x2), Math.round(y2));
 		this.canvas_ctx.stroke();
 	}
-
 }
+

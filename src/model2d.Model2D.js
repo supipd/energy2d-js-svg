@@ -14,7 +14,7 @@ model2d.Model2D = function(options, array_type, svgPartsSpace) {
         array_type = "regular";
     };
     model2d.array_type = array_type;
-    
+
     var opt = options.model;
 
     //this.opt = opt;
@@ -147,6 +147,13 @@ model2d.Model2D = function(options, array_type, svgPartsSpace) {
         this.fluidity[i] = true;
     }
 
+
+    // ------------------------- 
+    this.links = options.links || [];
+    this.view = new model2d.View2D(this, options.view);
+
+
+    // ------------------------- 
     this.heatSolver = new model2d.HeatSolver2D(this);
     this.fluidSolver = new model2d.FluidSolver2D(this);
     this.photonSolver = new model2d.PhotonSolver2D(this);

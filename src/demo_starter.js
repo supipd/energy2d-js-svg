@@ -34,23 +34,28 @@
     document.getElementsByTagName("head")[0].appendChild(script);
   };
 
-DEBUG_STEP_COUNT_LIMIT = 858;  //NaN;
+const DEBUG_STEP_COUNT_LIMIT = 858;  //NaN;
+var DEBUGABLE_BY_VIEW = false;
 
 
-//DOM globals ( by id )      
-//    canvasTemperatureLayer = document.getElementById("canvasTemperatureLayer");
-//    canvasPartsLayer = document.getElementById("canvasPartsLayer");
-//    svgPartsSpace = document.getElementById("svgPartsSpace");
-//    canvasVelocityLayer = document.getElementById("canvasVelocityLayer");
-//    canvasVelocityLenDestination = document.getElementById("canvasVelocityLenDestination");
-//    tdata = document.getElementById("tdata");
-//    step_count = document.getElementById("step_count");
-//    alerter = document.getElementById("alerter");
+//DOM globals ( by id - automatically in HTML, but not XHTML !)      
+    canvasTemperatureLayer = document.getElementById("canvasTemperatureLayer");
+    canvasPartsLayer = document.getElementById("canvasPartsLayer");
+    svgPartsLayer = document.getElementById("svgPartsLayer");
+    svgPartsSpace = document.getElementById("svgPartsSpace");
+    svgTemperatureLayer = document.getElementById("svgTemperatureLayer");
+    svgVelocityLayer = document.getElementById("svgVelocityLayer");
+    canvasVelocityLayer = document.getElementById("canvasVelocityLayer");
+    canvasVelocityLenDestination = document.getElementById("canvasVelocityLenDestination");
+    tdata = document.getElementById("tdata");
+    step_count = document.getElementById("step_count");
+    alerter = document.getElementById("alerter");
+    part_info = document.getElementById("part_info");
 
         // get DOM elements ... all needed in ONE form, divided to fieldsets
 
 // central global form elements
-cFelems = document.forms.central.elements
+    cFelems = document.forms.central.elements
 
 e2dUI = {
     model: null
@@ -68,11 +73,11 @@ e2dUI = {
 	    this.fillPreparedModels();
 
         // setup model selectors callbacks
-        cFelems.examples_select.onchange = function() {
+        cFelems.examples_select.onclick/*onchange*/ = function() {
             me.model_name = this.value;
             me.loadModelState(me.model_name, this.name);    // examples_select
         };
-        cFelems.models_select.onchange = function() {
+        cFelems.models_select.onclick/*onchange*/ = function() {
             me.model_name = this.value;
             me.loadModelState(me.model_name, this.name);    // models_select
         };
@@ -201,11 +206,10 @@ e2dUI = {
 			case 'show_Isotherm':
 			case 'show_HeatFlux':
 			case 'show_Streams':
+			case 'show_Factors':
 				if (! this.paintInterval) {
                     this.renderResults();
 				}
-				break;
-			case 'show_Factors':    this.todoAlerter();el.checked = !el.checked;
 			    break;
 		}
 	}
@@ -273,13 +277,9 @@ e2dUI = {
 		// ----------------
 		// clean SVG
 		svgPartsSpace.innerHTML = '';  
-		// only place to createe model
+		// only place to create model
 		this.model = new model2d.Model2D(options, array_selection, svgPartsSpace);
 console.log(this.model);            
-//		// initial arrays preparing
-//		this.model.checkPartPower();
-//		this.model.checkPartRadiation();    // this.model.radiative
-//		this.model.refreshPowerArray();
 
         this.setupRendering();
 	}
@@ -303,7 +303,9 @@ console.log(this.model);
 ,   rendererFieldLines: undefined
 ,   setupRendering: function() {
 
-	    var model = this.model;
+	    var model = this.model
+	    ,   viewSettings = model.view.settings    // TODO 
+	    ;
 
         // initialize temperature pixels layer CANVAS
 		if (cFelems.hq_smoothing.checked){
@@ -318,12 +320,12 @@ console.log(this.model);
 
         // initialize parts layers CANVAS and SVG
 		model2d.initCanvas(canvasPartsLayer, canvasPartsLayer.clientWidth, canvasPartsLayer.clientHeight);
-		model2d.displayParts(canvasPartsLayer, model.parts, model.lx, model.ly);
+// replaced by SVG (but some can want it :-)		model2d.displayParts(canvasPartsLayer, model.parts, model.lx, model.ly);
 
 		model2d.displaySvgParts(model);
 
         // initialize vector drawing layer CANVAS
-		model2d.initCanvas(canvasVelocityLayer, canvasVelocityLayer.clientWidth, canvasVelocityLayer.clientHeight);
+		model2d.initCanvas(canvasVelocityLayer, canvasVelocityLayer.width, canvasVelocityLayer.height);    //, canvasVelocityLayer.clientWidth, canvasVelocityLayer.clientHeight);
 		// initialize renderers
 		this.rendererContourMap = new model2d.ContourMap(canvasVelocityLayer, model, false);
 		this.rendererFieldLines = new model2d.FieldLines(canvasVelocityLayer, model, false);
@@ -378,9 +380,10 @@ console.log(this.model);
 		if (cFelems.show_Streams.checked) {
 			this.rendererFieldLines.renderVectors(e2dUI.model.u, e2dUI.model.v);
 	    }
-		if (cFelems.show_Factors.checked) {
-	    }
-
+	    // --------------------
+		var gRadiosity = model2d.drawerViewFactorMesh.generate(this.model, false);    // not forceRedraw
+        gRadiosity && (gRadiosity.style.display = (cFelems.show_Factors.checked ? '' : 'none'));
+	    // --------------------
 		if (cFelems.show_velocity_length.checked) {
 			model2d.displayVelocityLengthCanvas(canvasVelocityLenDestination, model);
 	    }
