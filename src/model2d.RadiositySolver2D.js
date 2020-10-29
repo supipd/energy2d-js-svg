@@ -62,7 +62,7 @@ model2d.RadiositySolver2D.prototype.solve = function() {
         if (s.part.emissivity > 0) {
             var c = s.c;
             var temp;
-            if (s.part.constantTemperature) {
+            if (s.part.constant_temperature) {
                 temp = s.part.temperature + 273;
             } else {
                 temp = this.model.getTemperatureAt(c.x, c.y, /*Sensor.NINE_POINT*/9) + 273; // FIXME: This needs to take the stencil points inwardly
@@ -72,6 +72,9 @@ model2d.RadiositySolver2D.prototype.solve = function() {
             temp = this.model.backgroundTemperature + 273;
             temp *= temp;
             s.emission -= s.part.emissivity * model2d.STEFAN_CONSTANT * temp * temp;
+if (isNaN(s.emission))  {
+    console.log('NaN');
+}          
         }
     }
 
@@ -85,6 +88,9 @@ model2d.RadiositySolver2D.prototype.solve = function() {
                     s.radiation -= this.reflection[i*n+j] * this.segments[j].radiation;
             }
             s.radiation /= this.reflection[i*n+i];
+if (isNaN(s.radiation))  {
+    console.log('NaN');
+}          
         }
     }
 
@@ -95,6 +101,9 @@ model2d.RadiositySolver2D.prototype.solve = function() {
         for (var j = 0; j < n; j++) {
             if (j != i)
                 s.absorption += this.absorption[i*n+j] * this.segments[j].radiation;
+if (isNaN(s.absorption))  {
+    console.log('NaN');
+}          
         }
     }
 
@@ -164,6 +173,12 @@ DEBUGABLE_BY_VIEW && (s2.svgLine.style.strokeWidth = 10, s2.svgLine.style.stroke
 					this.reflection[nji] = -s2.part.reflection * vf * lengthRatio;
 					this.absorption[nij] = s1.part.absorption * vf;
 					this.absorption[nji] = s2.part.absorption * vf * lengthRatio;
+if (isNaN(this.reflection[nij]) || isNaN(this.reflection[nji]))  {
+    console.log('NaN');
+}          
+if (isNaN(this.absorption[nij]) || isNaN(this.absorption[nji]))  {
+    console.log('NaN');
+}          
 
                     this.segmentJoins.push( {
                     	s:s1.c,
@@ -196,8 +211,8 @@ model2d.RadiositySolver2D.prototype.segmentizePerimeters = function() {
     	seg.emission = 0;
     })
     var n = this.segments.length;
-    this.reflection = createArray(n, 0);
-    this.absorption = createArray(n, 0);
+    this.reflection = createArray(n * n, 0);
+    this.absorption = createArray(n * n, 0);
     this.computeReflectionAndAbsorptionMatrices();
 }
 

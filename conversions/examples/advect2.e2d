@@ -17,7 +17,7 @@
 <buoyancy_approximation>0</buoyancy_approximation>
 <boundary>
 <temperature_at_border upper="0.0" lower="0.0" left="0.0" right="0.0"/>
-<mass_flow_at_border upper="1" lower="1" left="1" right="1"/>
+<mass_flow_at_border upper="0" lower="1" left="1" right="1"/>
 </boundary>
 <structure>
 <particle>
@@ -370,16 +370,6 @@
 <velocity_color>ffff80</velocity_color>
 </particle>
 <particle>
-<rx>6.8007684</rx>
-<ry>4.482701</ry>
-<vx>-9.1034087E-4</vx>
-<vy>0.0064741205</vy>
-<radius>0.06</radius>
-<mass>0.1</mass>
-<color>c080ff</color>
-<velocity_color>c080ff</velocity_color>
-</particle>
-<particle>
 <rx>5.522566</rx>
 <ry>8.141465</ry>
 <vx>-0.0016644135</vx>
@@ -571,16 +561,6 @@
 <radius>0.04</radius>
 <mass>0.2</mass>
 <velocity_color>ffffff</velocity_color>
-</particle>
-<particle>
-<rx>5.9816604</rx>
-<ry>2.339439</ry>
-<vx>7.4396405E-4</vx>
-<vy>0.0066976147</vy>
-<radius>0.06</radius>
-<mass>0.2</mass>
-<color>ffc0ff</color>
-<velocity_color>ffc0ff</velocity_color>
 </particle>
 <particle>
 <rx>6.8793907</rx>
@@ -979,7 +959,7 @@
 </particle>
 </structure>
 <environment>
-<fan x="4.5" y="5.9" width="1.0" height="0.4" speed="-0.02" angle="1.5707964"/><particle_feeder velocity_color="ffffff" radius="0.04" mass="0.2" x="4.2999983" y="1.0000001" maximum="100" period="10.0"/><particle_feeder color="ffffc0" velocity_color="ffffc0" radius="0.04" mass="0.2" x="5.499998" y="1.0000001" maximum="100" period="10.0"/><particle_feeder color="ffff80" velocity_color="ffff80" radius="0.08" mass="0.2" x="4.899999" y="1.0000002" maximum="100" period="10.0"/><particle_feeder color="ffc0ff" velocity_color="ffc0ff" radius="0.06" mass="0.2" x="5.199999" y="1.0000002" maximum="100" period="10.0"/><particle_feeder color="ffc080" velocity_color="ffc080" radius="0.06" mass="0.1" x="4.5999985" y="1.0000001" maximum="100" period="10.0"/><particle_feeder color="c080ff" velocity_color="c080ff" radius="0.06" mass="0.1" x="5.800002" y="1.0000002" maximum="100" period="10.0"/></environment>
+<fan x="4.5" y="5.6" width="1.0" height="0.7" speed="-0.04" angle="1.5707964"/><particle_feeder velocity_color="ffffff" radius="0.04" mass="0.2" x="4.2999983" y="1.0000001" maximum="100" period="10.0"/><particle_feeder color="ffffc0" velocity_color="ffffc0" radius="0.04" mass="0.2" x="5.499998" y="1.0000001" maximum="100" period="10.0"/><particle_feeder color="ffff80" velocity_color="ffff80" radius="0.08" mass="0.2" x="4.899999" y="1.0000002" maximum="100" period="10.0"/><particle_feeder color="ffc0ff" velocity_color="ffc0ff" radius="0.06" mass="0.2" x="5.199999" y="1.0000002" maximum="100" period="10.0"/><particle_feeder color="ffc080" velocity_color="ffc080" radius="0.06" mass="0.1" x="4.5999985" y="1.0000001" maximum="100" period="10.0"/><particle_feeder color="c080ff" velocity_color="c080ff" radius="0.06" mass="0.1" x="5.800002" y="1.0000002" maximum="100" period="10.0"/></environment>
 <sensor>
 </sensor>
 <controller>

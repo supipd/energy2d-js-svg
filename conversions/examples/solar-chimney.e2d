@@ -14,18 +14,21 @@
 <solar_power_density>1000.0</solar_power_density>
 <solar_ray_count>60</solar_ray_count>
 <solar_ray_speed>0.4</solar_ray_speed>
-<photon_emission_interval>5</photon_emission_interval>
-<z_heat_diffusivity>0.0</z_heat_diffusivity><background_conductivity>1.0</background_conductivity>
+<photon_emission_interval>6</photon_emission_interval>
+<gravitational_acceleration>9.8</gravitational_acceleration>
+<thermophoretic_coefficient>0.0</thermophoretic_coefficient><particle_drag>0.01</particle_drag><particle_hardness>1.0E-6</particle_hardness><z_heat_diffusivity>0.0</z_heat_diffusivity><background_conductivity>1.0</background_conductivity>
 <background_temperature>30.0</background_temperature>
 <background_viscosity>0.005</background_viscosity>
-<thermal_buoyancy>5.0E-4</thermal_buoyancy>
+<thermal_expansion_coefficient>5.0E-4</thermal_expansion_coefficient>
 <buoyancy_approximation>1</buoyancy_approximation>
 <boundary>
 <temperature_at_border upper="30.0" lower="15.0" left="30.0" right="30.0"/>
 <mass_flow_at_border upper="1" lower="1" left="1" right="1"/>
 </boundary>
 <structure>
-<part><rectangle x="4.2042327" y="13.666665" width="0.608466" height="0.925926"/><thermal_conductivity>0.001</thermal_conductivity>
+<part>
+<rectangle x="4.2042327" y="13.666665" width="0.608466" height="0.925926"/><elasticity>1.0</elasticity>
+<thermal_conductivity>0.001</thermal_conductivity>
 <specific_heat>1300.0</specific_heat>
 <density>25.0</density>
 <transmission>0.0</transmission>
@@ -42,7 +45,9 @@
 <texture_height>10</texture_height>
 </texture>
 </part>
-<part><rectangle x="4.4687834" y="10.201056" width="0.343915" height="2.989418"/><thermal_conductivity>0.001</thermal_conductivity>
+<part>
+<rectangle x="4.4687834" y="10.201056" width="0.343915" height="2.989418"/><elasticity>1.0</elasticity>
+<thermal_conductivity>0.001</thermal_conductivity>
 <specific_heat>1300.0</specific_heat>
 <density>25.0</density>
 <transmission>0.0</transmission>
@@ -60,7 +65,9 @@
 <texture_height>10</texture_height>
 </texture>
 </part>
-<part><polygon count="6" vertices="3.7000005, 10.200005, 7.699998, 7.7000027, 11.699998, 10.200005, 10.699998, 10.200005, 7.699998, 8.350002, 4.7, 10.200005"/>
+<part>
+<polygon count="6" vertices="3.7000005, 10.200005, 7.699998, 7.7000027, 11.699998, 10.200005, 10.699998, 10.200005, 7.699998, 8.350002, 4.7, 10.200005"/>
+<elasticity>1.0</elasticity>
 <thermal_conductivity>0.001</thermal_conductivity>
 <specific_heat>1300.0</specific_heat>
 <density>25.0</density>
@@ -78,7 +85,9 @@
 <texture_height>12</texture_height>
 </texture>
 </part>
-<part><rectangle x="-4.7683716E-7" y="15.10582" width="9.126985" height="4.973545"/><thermal_conductivity>0.001</thermal_conductivity>
+<part>
+<rectangle x="-4.7683716E-7" y="15.10582" width="9.126985" height="4.973545"/><elasticity>1.0</elasticity>
+<thermal_conductivity>0.001</thermal_conductivity>
 <specific_heat>1000.0</specific_heat>
 <density>10.0</density>
 <transmission>0.0</transmission>
@@ -98,7 +107,9 @@
 </texture>
 <label>Cool Ground</label>
 </part>
-<part><rectangle x="10.699998" y="10.200003" width="0.5" height="4.5"/><thermal_conductivity>0.001</thermal_conductivity>
+<part>
+<rectangle x="10.699998" y="10.200003" width="0.5" height="4.5"/><elasticity>1.0</elasticity>
+<thermal_conductivity>0.001</thermal_conductivity>
 <specific_heat>1300.0</specific_heat>
 <density>25.0</density>
 <transmission>0.0</transmission>
@@ -116,7 +127,9 @@
 </texture>
 <label>Wall</label>
 </part>
-<part><rectangle x="3.7000005" y="10.900003" width="0.1" height="2.8"/><thermal_conductivity>0.001</thermal_conductivity>
+<part>
+<rectangle x="3.7000005" y="10.900003" width="0.1" height="2.8"/><elasticity>1.0</elasticity>
+<thermal_conductivity>0.001</thermal_conductivity>
 <specific_heat>1300.0</specific_heat>
 <density>25.0</density>
 <transmission>1.0</transmission>
@@ -128,7 +141,9 @@
 <constant_temperature>false</constant_temperature>
 <color>ccccff</color>
 </part>
-<part><rectangle x="3.7000005" y="13.700001" width="0.5" height="0.2"/><thermal_conductivity>1.0E-9</thermal_conductivity>
+<part>
+<rectangle x="3.7000005" y="13.700001" width="0.5" height="0.2"/><elasticity>1.0</elasticity>
+<thermal_conductivity>1.0E-9</thermal_conductivity>
 <specific_heat>1300.0</specific_heat>
 <density>25.0</density>
 <transmission>0.0</transmission>
@@ -139,7 +154,9 @@
 <temperature>30.0</temperature>
 <constant_temperature>false</constant_temperature>
 </part>
-<part><rectangle x="4.225" y="10.199998" width="0.15" height="3.0"/><thermal_conductivity>0.1</thermal_conductivity>
+<part>
+<rectangle x="4.225" y="10.199998" width="0.15" height="3.0"/><elasticity>1.0</elasticity>
+<thermal_conductivity>0.1</thermal_conductivity>
 <specific_heat>1000.0</specific_heat>
 <density>10.0</density>
 <transmission>0.0</transmission>
@@ -156,7 +173,9 @@
 <texture_height>8</texture_height>
 </texture>
 </part>
-<part><rectangle x="-0.026455026" y="14.603174" width="9.1534395" height="0.3968254"/><thermal_conductivity>1.0E-9</thermal_conductivity>
+<part>
+<rectangle x="-0.026455026" y="14.603174" width="9.1534395" height="0.3968254"/><elasticity>1.0</elasticity>
+<thermal_conductivity>1.0E-9</thermal_conductivity>
 <specific_heat>1300.0</specific_heat>
 <density>25.0</density>
 <transmission>0.0</transmission>
@@ -173,7 +192,9 @@
 <texture_height>12</texture_height>
 </texture>
 </part>
-<part><rectangle x="9.04762" y="16.904762" width="10.84656" height="3.201058"/><thermal_conductivity>0.001</thermal_conductivity>
+<part>
+<rectangle x="9.04762" y="16.904762" width="10.84656" height="3.201058"/><elasticity>1.0</elasticity>
+<thermal_conductivity>0.001</thermal_conductivity>
 <specific_heat>1000.0</specific_heat>
 <density>10.0</density>
 <transmission>0.0</transmission>
@@ -193,7 +214,9 @@
 </texture>
 <label>Cool Ground</label>
 </part>
-<part><rectangle x="10.199999" y="14.603173" width="5.555555" height="1.560847"/><thermal_conductivity>1.0E-9</thermal_conductivity>
+<part>
+<rectangle x="10.199999" y="14.603173" width="5.555555" height="1.560847"/><elasticity>1.0</elasticity>
+<thermal_conductivity>1.0E-9</thermal_conductivity>
 <specific_heat>1300.0</specific_heat>
 <density>25.0</density>
 <transmission>0.0</transmission>
@@ -211,7 +234,9 @@
 <texture_height>12</texture_height>
 </texture>
 </part>
-<part><rectangle x="16.534391" y="14.4709" width="3.3862433" height="2.4338624"/><thermal_conductivity>1.0E-9</thermal_conductivity>
+<part>
+<rectangle x="16.534391" y="14.4709" width="3.3862433" height="2.4338624"/><elasticity>1.0</elasticity>
+<thermal_conductivity>1.0E-9</thermal_conductivity>
 <specific_heat>1300.0</specific_heat>
 <density>25.0</density>
 <transmission>0.0</transmission>
@@ -228,7 +253,9 @@
 <texture_height>12</texture_height>
 </texture>
 </part>
-<part><rectangle x="-10.0" y="14.6089945" width="1.0" height="0.2"/><thermal_conductivity>1.0</thermal_conductivity>
+<part>
+<rectangle x="-10.0" y="14.6089945" width="1.0" height="0.2"/><elasticity>1.0</elasticity>
+<thermal_conductivity>1.0</thermal_conductivity>
 <specific_heat>1300.0</specific_heat>
 <density>25.0</density>
 <transmission>0.0</transmission>
@@ -266,11 +293,12 @@
 <view>
 <snap_to_grid>false</snap_to_grid>
 <grid_size>10</grid_size>
-<ruler>true</ruler>
+<perimeter_step_size>0.05</perimeter_step_size>
+<border_tickmarks>true</border_tickmarks>
 <color_palette_type>0</color_palette_type>
 <color_palette_x>0.0</color_palette_x><color_palette_y>0.0</color_palette_y><color_palette_w>0.0</color_palette_w><color_palette_h>0.0</color_palette_h><minimum_temperature>0.0</minimum_temperature>
 <maximum_temperature>100.0</maximum_temperature>
-<streamline>true</streamline>
+<fan_rotation_speed_scale_factor>1.0</fan_rotation_speed_scale_factor><streamline>true</streamline>
 <graph_xlabel>Time</graph_xlabel><graph_ylabel>Temperature (℃)</graph_ylabel><text string="Solar Chimney" face="Arial" size="18" style="0" color="ffffff" x="1.0000001" y="19.4"/>
 </view>
 </state>

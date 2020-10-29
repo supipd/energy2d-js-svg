@@ -69,6 +69,9 @@ input[type=tel] {
     font-size: 11px;
     font-weight: bold;
 }
+input[type=tel].shorter {
+    width:40px;   
+}
 small {
     color: black;
     font-size: 14px;
@@ -156,17 +159,17 @@ textarea#part_info {
                   <legend>Layers rendering and visibility</legend>
 <table style="width: 563px;"><tbody>
 <tr><td>
-                  <label><input name="show_svgGrid" type="checkbox"> Grid</label>
+                  <label><input name="show_svgGrid" type="checkbox"/> Grid</label>
 </td><td>                  
-                  <label><input name="show_svgTemperatureLayer" type="checkbox" checked="checked"> TemperatureLayer</label>
+                  <label><input name="show_svgTemperatureLayer" type="checkbox" checked="checked"/> TemperatureLayer</label>
 </td><td>
-                  <label><input name="show_svgPartsLayer" type="checkbox" checked="checked"> PartsLayer</label>
+                  <label><input name="show_svgPartsLayer" type="checkbox" checked="checked"/> PartsLayer</label>
 </td><td>
-                  <label><input name="show_svgVelocityLayer" type="checkbox" checked="checked"> LinesLayer</label>
-</td><td class="linesel">
-                  <label><input name="show_Velocity" type="checkbox" checked="checked"> Velocity</label>
+                  <label><input name="show_svgVelocityLayer" type="checkbox" checked="checked"/> LinesLayer</label>
+</td><td>
+
 </td></tr><tr><td>
-                  <label><input name="show_svgColorPalette" type="checkbox"> Palette</label>
+                  <label><input name="show_svgColorPalette" type="checkbox"/> Palette</label>
 </td><td>
                   <label><select name="select_ColorPalette">
                     <option>default</option>
@@ -175,21 +178,21 @@ textarea#part_info {
                     <option>GRAY_RGB</option>
                   </select></label>
 </td><td>
-                  <label>Opacity <input name="opacity_svgPartsLayer" type="number" value="1" min="0.1" max="1" step="0.1"></label>
+                  <label>Opacity <input name="opacity_svgPartsLayer" type="number" value="1" min="0.1" max="1" step="0.1"/></label>
 </td><td class="linesel">
-                  <label><input name="show_Isotherm" type="checkbox"> Isotherm</label>
+                  <label><input name="show_Isotherm" type="checkbox"/> Isotherm</label>
 </td><td class="linesel">
-                  <label><input name="show_HeatFlux" type="checkbox"> HeatFlux</label>
+                  <label><input name="show_Velocity" type="checkbox" checked="checked"/> Velocity</label>
 </td></tr><tr><td>
-                  <label><input name="show_svgBorderTickmarks" type="checkbox"> Tickmarks</label>
-</td><td>
-                  
+                  <label><input name="show_svgBorderTickmarks" type="checkbox"/> Tickmarks</label>
 </td><td>
                   
 </td><td class="linesel">
-                  <label><input name="show_Streams" type="checkbox"> Streams</label>
+                  <label><input name="show_Factors" type="checkbox"/> Factors</label>                  
 </td><td class="linesel">
-                  <label><input name="show_Factors" type="checkbox"> Factors</label>
+                  <label><input name="show_Streams" type="checkbox"/> Streams</label>
+</td><td class="linesel">
+                  <label><input name="show_HeatFlux" type="checkbox"/> HeatFlux</label>
 </td></tr>
 </tbody></table>
                 </fieldset>
@@ -200,7 +203,7 @@ textarea#part_info {
             <canvas id="canvasPartsLayer"></canvas>
             <canvas id="canvasVelocityLayer"></canvas>  -->
 
-                <svg width="600px" height="600px"  style="background-color:white">
+                <svg xmlns="http://www.w3.org/2000/svg" data-sizes="{width:600,height:600}" width="600px" height="600px"  style="background-color:white">
 <defs>
     <marker id = "StartMarker" viewBox = "0 0 12 12" refX = "12" refY = "6" markerWidth = "3" markerHeight = "3" stroke = "green" stroke-width = "2" fill = "none" orient = "auto">
         <circle cx = "6" cy = "6" r = "5"/>
@@ -218,7 +221,7 @@ textarea#part_info {
                     <rect width="600" height="600" class="bg" fill="white"></rect>
                     <g id="svgTemperatureLayer">
                         <foreignObject x="0" y="0" width="600" height="600">
-                            <body>
+                            <body xmlns="http://www.w3.org/1999/xhtml" >
                                 <canvas id="canvasTemperatureLayer" x="0" y="0" width="600" height="600"></canvas>
                             </body>
                         </foreignObject>
@@ -227,14 +230,14 @@ textarea#part_info {
                         <g id="svgPartsSpace" style="stroke-width: 2;fill: gray;stroke-linecap: round;stroke: black;">
                         </g>
                         <foreignObject x="0" y="0" width="600" height="600" style="display:none" >
-                            <body>
+                            <body xmlns="http://www.w3.org/1999/xhtml" >
                                 <canvas id="canvasPartsLayer" x="0" y="0" width="600" height="600"></canvas>
                             </body>
                         </foreignObject>
                     </g>
                     <g id="svgVelocityLayer">
                         <foreignObject x="0" y="0" width="600" height="600">
-                            <body>
+                            <body xmlns="http://www.w3.org/1999/xhtml" >
                                 <canvas id="canvasVelocityLayer" x="0" y="0" width="600" height="600"></canvas>
                             </body>
                         </foreignObject>
@@ -273,9 +276,24 @@ if (typeof loaderE2D != 'undefined'){ loaderE2D.LoadProjectFileE2D(event) }
         <li>
           <ul class="hlist">
             <li>
+                <fieldset name="modelIdent">
+                  <legend>Model name: </legend>
+                  <input type="text" name="model_name"/>
+                </fieldset>
+                <fieldset name="sun">
+                  <legend>Sun: </legend>
+                  <label><input type="checkbox" name="sunny" checked="checked"/> Sunn(y) Angle</label>
+                  <label><input type="button" name="sunAngleMinus" value="(M)inus"/> </label>
+                  <label><input type="tel" class="shorter" name="sunAngle" disabled="disabled" value="180" /> </label>
+                  <label><input type="button" name="sunAnglePlus" value="(P)lus"/> </label>
+                </fieldset>
+            </li>
+          </ul>
+          <ul class="hlist">
+            <li>
                 <fieldset name="simulation">
                   <legend>Simulation: </legend>
-                  <label><input type="radio" name="simul" value="stop" checked/> (S)top</label>
+                  <label><input type="radio" name="simul" value="stop" checked="checked"/> (S)top</label>
                   <label><input type="radio" name="simul" value="reset"/> (R)eset</label>
                   <label><input type="radio" name="simul" value="step"/> (S)tep</label>
                   <label><input type="radio" name="simul" value="go"/> (G)o</label>
@@ -285,7 +303,7 @@ if (typeof loaderE2D != 'undefined'){ loaderE2D.LoadProjectFileE2D(event) }
                   <select name="steps_per_frame">
                     <option value="1">1</option>
                     <option value="2">2</option>
-                    <option value="3" selected>3</option>
+                    <option value="3" selected="selected">3</option>
                     <option value="4">4</option>
                     <option value="10">10</option>
                     <option value="20">20</option>
@@ -297,26 +315,57 @@ if (typeof loaderE2D != 'undefined'){ loaderE2D.LoadProjectFileE2D(event) }
           </ul>
           <ul class="hlist">
             <li>
-              <h2 id="step_count">frame 0</h2>
+              <h2 id="step_count" style="padding:0;">frame 0</h2>
             </li>
           </ul>
           <ul class="hlist">
             <li>
-              <fieldset name="choose_array_type">
-                <legend>Type of JavaScript arrays</legend>
-                  <label><input type="radio" name="array" value="regular" checked/> Regular</label>
-                  <label><input type="radio" name="array" value="typed" disabled/> Typed</label>
-              </fieldset>
-            </li>
-            <li>
               <fieldset name="active_solvers">
               <legend>Active solvers</legend>
-                  <label><input name="use_heat_solver" type="checkbox" checked disabled/> Heat solver</label>
-                  <label><input name="use_fluid_solver" type="checkbox" checked/> Fluid solver</label>
+<table><tr><td>
+                  <label><input name="use_parts_solver" type="checkbox" checked="checked"  disabled="disabled"/> Parts</label>
+</td><td>
+                  <label><input name="use_heat_solver" type="checkbox" checked="checked" disabled="disabled"/> Heat</label>
+</td><td>
+                  <label><input name="use_fluid_solver" type="checkbox" checked="checked" disabled="disabled"/> Fluid</label>
+</td><td>
+                  <label><input name="use_radiosity_solver" type="checkbox" checked="checked" disabled="disabled"/> Radiosity</label>
+</td><td>
+                  <label><input name="use_photon_solver" type="checkbox" checked="checked" disabled="disabled"/> Photon</label>
+</td><td>
+                  <label><input name="use_particle_solver" type="checkbox" checked="checked" disabled="disabled"/> Particle</label>
+</td><td>
+                  <label><input name="use_devices_solver" type="checkbox" checked="checked"  disabled="disabled"/> Devices</label>
+</td></tr><tr><td>
+                  <input name="count_parts" type="tel" class="shorter" value="0"  disabled="disabled"
+title="count of parts / count of clouds and trees"
+                  />
+</td><td>
+</td><td>
+</td><td>
+                  <input name="count_segments" type="tel" value="0"  disabled="disabled"
+title="count of emmitive segments / count of segment joins"
+                  />
+</td><td>
+                  <input name="count_photons" type="tel" class="shorter" value="0"  disabled="disabled"/>
+</td><td>
+                  <input name="count_particles" type="tel" class="shorter" value="0"  disabled="disabled"/>
+</td><td>
+                  <input name="count_devices" type="tel" class="shorter" value="0"  disabled="disabled"
+title="summary count of thermometers, anemometers, heatFluxSensors, thermostats, fans, heliostats and particleFeeders"
+                  />
+</td></tr></table>
               </fieldset>
             </li>
           </ul>  
           <ul class="hlist">
+            <li>
+              <fieldset name="choose_array_type">
+                <legend>Type of JavaScript arrays</legend>
+                  <label><input type="radio" name="array" value="regular" checked="checked"/> Regular</label>
+                  <label><input type="radio" name="array" value="typed" disabled="disabled"/> Typed</label>
+              </fieldset>
+            </li>
             <li>
                 <fieldset name="smoothing_options">
                   <legend>HQ smoothing</legend>
@@ -328,9 +377,9 @@ if (typeof loaderE2D != 'undefined'){ loaderE2D.LoadProjectFileE2D(event) }
                       <option value="300">300x300</option>
                       <option value="400">400x400</option>
                       <option value="500">500x500</option>
-                      <option value="600" selected>600x600</option>
+                      <option value="600" selected="selected">600x600</option>
                     </select>
-                    Grid dimensions
+                    Grid
                   </label>
                 </fieldset>
             </li>
@@ -424,7 +473,7 @@ if (typeof loaderE2D != 'undefined'){ loaderE2D.LoadProjectFileE2D(event) }
   </div>
 </div>
 
-<div id="alerter" style="display:none;">
+<div id="alerter" style="display:none;z-index:1000">
     <h1>TODO</h1>
 </div>
 

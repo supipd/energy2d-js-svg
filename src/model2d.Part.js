@@ -11,6 +11,7 @@ model2d.Part = function(options, nr, model) {
         options = {};
     
     this.model = model;
+    this.nr = nr;   // part index
     
     // source properties
     this.thermal_conductivity = options.thermal_conductivity != undefined ? options.thermal_conductivity : 1;
@@ -42,7 +43,6 @@ model2d.Part = function(options, nr, model) {
     this.texture = options.texture; 
     this.label = options.label;
     this.uid = options.uid || '_part_'+(new Date).valueOf();
-    this.nr = nr;   // part index
 
     this.powerSwitch = true;
 
@@ -57,9 +57,11 @@ model2d.Part = function(options, nr, model) {
         blob : options.blob,
     }
 
-    this.svgElement = model2d.genShapeGeometry(this/*.shape*/, model/*.svg*/);
-    var ds = model2d.segmentizeShapePerimeter(this/*part*/, model, true);  // generate SVG
+    this.svgElement = model2d.genShapeGeometry(this, model);
+    var ds = model2d.segmentizeShapePerimeter(this, model, true);  // generate SVG
     this.segments = ds.segments;
+    this.clockwise = ds.clockwise;
+    this.area = ds.area;
 
     this.occupationIndexes = {};                        
 
@@ -122,4 +124,86 @@ DEBUGABLE_BY_VIEW && (seg.svgLine.style.strokeWidth = '', seg.svgLine.style.stro
         }
     }
     return false;
+}
+
+model2d.Part.prototype.reflect = function(p, scatter) {
+    var dt = this.model.timeStep;
+    var predictedX = p.rx + p.vx * dt;
+    var predictedY = p.ry + p.vy * dt;
+    if (p instanceof model2d.Particle) {
+        var dt2 = 0.5 * dt * dt;
+        predictedX += p.ax * dt2;
+        predictedY += p.ay * dt2;
+    }
+    var svgElement = this.svgElement;
+
+    var predictedToBeInShape = model2d.containsPoint(this.svgElement, predictedX, predictedY, false, this.model);
+//    return predictedToBeInShape;
+    if (predictedToBeInShape) {
+        var G = model2d.G
+        ,   line = {s:{x: p.rx, y: p.ry}, e:{x: predictedX, y: predictedY}}
+        ,   segment, intersectInfo 
+        ;
+        for(var i = 0; i < this.segments.length; i++) {
+            segment = this.segments[i];
+            intersectInfo = G.intersection(segment, line, true);
+            if (intersectInfo.intersect) {
+                this.reflectFromLine(p, segment, predictedX, predictedY, scatter);
+                break;
+            }
+        }
+    }    
+}
+
+model2d.Part.prototype.reflectFromLine = function(p, line, predictedX, predictedY, scatter) {
+//		if (line.s.x == line.e.x && line.s.y == line.e.y)
+//			return false;
+//		boolean hit = false;
+//		if (p instanceof Photon) { // a photon doesn't have any size, use its center to detect collision
+//			hit = line.intersectsLine(p.getRx(), p.getRy(), predictedX, predictedY);
+//		} else if (p instanceof Particle) {
+//			Particle particle = (Particle) p;
+//			float r = particle.radius;
+//			hit = Line2D.ptSegDistSq(line.x1, line.y1, line.x2, line.y2, predictedX, predictedY) <= r * r;
+//		}
+//		if (hit) {
+			var d12 = Math.hypot(line.s.x - line.e.x, line.s.y - line.e.y);
+			var sin = (this.clockwise ? line.e.y - line.s.y : line.s.y - line.e.y) / d12;
+			var cos = (this.clockwise ? line.e.x - line.s.x : line.s.x - line.e.x) / d12;
+			if (scatter) {
+				var angle = -Math.PI * Math.random(); // remember internally the y-axis points downward
+				var cos1 = Math.cos(angle);
+				var sin1 = Math.sin(angle);
+				var cos2 = cos1 * cos - sin1 * sin;
+				var sin2 = sin1 * cos + cos1 * sin;
+				p.vx = p.speed * cos2;
+				p.vy = p.speed * sin2;
+			} else {
+				var u; // velocity component parallel to the line
+				var w; // velocity component perpendicular to the line
+				if (p instanceof model2d.Particle) {
+					u = p.vx * cos + p.vy * sin;
+					w = p.vy * cos - p.vx * sin;
+					w *= this.elasticity;
+					if (Math.abs(w) < 0.01)
+						w = -Math.abs(w); // force the w component to point outwards
+					p.vx = u * cos + w * sin;
+					p.vy = u * sin - w * cos;
+				} else {
+					u = p.vx * cos + p.vy * sin;
+					w = p.vy * cos - p.vx * sin;
+					p.vx = u * cos + w * sin;
+					p.vy = u * sin - w * cos;
+				}
+				if (p instanceof model2d.Particle && this.elasticity < 1) {
+					var hitX = predictedX + (p.radius + 0.5 * this.model.lx / this.model.nx) * sin;
+					var hitY = predictedY - (p.radius + 0.5 * this.model.ly / this.model.ny) * cos;
+					var energy = 0.5 * p.mass * w * w * (1 - this.elasticity * this.elasticity);
+					var volume = this.model.lx * this.model.ly / (this.model.nx * this.model.ny);
+					this.model.changeTemperatureAt(hitX, hitY, energy / (this.specific_heat * this.density * volume));
+				}
+			}
+//			return true;
+//		}
+//		return false;
 }

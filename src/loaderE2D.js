@@ -74,6 +74,10 @@ convertor e2d:
         jxo.opts.s.AttrsPref = '';
         try {
             prjObj = jxo.textXtoj(xmlTxt, __, __, __, (state, item/*, oPar*/)=>{
+                if ((state == JXONo.CLBK_ATTRIBUTE_VALUE) && (colorTags.indexOf(item.nodeName) >= 0)) {
+                    item.value = this.ConvertColorNumbers(item.value).value;
+                    return {value: item};
+                }
                 if ((state == JXONo.CLBK_OBJECT_PROPERTY_NAME) && (colorTags.indexOf(item) >= 0)) {
                     cnv_signal = true;
                 }

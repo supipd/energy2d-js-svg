@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<state>
+<links>
+</links>
+<model>
+<model_width>4.0</model_width>
+<model_height>4.0</model_height>
+<timestep>0.1</timestep>
+<sun_angle>1.5707964</sun_angle>
+<solar_power_density>2000.0</solar_power_density>
+<solar_ray_count>24</solar_ray_count>
+<solar_ray_speed>0.1</solar_ray_speed>
+<photon_emission_interval>20</photon_emission_interval>
+<gravitational_acceleration>9.8</gravitational_acceleration>
+<thermophoretic_coefficient>0.0</thermophoretic_coefficient><particle_drag>0.01</particle_drag><particle_hardness>1.0E-6</particle_hardness><z_heat_diffusivity>0.0</z_heat_diffusivity><z_heat_diffusivity_only_for_fluid>false</z_heat_diffusivity_only_for_fluid><thermal_expansion_coefficient>2.5E-4</thermal_expansion_coefficient>
+<buoyancy_approximation>1</buoyancy_approximation>
+<boundary>
+<temperature_at_border upper="0.0" lower="0.0" left="0.0" right="0.0"/>
+<mass_flow_at_border upper="0" lower="0" left="0" right="0"/>
+</boundary>
+<structure>
+<part>
+<polygon count="118" vertices="1.9823074, 3.2194872, 1.9553065, 3.201487, 1.928307, 3.1924877, 1.9373078, 3.0484867, 1.9373078, 2.9764876, 1.8833075, 2.8414874, 1.8743081, 2.7424874, 1.8563066, 2.6794877, 1.8563066, 2.6074872, 1.8383079, 2.4634876, 1.7933068, 2.4454875, 1.7933068, 2.3284874, 1.7573066, 2.2204874, 1.7483072, 2.139489, 1.7483072, 2.0494869, 1.7753081, 1.9774873, 1.8023076, 1.9234874, 1.8203063, 1.8874872, 1.8203063, 1.8424871, 1.8293071, 1.7704885, 1.8023076, 1.7164876, 1.7933068, 1.7614877, 1.7843075, 1.7704885, 1.7843075, 1.8514879, 1.7753081, 1.9144876, 1.7213078, 2.1574876, 1.7393079, 2.1754892, 1.7393079, 2.2384887, 1.7303071, 2.2564874, 1.7213078, 2.2474875, 1.712307, 2.2204874, 1.7033076, 2.2474875, 1.7303071, 2.274487, 1.7483072, 2.2924871, 1.6853075, 2.274487, 1.6673074, 2.2114875, 1.6853075, 2.139489, 1.6943069, 1.9144876, 1.7033076, 1.8694885, 1.712307, 1.8154876, 1.712307, 1.7704885, 1.6943069, 1.752487, 1.6943069, 1.6354883, 1.7033076, 1.5634878, 1.7303071, 1.4914873, 1.8023076, 1.4734881, 1.8023076, 1.3654873, 1.8383079, 1.2304871, 1.8653073, 1.1944869, 1.8833075, 1.1674874, 1.9193077, 1.1584885, 1.9463072, 1.1584885, 1.9643073, 1.1674874, 2.0003076, 1.185488, 2.0183077, 1.2034876, 2.0453072, 1.2304871, 2.0903068, 1.3654873, 2.0993075, 1.4104884, 2.0993075, 1.4734881, 2.1443076, 1.4824879, 2.1983085, 1.6174877, 2.1803079, 1.7614877, 2.171308, 1.797488, 2.1893077, 1.8604877, 2.1983085, 1.9054887, 2.1893077, 2.139489, 2.216308, 2.193488, 2.1983085, 2.2474875, 2.1443076, 2.274487, 2.1533065, 2.2564874, 2.1893077, 2.2384887, 2.1983085, 2.2114875, 2.171308, 2.2024887, 2.171308, 2.2294881, 2.1533065, 2.2384887, 2.1533065, 2.1754892, 2.1623073, 2.1034887, 2.1173081, 1.8784893, 2.1173081, 1.7794874, 2.0903068, 1.8334882, 2.0903068, 1.8514879, 2.1083074, 1.9324882, 2.1173081, 1.9954879, 2.1353078, 2.040487, 2.1353078, 2.1214874, 2.1353078, 2.1664884, 2.1353078, 2.2204874, 2.126307, 2.2834864, 2.1083074, 2.373487, 2.072308, 2.4544868, 2.081308, 2.4994879, 2.081308, 2.5354881, 2.0993075, 2.6164865, 2.081308, 2.868487, 2.081308, 2.9224873, 2.0903068, 2.985487, 2.1353078, 3.084487, 2.1443076, 3.129488, 2.072308, 3.1564875, 2.0453072, 3.0754876, 2.0363078, 3.0394874, 2.009307, 2.9674869, 2.0183077, 2.9044871, 2.0183077, 2.868487, 2.0003076, 2.787487, 1.9913068, 2.7244873, 1.9913068, 2.6794877, 1.9913068, 2.6164865, 1.9733081, 2.5984879, 1.9553065, 2.6074872, 1.9553065, 2.6524868, 1.9733081, 2.7064872, 1.9733081, 2.7694883, 1.9823074, 2.9674869, 2.0003076, 3.0124865, 2.009307, 3.102487, 2.0363078, 3.1384873, 2.027307, 3.183487"/>
+<elasticity>1.0</elasticity>
+<thermal_conductivity>1.0</thermal_conductivity>
+<specific_heat>1300.0</specific_heat>
+<density>25.0</density>
+<transmission>0.0</transmission>
+<reflection>0.0</reflection>
+<scattering>false</scattering>
+<absorption>1.0</absorption>
+<emissivity>0.0</emissivity>
+<temperature>0.0</temperature>
+<constant_temperature>false</constant_temperature>
+<color>ff0000</color>
+</part>
+</structure>
+<environment>
+</environment>
+<sensor>
+</sensor>
+<controller>
+</controller>
+</model>
+<view>
+<grid>true</grid>
+<snap_to_grid>true</snap_to_grid>
+<grid_size>10</grid_size>
+<perimeter_step_size>0.05</perimeter_step_size>
+<border_tickmarks>true</border_tickmarks>
+<color_palette_type>0</color_palette_type>
+<color_palette_x>0.0</color_palette_x><color_palette_y>0.0</color_palette_y><color_palette_w>0.0</color_palette_w><color_palette_h>0.0</color_palette_h><minimum_temperature>0.0</minimum_temperature>
+<maximum_temperature>50.0</maximum_temperature>
+<fan_rotation_speed_scale_factor>1.0</fan_rotation_speed_scale_factor><graph_xlabel>Time (hr)</graph_xlabel><graph_ylabel>Temperature (℃)</graph_ylabel></view>
+</state>

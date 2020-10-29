@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<state>
+<links>
+</links>
+<model>
+<timestep>0.05</timestep>
+<sun_angle>1.5707964</sun_angle>
+<solar_power_density>2000.0</solar_power_density>
+<solar_ray_count>24</solar_ray_count>
+<solar_ray_speed>0.1</solar_ray_speed>
+<photon_emission_interval>20</photon_emission_interval>
+<gravitational_acceleration>9.8</gravitational_acceleration>
+<thermophoretic_coefficient>0.0</thermophoretic_coefficient><particle_drag>0.01</particle_drag><particle_hardness>1.0E-6</particle_hardness><z_heat_diffusivity>0.0</z_heat_diffusivity><z_heat_diffusivity_only_for_fluid>false</z_heat_diffusivity_only_for_fluid><background_conductivity>1.0</background_conductivity>
+<background_temperature>-40.0</background_temperature>
+<background_viscosity>1.0E-4</background_viscosity>
+<thermal_expansion_coefficient>1.0E-4</thermal_expansion_coefficient>
+<buoyancy_approximation>0</buoyancy_approximation>
+<boundary>
+<temperature_at_border upper="-40.0" lower="-30.0" left="-40.0" right="-40.0"/>
+<mass_flow_at_border upper="0" lower="0" left="0" right="0"/>
+</boundary>
+<structure>
+<part>
+<polygon count="31" vertices="2.063492, 5.3042326, 4.100529, 5.3042326, 4.259259, 5.3042326, 4.3386245, 5.185185, 4.457672, 5.066138, 4.6957674, 5.3042326, 4.537037, 5.4761906, 4.4179893, 5.6084657, 4.259259, 5.820106, 4.1402116, 6.0185184, 4.100529, 6.2566137, 4.100529, 6.6137567, 4.6957674, 6.6137567, 4.6957674, 6.984127, 4.616402, 7.2619047, 4.4708996, 7.4603176, 4.219577, 7.60582, 4.0343914, 7.65873, 3.8095238, 7.632275, 3.6243386, 7.5793653, 3.478836, 7.5, 3.3333333, 7.367725, 3.1613758, 7.208995, 3.1349206, 6.984127, 3.7433863, 6.984127, 3.7433863, 6.6137567, 3.7433863, 6.3756614, 3.7433863, 6.137566, 3.862434, 5.820106, 4.0079365, 5.5687833, 2.063492, 5.5687833"/>
+<elasticity>1.0</elasticity>
+<thermal_conductivity>2.5</thermal_conductivity>
+<specific_heat>1882.0</specific_heat>
+<density>920.0</density>
+<transmission>0.0</transmission>
+<reflection>0.0</reflection>
+<scattering>false</scattering>
+<scattering_visible>false</scattering_visible>
+<absorption>1.0</absorption>
+<emissivity>0.0</emissivity>
+<temperature>-40.0</temperature>
+<constant_temperature>false</constant_temperature>
+<texture><texture_fg>-1000000</texture_fg>
+<texture_bg>-7f7f80</texture_bg>
+<texture_style>16</texture_style>
+<texture_width>12</texture_width>
+<texture_height>12</texture_height>
+</texture>
+</part>
+<part>
+<rectangle x="5.423281" y="6.2698407" width="1.137566" height="0.21164"/><elasticity>1.0</elasticity>
+<thermal_conductivity>0.17</thermal_conductivity>
+<specific_heat>1000.0</specific_heat>
+<density>200.0</density>
+<transmission>0.0</transmission>
+<reflection>0.0</reflection>
+<scattering>false</scattering>
+<scattering_visible>false</scattering_visible>
+<absorption>1.0</absorption>
+<emissivity>0.0</emissivity>
+<temperature>36.0</temperature>
+<constant_temperature>true</constant_temperature>
+<label>%temperature</label>
+</part>
+<part>
+<polygon count="38" vertices="4.5105815, 4.9735456, 4.788359, 4.78836, 4.9999995, 4.68254, 5.2645497, 4.6164026, 5.449735, 4.57672, 5.6746025, 4.57672, 5.9259253, 4.6164026, 6.084656, 4.68254, 6.2962956, 4.7751327, 6.4417987, 4.880953, 6.6534386, 5.039683, 6.772486, 5.145503, 6.917989, 5.304233, 7.0370364, 5.449736, 7.156084, 5.6216936, 7.2354493, 5.793651, 7.288359, 5.992064, 7.3015866, 6.2433867, 7.288359, 6.5740747, 7.3015866, 6.997355, 5.3835974, 6.9841275, 5.3835974, 6.587302, 6.9841266, 6.587302, 6.9841266, 6.283069, 6.9841266, 6.097884, 6.944444, 5.9126987, 6.8783064, 5.6878314, 6.7460313, 5.5158734, 6.5476184, 5.3306885, 6.3888884, 5.211641, 6.177248, 5.0793657, 5.9788356, 4.986773, 5.6878304, 4.9338627, 5.436507, 4.9338627, 5.2248673, 4.986773, 5.039682, 5.039683, 4.880952, 5.145503, 4.748677, 5.2645507"/>
+<elasticity>1.0</elasticity>
+<thermal_conductivity>2.5</thermal_conductivity>
+<specific_heat>1882.0</specific_heat>
+<density>920.0</density>
+<transmission>0.0</transmission>
+<reflection>0.0</reflection>
+<scattering>false</scattering>
+<scattering_visible>false</scattering_visible>
+<absorption>1.0</absorption>
+<emissivity>0.0</emissivity>
+<temperature>-40.0</temperature>
+<constant_temperature>false</constant_temperature>
+<texture><texture_fg>-1000000</texture_fg>
+<texture_bg>-7f7f80</texture_bg>
+<texture_style>16</texture_style>
+<texture_width>12</texture_width>
+<texture_height>12</texture_height>
+</texture>
+</part>
+<part>
+<polygon count="25" vertices="-0.01693058, 6.984652, 2.086244, 6.984652, 2.086244, 6.693648, 2.3772492, 6.693648, 2.3772492, 6.984652, 2.3772492, 7.183066, 2.4037044, 7.4608426, 2.4566145, 7.619573, 2.522752, 7.7518487, 2.681482, 7.8841233, 2.7873023, 7.989943, 2.985715, 8.082535, 3.1841276, 8.188356, 3.3825402, 8.280949, 4.3878307, 8.280949, 4.7582006, 8.175129, 4.9566135, 8.042852, 5.141799, 7.8312135, 5.234391, 7.698939, 5.366667, 7.5137525, 5.3798943, 7.183066, 5.3798943, 6.984652, 9.983068, 6.984652, 9.983068, 9.987297, -0.01693058, 9.987297"/>
+<elasticity>1.0</elasticity>
+<thermal_conductivity>2.5</thermal_conductivity>
+<specific_heat>1882.0</specific_heat>
+<density>920.0</density>
+<transmission>0.0</transmission>
+<reflection>0.0</reflection>
+<scattering>false</scattering>
+<scattering_visible>false</scattering_visible>
+<absorption>1.0</absorption>
+<emissivity>0.0</emissivity>
+<temperature>-30.0</temperature>
+<constant_temperature>false</constant_temperature>
+<texture><texture_fg>-1000000</texture_fg>
+<texture_bg>-7f7f80</texture_bg>
+<texture_style>9</texture_style>
+<texture_width>8</texture_width>
+<texture_height>8</texture_height>
+</texture>
+</part>
+</structure>
+<environment>
+</environment>
+<sensor>
+<thermometer x="3.941799" y="7.7380953"/>
+<thermometer x="3.915344" y="2.1560845"/>
+<thermometer x="5.595238" y="5.0132275"/>
+<thermometer x="6.3492064" y="9.034391"/>
+</sensor>
+<controller>
+</controller>
+</model>
+<view>
+<grid>true</grid>
+<snap_to_grid>false</snap_to_grid>
+<grid_size>10</grid_size>
+<perimeter_step_size>0.05</perimeter_step_size>
+<border_tickmarks>true</border_tickmarks>
+<color_palette_type>0</color_palette_type>
+<color_palette_x>0.0</color_palette_x><color_palette_y>0.0</color_palette_y><color_palette_w>0.0</color_palette_w><color_palette_h>0.0</color_palette_h><minimum_temperature>-40.0</minimum_temperature>
+<maximum_temperature>20.0</maximum_temperature>
+<fan_rotation_speed_scale_factor>1.0</fan_rotation_speed_scale_factor><graph_xlabel>Time (hr)</graph_xlabel><graph_ylabel>Temperature (℃)</graph_ylabel></view>
+</state>

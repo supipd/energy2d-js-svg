@@ -21,7 +21,8 @@
 </boundary>
 <structure>
 <part>
-<rectangle x="0.0" y="5.2" width="10.0" height="1.0"/><thermal_conductivity>1.0</thermal_conductivity>
+<rectangle x="0.0" y="5.2" width="10.0" height="1.0"/><elasticity>1.0</elasticity>
+<thermal_conductivity>1.0</thermal_conductivity>
 <specific_heat>1300.0</specific_heat>
 <density>25.0</density>
 <transmission>0.0</transmission>
@@ -41,7 +42,8 @@
 <filled>false</filled>
 </part>
 <part>
-<rectangle x="0.0" y="9.0" width="10.0" height="1.0"/><thermal_conductivity>1.0E-6</thermal_conductivity>
+<rectangle x="0.0" y="9.0" width="10.0" height="1.0"/><elasticity>1.0</elasticity>
+<thermal_conductivity>1.0E-6</thermal_conductivity>
 <specific_heat>1300.0</specific_heat>
 <density>25.0</density>
 <transmission>0.0</transmission>
@@ -61,7 +63,8 @@
 <label>Insulator</label>
 </part>
 <part>
-<rectangle x="0.0" y="8.799999" width="10.0" height="0.2"/><thermal_conductivity>1.0</thermal_conductivity>
+<rectangle x="0.0" y="8.799999" width="10.0" height="0.2"/><elasticity>1.0</elasticity>
+<thermal_conductivity>1.0</thermal_conductivity>
 <specific_heat>1300.0</specific_heat>
 <density>25.0</density>
 <transmission>0.0</transmission>
@@ -74,7 +77,8 @@
 <constant_temperature>true</constant_temperature>
 </part>
 <part>
-<rectangle x="-0.099999905" y="4.2" width="10.0" height="1.0"/><thermal_conductivity>1.0E-6</thermal_conductivity>
+<rectangle x="-0.099999905" y="4.2" width="10.0" height="1.0"/><elasticity>1.0</elasticity>
+<thermal_conductivity>1.0E-6</thermal_conductivity>
 <specific_heat>1300.0</specific_heat>
 <density>25.0</density>
 <transmission>0.0</transmission>
@@ -94,7 +98,8 @@
 <label>Insulator</label>
 </part>
 <part>
-<rectangle x="0.0" y="4.0" width="10.0" height="0.2"/><thermal_conductivity>1.0</thermal_conductivity>
+<rectangle x="0.0" y="4.0" width="10.0" height="0.2"/><elasticity>1.0</elasticity>
+<thermal_conductivity>1.0</thermal_conductivity>
 <specific_heat>1300.0</specific_heat>
 <density>25.0</density>
 <transmission>0.0</transmission>
@@ -107,7 +112,8 @@
 <constant_temperature>true</constant_temperature>
 </part>
 <part>
-<rectangle x="0.0" y="0.0" width="10.0" height="1.0"/><thermal_conductivity>1.0</thermal_conductivity>
+<rectangle x="0.0" y="0.0" width="10.0" height="1.0"/><elasticity>1.0</elasticity>
+<thermal_conductivity>1.0</thermal_conductivity>
 <specific_heat>1300.0</specific_heat>
 <density>25.0</density>
 <transmission>0.0</transmission>
@@ -133,6 +139,7 @@
 <vy>-2.219719E-4</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>9.959967</rx>
@@ -141,6 +148,7 @@
 <vy>-8.725474E-4</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>1.57015296E8</rx>
@@ -149,6 +157,7 @@
 <vy>4.37448868E11</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>3.7093658</rx>
@@ -157,6 +166,7 @@
 <vy>5.1998586E-4</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>2.0216317</rx>
@@ -165,6 +175,7 @@
 <vy>2.7270525E-4</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>1.04304634E16</rx>
@@ -173,6 +184,7 @@
 <vy>-4.77853492E17</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>-1.59505216E8</rx>
@@ -181,6 +193,7 @@
 <vy>-4.37448868E11</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>2.8533177</rx>
@@ -189,6 +202,7 @@
 <vy>3.2867183E-4</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>-1.05934262E16</rx>
@@ -197,6 +211,7 @@
 <vy>4.77853492E17</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>7.7815127</rx>
@@ -205,6 +220,7 @@
 <vy>-1.5773083E-4</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>6.0148234</rx>
@@ -213,6 +229,7 @@
 <vy>1.1412142E-4</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>4.0630364</rx>
@@ -221,6 +238,7 @@
 <vy>-0.0010815873</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>2.113011</rx>
@@ -229,6 +247,7 @@
 <vy>3.300503E-4</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>0.046786647</rx>
@@ -237,6 +256,7 @@
 <vy>-6.5978686E-4</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>8.410615</rx>
@@ -245,6 +265,7 @@
 <vy>-5.5961926E-5</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>2.5859659</rx>
@@ -253,6 +274,7 @@
 <vy>-4.816534E-4</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>1.6045743</rx>
@@ -261,6 +283,7 @@
 <vy>5.994351E-4</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>4.279552</rx>
@@ -269,6 +292,8 @@
 <vy>-0.007768861</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<uid>P1</uid>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>3.2515128</rx>
@@ -277,6 +302,7 @@
 <vy>0.0010327116</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>1.758749</rx>
@@ -285,6 +311,7 @@
 <vy>9.938688E-4</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>5.53707</rx>
@@ -293,6 +320,7 @@
 <vy>-0.0019444935</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>5.7922473</rx>
@@ -301,6 +329,7 @@
 <vy>2.10711E-5</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>6.893472</rx>
@@ -309,6 +338,7 @@
 <vy>-2.0012377E-4</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>7.6082196</rx>
@@ -317,6 +347,7 @@
 <vy>-2.489387E-4</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>7.9359612</rx>
@@ -325,6 +356,7 @@
 <vy>-2.4916377E-4</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>8.122026</rx>
@@ -333,6 +365,7 @@
 <vy>-2.3946042E-5</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>8.310455</rx>
@@ -341,6 +374,7 @@
 <vy>-1.8478892E-4</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>8.585397</rx>
@@ -349,6 +383,7 @@
 <vy>6.7414826E-4</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>6.441728</rx>
@@ -357,6 +392,7 @@
 <vy>-0.0062319282</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>3.3502357</rx>
@@ -365,6 +401,7 @@
 <vy>-6.9444545E-4</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>1.1889064</rx>
@@ -373,6 +410,7 @@
 <vy>8.531519E-5</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>0.9897262</rx>
@@ -381,6 +419,7 @@
 <vy>-0.0017281234</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>0.5123298</rx>
@@ -389,6 +428,7 @@
 <vy>-0.002310382</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>4.6058483</rx>
@@ -397,6 +437,7 @@
 <vy>-0.0015586717</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>4.426545</rx>
@@ -405,6 +446,7 @@
 <vy>-0.0051404103</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>5.1929617</rx>
@@ -413,6 +455,7 @@
 <vy>-8.0536015E-4</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>6.194458</rx>
@@ -421,6 +464,7 @@
 <vy>2.4986407E-4</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>6.4950237</rx>
@@ -429,6 +473,7 @@
 <vy>2.8195448E-4</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>7.297371</rx>
@@ -437,6 +482,7 @@
 <vy>-7.7909266E-4</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>8.802355</rx>
@@ -445,6 +491,7 @@
 <vy>-0.0012728635</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>8.775472</rx>
@@ -453,6 +500,7 @@
 <vy>3.1742177E-4</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>2.3852596</rx>
@@ -461,6 +509,7 @@
 <vy>1.6223983E-4</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>1.3803536</rx>
@@ -469,6 +518,7 @@
 <vy>3.1621638E-4</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>7.0966687</rx>
@@ -477,6 +527,7 @@
 <vy>3.1205892E-4</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>7.498603</rx>
@@ -485,6 +536,7 @@
 <vy>3.652741E-4</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>5.69368</rx>
@@ -493,6 +545,7 @@
 <vy>-8.051668E-4</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>8.996002</rx>
@@ -501,6 +554,7 @@
 <vy>-0.0015498484</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>9.310558</rx>
@@ -509,6 +563,7 @@
 <vy>-2.1998238E-4</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>9.194405</rx>
@@ -517,6 +572,7 @@
 <vy>-6.7770516E-4</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>0.83590025</rx>
@@ -525,6 +581,7 @@
 <vy>-1.1699339E-4</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>0.80025625</rx>
@@ -533,6 +590,7 @@
 <vy>-0.0023289784</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>0.25126785</rx>
@@ -541,6 +599,7 @@
 <vy>-0.0028173064</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>0.48027837</rx>
@@ -549,6 +608,7 @@
 <vy>-1.7015467E-4</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>3.0891173</rx>
@@ -557,6 +617,7 @@
 <vy>-7.9269573E-4</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>3.3899434</rx>
@@ -565,6 +626,7 @@
 <vy>-7.999095E-4</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>9.567628</rx>
@@ -573,6 +635,7 @@
 <vy>-0.0022695477</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>9.777688</rx>
@@ -581,6 +644,7 @@
 <vy>6.567158E-4</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>9.156087</rx>
@@ -589,6 +653,7 @@
 <vy>-9.218027E-5</vy>
 <radius>0.04</radius>
 <mass>0.01</mass>
+<velocity_color>0</velocity_color>
 </particle>
 <particle>
 <rx>5.0</rx>
@@ -694,7 +759,7 @@
 <view>
 <snap_to_grid>true</snap_to_grid>
 <grid_size>10</grid_size>
-<radiation_mesh_size>0.05</radiation_mesh_size>
+<perimeter_step_size>0.05</perimeter_step_size>
 <color_palette_type>0</color_palette_type>
 <color_palette_x>0.0</color_palette_x><color_palette_y>0.0</color_palette_y><color_palette_w>0.0</color_palette_w><color_palette_h>0.0</color_palette_h><minimum_temperature>0.0</minimum_temperature>
 <maximum_temperature>20.0</maximum_temperature>

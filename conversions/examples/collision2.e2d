@@ -20,7 +20,7 @@
 </boundary>
 <structure>
 <part>
-<blob count="10" points="0.8526983, 6.8293653, 0.4526983, 8.629366, 2.7526984, 8.829365, 6.8526983, 8.429365, 6.252698, 7.429365, 5.752698, 6.929365, 4.552698, 7.5293655, 2.9526982, 7.5293655, 2.0526984, 7.8293653, 1.6526983, 5.8293653"/>
+<blob count="10" points="0.8526983, 6.829365, 0.4526983, 8.629366, 2.7526984, 8.829365, 6.8526983, 8.429365, 6.252698, 7.429365, 5.752698, 6.929365, 4.552698, 7.5293655, 2.9526982, 7.5293655, 2.0526984, 7.829365, 1.6526983, 5.829365"/>
 <elasticity>1.0</elasticity>
 <thermal_conductivity>1.0</thermal_conductivity>
 <specific_heat>1300.0</specific_heat>
@@ -41,7 +41,7 @@
 </texture>
 </part>
 <part>
-<polygon count="4" vertices="7.1, 10.0, 10.1, 10.0, 10.1, 5.9, 9.2, 6.2000003"/>
+<polygon count="4" vertices="7.1, 10.0, 10.1, 10.0, 10.1, 5.8999996, 9.2, 6.200001"/>
 <elasticity>1.0</elasticity>
 <thermal_conductivity>1.0</thermal_conductivity>
 <specific_heat>1300.0</specific_heat>
@@ -62,7 +62,7 @@
 </texture>
 </part>
 <part>
-<ellipse x="2.9000000953674316" y="3.9999999701976776" a="2.1000001" b="0.90000004"/><elasticity>1.0</elasticity>
+<ellipse x="2.9000000953674316" y="4.000000208616257" a="2.1000001" b="0.90000004"/><elasticity>1.0</elasticity>
 <thermal_conductivity>1.0</thermal_conductivity>
 <specific_heat>1300.0</specific_heat>
 <density>25.0</density>
@@ -82,7 +82,7 @@
 </texture>
 </part>
 <part>
-<blob count="8" points="6.7000003, 4.0, 5.5, 4.3, 6.0, 5.0, 7.3, 5.4, 8.3, 4.7000003, 8.8, 3.8, 7.3, 4.5, 7.2000003, 2.7"/>
+<blob count="8" points="6.7000003, 4.0, 5.5, 4.3, 6.0, 5.0, 7.3, 5.3999996, 8.3, 4.700001, 8.8, 3.8000002, 7.3, 4.5, 7.2000003, 2.6999998"/>
 <elasticity>1.0</elasticity>
 <thermal_conductivity>1.0</thermal_conductivity>
 <specific_heat>1300.0</specific_heat>
@@ -103,7 +103,7 @@
 </texture>
 </part>
 <part>
-<polygon count="3" vertices="3.6677246, 4.9010577, 5.3677244, 6.101058, 3.0677247, 6.101058"/>
+<polygon count="3" vertices="3.6677246, 4.901058, 5.3677244, 6.101059, 3.0677247, 6.101059"/>
 <elasticity>1.0</elasticity>
 <thermal_conductivity>1.0</thermal_conductivity>
 <specific_heat>1300.0</specific_heat>
@@ -129,7 +129,7 @@
 </particle>
 <particle>
 <rx>3.9</rx>
-<ry>0.4</ry>
+<ry>0.39999962</ry>
 <vx>2.8709053E-5</vx>
 <vy>1.9070876E-6</vy>
 <radius>0.04</radius>
@@ -147,7 +147,7 @@
 </particle>
 <particle>
 <rx>4.4</rx>
-<ry>0.6</ry>
+<ry>0.6000004</ry>
 <vx>-2.8933748E-5</vx>
 <vy>1.2031789E-5</vy>
 <radius>0.04</radius>
@@ -156,7 +156,7 @@
 </particle>
 <particle>
 <rx>3.7</rx>
-<ry>1.6</ry>
+<ry>1.6000004</ry>
 <vx>2.6416694E-4</vx>
 <vy>4.4333536E-4</vy>
 <radius>0.04</radius>
@@ -174,7 +174,7 @@
 </particle>
 <particle>
 <rx>5.4</rx>
-<ry>2.6000001</ry>
+<ry>2.6000004</ry>
 <vx>2.623059E-4</vx>
 <vy>-3.551224E-5</vy>
 <radius>0.04</radius>
@@ -183,7 +183,7 @@
 </particle>
 <particle>
 <rx>6.4</rx>
-<ry>1.8000001</ry>
+<ry>1.8000002</ry>
 <vx>2.0629584E-4</vx>
 <vy>4.473691E-5</vy>
 <radius>0.04</radius>
@@ -192,7 +192,7 @@
 </particle>
 <particle>
 <rx>4.0</rx>
-<ry>1.6</ry>
+<ry>1.6000004</ry>
 <vx>3.4495613E-5</vx>
 <vy>-1.3593044E-4</vy>
 <radius>0.04</radius>
@@ -201,7 +201,7 @@
 </particle>
 <particle>
 <rx>5.5</rx>
-<ry>1.7</ry>
+<ry>1.6999998</ry>
 <vx>7.099066E-5</vx>
 <vy>2.6503942E-4</vy>
 <radius>0.04</radius>
@@ -210,7 +210,7 @@
 </particle>
 <particle>
 <rx>3.9</rx>
-<ry>1.1</ry>
+<ry>1.1000004</ry>
 <vx>-1.4274233E-4</vx>
 <vy>1.2213584E-4</vy>
 <radius>0.04</radius>
@@ -219,7 +219,7 @@
 </particle>
 <particle>
 <rx>5.7000003</rx>
-<ry>0.6</ry>
+<ry>0.6000004</ry>
 <vx>1.1869772E-5</vx>
 <vy>-9.213014E-5</vy>
 <radius>0.04</radius>
@@ -228,7 +228,7 @@
 </particle>
 <particle>
 <rx>3.6000001</rx>
-<ry>1.3000001</ry>
+<ry>1.3000002</ry>
 <vx>-2.2831323E-4</vx>
 <vy>2.6249612E-4</vy>
 <radius>0.04</radius>
@@ -237,7 +237,7 @@
 </particle>
 <particle>
 <rx>3.1000001</rx>
-<ry>0.7</ry>
+<ry>0.6999998</ry>
 <vx>-1.8417944E-4</vx>
 <vy>2.7310368E-4</vy>
 <radius>0.04</radius>
@@ -264,7 +264,7 @@
 </particle>
 <particle>
 <rx>5.2000003</rx>
-<ry>0.6</ry>
+<ry>0.6000004</ry>
 <vx>-2.437799E-4</vx>
 <vy>3.815794E-4</vy>
 <radius>0.04</radius>
@@ -273,7 +273,7 @@
 </particle>
 <particle>
 <rx>6.0</rx>
-<ry>1.1</ry>
+<ry>1.1000004</ry>
 <vx>2.4928752E-4</vx>
 <vy>-1.755586E-4</vy>
 <radius>0.04</radius>
@@ -282,7 +282,7 @@
 </particle>
 <particle>
 <rx>4.6</rx>
-<ry>2.7</ry>
+<ry>2.6999998</ry>
 <vx>-2.7094985E-4</vx>
 <vy>1.9054247E-5</vy>
 <radius>0.04</radius>
@@ -291,7 +291,7 @@
 </particle>
 <particle>
 <rx>2.0</rx>
-<ry>1.1</ry>
+<ry>1.1000004</ry>
 <vx>1.21329445E-4</vx>
 <vy>4.6857318E-4</vy>
 <radius>0.04</radius>
@@ -300,7 +300,7 @@
 </particle>
 <particle>
 <rx>4.1</rx>
-<ry>0.90000004</ry>
+<ry>0.8999996</ry>
 <vx>-9.275239E-5</vx>
 <vy>3.810889E-4</vy>
 <radius>0.04</radius>
@@ -309,7 +309,7 @@
 </particle>
 <particle>
 <rx>5.3</rx>
-<ry>1.2</ry>
+<ry>1.1999998</ry>
 <vx>-4.694758E-4</vx>
 <vy>-8.268158E-4</vy>
 <radius>0.15</radius>
@@ -320,7 +320,7 @@
 </particle>
 <particle>
 <rx>3.4</rx>
-<ry>1.8000001</ry>
+<ry>1.8000002</ry>
 <vx>-5.9426937E-5</vx>
 <vy>1.7413065E-4</vy>
 <radius>0.1</radius>
@@ -329,7 +329,7 @@
 </particle>
 <particle>
 <rx>3.7</rx>
-<ry>1.1</ry>
+<ry>1.1000004</ry>
 <vx>1.7626096E-4</vx>
 <vy>2.0787716E-4</vy>
 <radius>0.1</radius>
@@ -338,7 +338,7 @@
 </particle>
 <particle>
 <rx>4.0</rx>
-<ry>2.6000001</ry>
+<ry>2.6000004</ry>
 <vx>-1.5612181E-4</vx>
 <vy>2.8931815E-4</vy>
 <radius>0.1</radius>
@@ -347,7 +347,7 @@
 </particle>
 <particle>
 <rx>4.8</rx>
-<ry>1.6</ry>
+<ry>1.6000004</ry>
 <vx>2.5503992E-4</vx>
 <vy>-1.626565E-4</vy>
 <radius>0.1</radius>
@@ -365,7 +365,7 @@
 </particle>
 <particle>
 <rx>2.5</rx>
-<ry>1.8000001</ry>
+<ry>1.8000002</ry>
 <vx>-3.059233E-4</vx>
 <vy>1.9858636E-4</vy>
 <radius>0.1</radius>
@@ -374,7 +374,7 @@
 </particle>
 <particle>
 <rx>4.3</rx>
-<ry>1.9</ry>
+<ry>1.8999996</ry>
 <vx>3.105356E-5</vx>
 <vy>-1.2602656E-4</vy>
 <radius>0.04</radius>
@@ -383,7 +383,7 @@
 </particle>
 <particle>
 <rx>4.7000003</rx>
-<ry>0.7</ry>
+<ry>0.6999998</ry>
 <vx>1.9415928E-4</vx>
 <vy>-5.0822673E-5</vy>
 <radius>0.04</radius>
@@ -392,7 +392,7 @@
 </particle>
 <particle>
 <rx>2.5</rx>
-<ry>2.8</ry>
+<ry>2.8000002</ry>
 <vx>9.209107E-5</vx>
 <vy>2.9574637E-4</vy>
 <radius>0.04</radius>
@@ -401,7 +401,7 @@
 </particle>
 <particle>
 <rx>3.8</rx>
-<ry>2.2</ry>
+<ry>2.1999998</ry>
 <vx>-2.117441E-4</vx>
 <vy>3.260078E-5</vy>
 <radius>0.04</radius>
@@ -410,7 +410,7 @@
 </particle>
 <particle>
 <rx>4.4</rx>
-<ry>2.3</ry>
+<ry>2.3000002</ry>
 <vx>-1.900651E-4</vx>
 <vy>2.2495432E-4</vy>
 <radius>0.04</radius>
@@ -419,7 +419,7 @@
 </particle>
 <particle>
 <rx>3.7</rx>
-<ry>3.3</ry>
+<ry>3.3000002</ry>
 <vx>-2.6580174E-10</vx>
 <vy>-2.8774323E-4</vy>
 <radius>0.04</radius>
@@ -428,7 +428,7 @@
 </particle>
 <particle>
 <rx>4.4</rx>
-<ry>1.1</ry>
+<ry>1.1000004</ry>
 <vx>-1.0361333E-4</vx>
 <vy>-2.4022927E-4</vy>
 <radius>0.04</radius>
@@ -437,7 +437,7 @@
 </particle>
 <particle>
 <rx>4.9</rx>
-<ry>2.6000001</ry>
+<ry>2.6000004</ry>
 <vx>-9.751639E-9</vx>
 <vy>6.296857E-5</vy>
 <radius>0.04</radius>
@@ -446,7 +446,7 @@
 </particle>
 <particle>
 <rx>3.5</rx>
-<ry>2.3</ry>
+<ry>2.3000002</ry>
 <vx>-1.7751768E-4</vx>
 <vy>-4.311099E-5</vy>
 <radius>0.04</radius>
@@ -455,7 +455,7 @@
 </particle>
 <particle>
 <rx>5.1</rx>
-<ry>2.1000001</ry>
+<ry>2.1000004</ry>
 <vx>-2.3813986E-6</vx>
 <vy>-1.03324506E-4</vy>
 <radius>0.04</radius>
@@ -464,7 +464,7 @@
 </particle>
 <particle>
 <rx>6.2000003</rx>
-<ry>2.6000001</ry>
+<ry>2.6000004</ry>
 <vx>-5.8211566E-7</vx>
 <vy>4.4175795E-6</vy>
 <radius>0.04</radius>
@@ -473,7 +473,7 @@
 </particle>
 <particle>
 <rx>9.1</rx>
-<ry>1.2</ry>
+<ry>1.1999998</ry>
 <vx>-3.351492E-6</vx>
 <vy>2.5537057E-4</vy>
 <radius>0.2</radius>
@@ -484,7 +484,7 @@
 </particle>
 <particle>
 <rx>1.5</rx>
-<ry>1.3000001</ry>
+<ry>1.3000002</ry>
 <vx>-3.059233E-4</vx>
 <vy>1.9858636E-4</vy>
 <radius>0.1</radius>
@@ -493,7 +493,7 @@
 </particle>
 <particle>
 <rx>1.8000001</rx>
-<ry>2.1000001</ry>
+<ry>2.1000004</ry>
 <vx>-3.059233E-4</vx>
 <vy>1.9858636E-4</vy>
 <radius>0.1</radius>
@@ -502,7 +502,7 @@
 </particle>
 <particle>
 <rx>5.9</rx>
-<ry>2.1000001</ry>
+<ry>2.1000004</ry>
 <vx>-3.059233E-4</vx>
 <vy>1.9858636E-4</vy>
 <radius>0.16</radius>
@@ -513,7 +513,7 @@
 </particle>
 <particle>
 <rx>7.4</rx>
-<ry>1.9</ry>
+<ry>1.8999996</ry>
 <vx>2.0629584E-4</vx>
 <vy>4.473691E-5</vy>
 <radius>0.04</radius>
@@ -522,7 +522,7 @@
 </particle>
 <particle>
 <rx>8.2</rx>
-<ry>1.8000001</ry>
+<ry>1.8000002</ry>
 <vx>2.0629584E-4</vx>
 <vy>4.473691E-5</vy>
 <radius>0.04</radius>
@@ -531,7 +531,7 @@
 </particle>
 <particle>
 <rx>7.7000003</rx>
-<ry>1.2</ry>
+<ry>1.1999998</ry>
 <vx>2.0629584E-4</vx>
 <vy>4.473691E-5</vy>
 <radius>0.04</radius>
@@ -540,7 +540,7 @@
 </particle>
 <particle>
 <rx>7.7000003</rx>
-<ry>1.6</ry>
+<ry>1.6000004</ry>
 <vx>2.0629584E-4</vx>
 <vy>4.473691E-5</vy>
 <radius>0.04</radius>
@@ -558,7 +558,7 @@
 </particle>
 <particle>
 <rx>1.0</rx>
-<ry>0.6</ry>
+<ry>0.6000004</ry>
 <vx>2.0629584E-4</vx>
 <vy>4.473691E-5</vy>
 <radius>0.04</radius>
@@ -567,7 +567,7 @@
 </particle>
 <particle>
 <rx>0.90000004</rx>
-<ry>1.3000001</ry>
+<ry>1.3000002</ry>
 <vx>2.0629584E-4</vx>
 <vy>4.473691E-5</vy>
 <radius>0.04</radius>
@@ -576,7 +576,7 @@
 </particle>
 <particle>
 <rx>1.0</rx>
-<ry>1.9</ry>
+<ry>1.8999996</ry>
 <vx>2.0629584E-4</vx>
 <vy>4.473691E-5</vy>
 <radius>0.04</radius>
@@ -585,7 +585,7 @@
 </particle>
 <particle>
 <rx>1.0</rx>
-<ry>2.3</ry>
+<ry>2.3000002</ry>
 <vx>2.0629584E-4</vx>
 <vy>4.473691E-5</vy>
 <radius>0.04</radius>
@@ -594,7 +594,7 @@
 </particle>
 <particle>
 <rx>7.7000003</rx>
-<ry>0.7</ry>
+<ry>0.6999998</ry>
 <vx>2.0629584E-4</vx>
 <vy>4.473691E-5</vy>
 <radius>0.04</radius>
@@ -603,7 +603,7 @@
 </particle>
 <particle>
 <rx>8.3</rx>
-<ry>0.6</ry>
+<ry>0.6000004</ry>
 <vx>2.0629584E-4</vx>
 <vy>4.473691E-5</vy>
 <radius>0.04</radius>
@@ -612,7 +612,7 @@
 </particle>
 <particle>
 <rx>7.1</rx>
-<ry>0.4</ry>
+<ry>0.39999962</ry>
 <vx>2.0629584E-4</vx>
 <vy>4.473691E-5</vy>
 <radius>0.04</radius>
@@ -621,7 +621,7 @@
 </particle>
 <particle>
 <rx>7.2000003</rx>
-<ry>0.8</ry>
+<ry>0.8000002</ry>
 <vx>2.0629584E-4</vx>
 <vy>4.473691E-5</vy>
 <radius>0.04</radius>
@@ -630,7 +630,7 @@
 </particle>
 <particle>
 <rx>6.4</rx>
-<ry>0.4</ry>
+<ry>0.39999962</ry>
 <vx>2.0629584E-4</vx>
 <vy>4.473691E-5</vy>
 <radius>0.04</radius>
@@ -648,7 +648,7 @@
 </particle>
 <particle>
 <rx>2.2</rx>
-<ry>0.90000004</ry>
+<ry>0.8999996</ry>
 <vx>2.0629584E-4</vx>
 <vy>4.473691E-5</vy>
 <radius>0.04</radius>
@@ -657,7 +657,7 @@
 </particle>
 <particle>
 <rx>2.4</rx>
-<ry>1.4</ry>
+<ry>1.3999996</ry>
 <vx>2.0629584E-4</vx>
 <vy>4.473691E-5</vy>
 <radius>0.04</radius>
@@ -666,7 +666,7 @@
 </particle>
 <particle>
 <rx>1.8000001</rx>
-<ry>1.8000001</ry>
+<ry>1.8000002</ry>
 <vx>2.0629584E-4</vx>
 <vy>4.473691E-5</vy>
 <radius>0.04</radius>
@@ -675,7 +675,7 @@
 </particle>
 <particle>
 <rx>1.1</rx>
-<ry>1.9</ry>
+<ry>1.8999996</ry>
 <vx>2.0629584E-4</vx>
 <vy>4.473691E-5</vy>
 <radius>0.04</radius>
@@ -684,7 +684,7 @@
 </particle>
 <particle>
 <rx>1.6</rx>
-<ry>2.4</ry>
+<ry>2.3999996</ry>
 <vx>2.0629584E-4</vx>
 <vy>4.473691E-5</vy>
 <radius>0.04</radius>
@@ -693,7 +693,7 @@
 </particle>
 <particle>
 <rx>2.3</rx>
-<ry>2.2</ry>
+<ry>2.1999998</ry>
 <vx>2.0629584E-4</vx>
 <vy>4.473691E-5</vy>
 <radius>0.04</radius>
@@ -702,7 +702,7 @@
 </particle>
 <particle>
 <rx>2.5</rx>
-<ry>2.2</ry>
+<ry>2.1999998</ry>
 <vx>2.0629584E-4</vx>
 <vy>4.473691E-5</vy>
 <radius>0.04</radius>
@@ -720,7 +720,7 @@
 </particle>
 <particle>
 <rx>6.5</rx>
-<ry>1.3000001</ry>
+<ry>1.3000002</ry>
 <vx>2.0629584E-4</vx>
 <vy>4.473691E-5</vy>
 <radius>0.04</radius>
@@ -729,7 +729,7 @@
 </particle>
 <particle>
 <rx>8.5</rx>
-<ry>0.3</ry>
+<ry>0.3000002</ry>
 <vx>2.0629584E-4</vx>
 <vy>4.473691E-5</vy>
 <radius>0.04</radius>
@@ -747,7 +747,7 @@
 </particle>
 <particle>
 <rx>8.5</rx>
-<ry>1.1</ry>
+<ry>1.1000004</ry>
 <vx>2.0629584E-4</vx>
 <vy>4.473691E-5</vy>
 <radius>0.04</radius>
@@ -756,7 +756,7 @@
 </particle>
 <particle>
 <rx>8.5</rx>
-<ry>1.1</ry>
+<ry>1.1000004</ry>
 <vx>2.0629584E-4</vx>
 <vy>4.473691E-5</vy>
 <radius>0.04</radius>
@@ -765,7 +765,7 @@
 </particle>
 <particle>
 <rx>7.1</rx>
-<ry>1.1</ry>
+<ry>1.1000004</ry>
 <vx>2.0629584E-4</vx>
 <vy>4.473691E-5</vy>
 <radius>0.04</radius>
@@ -774,7 +774,7 @@
 </particle>
 <particle>
 <rx>6.7000003</rx>
-<ry>1.2</ry>
+<ry>1.1999998</ry>
 <vx>2.0629584E-4</vx>
 <vy>4.473691E-5</vy>
 <radius>0.04</radius>
@@ -783,7 +783,7 @@
 </particle>
 <particle>
 <rx>6.7000003</rx>
-<ry>1.7</ry>
+<ry>1.6999998</ry>
 <vx>2.0629584E-4</vx>
 <vy>4.473691E-5</vy>
 <radius>0.04</radius>
@@ -801,7 +801,7 @@
 </particle>
 <particle>
 <rx>6.4</rx>
-<ry>2.1000001</ry>
+<ry>2.1000004</ry>
 <vx>2.0629584E-4</vx>
 <vy>4.473691E-5</vy>
 <radius>0.04</radius>
@@ -810,7 +810,7 @@
 </particle>
 <particle>
 <rx>6.4</rx>
-<ry>2.1000001</ry>
+<ry>2.1000004</ry>
 <vx>2.0629584E-4</vx>
 <vy>4.473691E-5</vy>
 <radius>0.04</radius>
@@ -819,7 +819,7 @@
 </particle>
 <particle>
 <rx>6.6</rx>
-<ry>2.3</ry>
+<ry>2.3000002</ry>
 <vx>2.0629584E-4</vx>
 <vy>4.473691E-5</vy>
 <radius>0.04</radius>
@@ -828,7 +828,7 @@
 </particle>
 <particle>
 <rx>1.3000001</rx>
-<ry>0.90000004</ry>
+<ry>0.8999996</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -837,7 +837,7 @@
 </particle>
 <particle>
 <rx>1.8000001</rx>
-<ry>0.8</ry>
+<ry>0.8000002</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -846,7 +846,7 @@
 </particle>
 <particle>
 <rx>1.8000001</rx>
-<ry>1.2</ry>
+<ry>1.1999998</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -855,7 +855,7 @@
 </particle>
 <particle>
 <rx>2.5</rx>
-<ry>0.8</ry>
+<ry>0.8000002</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -873,7 +873,7 @@
 </particle>
 <particle>
 <rx>3.1000001</rx>
-<ry>0.4</ry>
+<ry>0.39999962</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -882,7 +882,7 @@
 </particle>
 <particle>
 <rx>1.4</rx>
-<ry>0.3</ry>
+<ry>0.3000002</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -891,7 +891,7 @@
 </particle>
 <particle>
 <rx>0.8</rx>
-<ry>0.2</ry>
+<ry>0.19999981</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -900,7 +900,7 @@
 </particle>
 <particle>
 <rx>0.7</rx>
-<ry>0.3</ry>
+<ry>0.3000002</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -909,7 +909,7 @@
 </particle>
 <particle>
 <rx>2.2</rx>
-<ry>0.2</ry>
+<ry>0.19999981</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -918,7 +918,7 @@
 </particle>
 <particle>
 <rx>2.7</rx>
-<ry>0.3</ry>
+<ry>0.3000002</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -927,7 +927,7 @@
 </particle>
 <particle>
 <rx>3.5</rx>
-<ry>0.3</ry>
+<ry>0.3000002</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -936,7 +936,7 @@
 </particle>
 <particle>
 <rx>3.7</rx>
-<ry>0.7</ry>
+<ry>0.6999998</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -954,7 +954,7 @@
 </particle>
 <particle>
 <rx>4.8</rx>
-<ry>0.3</ry>
+<ry>0.3000002</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -963,7 +963,7 @@
 </particle>
 <particle>
 <rx>4.2000003</rx>
-<ry>0.3</ry>
+<ry>0.3000002</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -981,7 +981,7 @@
 </particle>
 <particle>
 <rx>5.5</rx>
-<ry>0.3</ry>
+<ry>0.3000002</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -990,7 +990,7 @@
 </particle>
 <particle>
 <rx>5.0</rx>
-<ry>0.3</ry>
+<ry>0.3000002</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -999,7 +999,7 @@
 </particle>
 <particle>
 <rx>5.4</rx>
-<ry>0.6</ry>
+<ry>0.6000004</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -1008,7 +1008,7 @@
 </particle>
 <particle>
 <rx>5.0</rx>
-<ry>0.7</ry>
+<ry>0.6999998</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -1017,7 +1017,7 @@
 </particle>
 <particle>
 <rx>4.8</rx>
-<ry>0.90000004</ry>
+<ry>0.8999996</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -1035,7 +1035,7 @@
 </particle>
 <particle>
 <rx>5.6</rx>
-<ry>1.2</ry>
+<ry>1.1999998</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -1044,7 +1044,7 @@
 </particle>
 <particle>
 <rx>6.3</rx>
-<ry>0.7</ry>
+<ry>0.6999998</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -1062,7 +1062,7 @@
 </particle>
 <particle>
 <rx>6.0</rx>
-<ry>0.8</ry>
+<ry>0.8000002</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -1071,7 +1071,7 @@
 </particle>
 <particle>
 <rx>6.8</rx>
-<ry>0.6</ry>
+<ry>0.6000004</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -1080,7 +1080,7 @@
 </particle>
 <particle>
 <rx>7.5</rx>
-<ry>0.4</ry>
+<ry>0.39999962</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -1089,7 +1089,7 @@
 </particle>
 <particle>
 <rx>7.9</rx>
-<ry>0.4</ry>
+<ry>0.39999962</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -1098,7 +1098,7 @@
 </particle>
 <particle>
 <rx>8.2</rx>
-<ry>0.3</ry>
+<ry>0.3000002</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -1107,7 +1107,7 @@
 </particle>
 <particle>
 <rx>8.6</rx>
-<ry>0.6</ry>
+<ry>0.6000004</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -1116,7 +1116,7 @@
 </particle>
 <particle>
 <rx>9.3</rx>
-<ry>0.2</ry>
+<ry>0.19999981</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -1125,7 +1125,7 @@
 </particle>
 <particle>
 <rx>7.8</rx>
-<ry>1.1</ry>
+<ry>1.1000004</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -1143,7 +1143,7 @@
 </particle>
 <particle>
 <rx>6.7000003</rx>
-<ry>0.90000004</ry>
+<ry>0.8999996</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -1152,7 +1152,7 @@
 </particle>
 <particle>
 <rx>6.3</rx>
-<ry>0.90000004</ry>
+<ry>0.8999996</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -1161,7 +1161,7 @@
 </particle>
 <particle>
 <rx>6.2000003</rx>
-<ry>1.3000001</ry>
+<ry>1.3000002</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -1170,7 +1170,7 @@
 </particle>
 <particle>
 <rx>5.9</rx>
-<ry>1.3000001</ry>
+<ry>1.3000002</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -1179,7 +1179,7 @@
 </particle>
 <particle>
 <rx>6.0</rx>
-<ry>1.6</ry>
+<ry>1.6000004</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -1188,7 +1188,7 @@
 </particle>
 <particle>
 <rx>5.7000003</rx>
-<ry>1.6</ry>
+<ry>1.6000004</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -1197,7 +1197,7 @@
 </particle>
 <particle>
 <rx>4.8</rx>
-<ry>1.3000001</ry>
+<ry>1.3000002</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -1206,7 +1206,7 @@
 </particle>
 <particle>
 <rx>4.2000003</rx>
-<ry>1.2</ry>
+<ry>1.1999998</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -1224,7 +1224,7 @@
 </particle>
 <particle>
 <rx>2.8</rx>
-<ry>1.1</ry>
+<ry>1.1000004</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -1233,7 +1233,7 @@
 </particle>
 <particle>
 <rx>2.4</rx>
-<ry>1.1</ry>
+<ry>1.1000004</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -1242,7 +1242,7 @@
 </particle>
 <particle>
 <rx>2.4</rx>
-<ry>0.6</ry>
+<ry>0.6000004</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -1251,7 +1251,7 @@
 </particle>
 <particle>
 <rx>1.8000001</rx>
-<ry>0.4</ry>
+<ry>0.39999962</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -1269,7 +1269,7 @@
 </particle>
 <particle>
 <rx>1.2</rx>
-<ry>0.4</ry>
+<ry>0.39999962</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -1278,7 +1278,7 @@
 </particle>
 <particle>
 <rx>0.5</rx>
-<ry>0.7</ry>
+<ry>0.6999998</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -1287,7 +1287,7 @@
 </particle>
 <particle>
 <rx>0.7</rx>
-<ry>0.90000004</ry>
+<ry>0.8999996</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -1296,7 +1296,7 @@
 </particle>
 <particle>
 <rx>0.7</rx>
-<ry>0.90000004</ry>
+<ry>0.8999996</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -1305,7 +1305,7 @@
 </particle>
 <particle>
 <rx>0.6</rx>
-<ry>1.4</ry>
+<ry>1.3999996</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -1323,7 +1323,7 @@
 </particle>
 <particle>
 <rx>1.2</rx>
-<ry>1.6</ry>
+<ry>1.6000004</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -1332,7 +1332,7 @@
 </particle>
 <particle>
 <rx>1.5</rx>
-<ry>1.9</ry>
+<ry>1.8999996</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -1368,7 +1368,7 @@
 </particle>
 <particle>
 <rx>2.8</rx>
-<ry>1.7</ry>
+<ry>1.6999998</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>
@@ -1377,7 +1377,7 @@
 </particle>
 <particle>
 <rx>3.2</rx>
-<ry>1.3000001</ry>
+<ry>1.3000002</ry>
 <vx>5.2340954E-5</vx>
 <vy>-1.2274093E-5</vy>
 <radius>0.04</radius>

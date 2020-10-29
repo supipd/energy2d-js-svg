@@ -81,7 +81,7 @@
 </part>
 </structure>
 <environment>
-<fan x="0.31" y="0.0" width="0.4" height="0.06" speed="2.0" angle="1.5707964"/><particle_feeder color="ffff80" velocity_color="0" radius="0.002" mass="0.001" x="0.48" y="0.8" maximum="100" period="1.0"/><particle_feeder color="80ffc0" velocity_color="0" radius="0.004" mass="0.002" x="0.51" y="0.8" maximum="100" period="1.0"/><particle_feeder color="ffffc0" velocity_color="0" radius="0.002" mass="0.001" x="0.54" y="0.8" maximum="100" period="1.0"/></environment>
+<fan uid="FAN" x="0.31" y="0.0" width="0.4" height="0.06" speed="2.0" angle="1.5707964"/><particle_feeder color="ffff80" velocity_color="0" radius="0.002" mass="0.001" x="0.48" y="0.8" maximum="100" period="1.0"/><particle_feeder color="80ffc0" velocity_color="0" radius="0.004" mass="0.002" x="0.51" y="0.8" maximum="100" period="1.0"/><particle_feeder color="ffffc0" velocity_color="0" radius="0.002" mass="0.001" x="0.54" y="0.8" maximum="100" period="1.0"/></environment>
 <sensor>
 <thermometer x="0.51" y="0.81000006"/>
 <thermometer x="0.17999999" y="0.81"/>

@@ -51,22 +51,39 @@ model2d.Model2D = function(options, array_type, svgPartsSpace) {
 	this.particleDrag = opt.particle_drag != undefined ? opt.particle_drag : -1;
 	this.particleHardness = opt.particle_hardness != undefined ? opt.particle_hardness : -1;
 
-    this.backgroundConductivity = opt.background_conductivity != undefined ? opt.background_conductivity : 10 * model2d.AIR_THERMAL_CONDUCTIVITY;
-    this.backgroundViscosity = opt.background_viscosity != undefined ? opt.background_viscosity : 10 * model2d.AIR_VISCOSITY;
+    this.backgroundConductivity = opt.background_conductivity != undefined ? opt.background_conductivity : /*10 * */model2d.AIR_THERMAL_CONDUCTIVITY;
+    this.backgroundViscosity = opt.background_viscosity != undefined ? opt.background_viscosity : /*10 * */model2d.AIR_VISCOSITY;
     this.backgroundSpecificHeat = opt.background_specific_heat != undefined ? opt.background_specific_heat : model2d.AIR_SPECIFIC_HEAT;
     this.backgroundDensity = opt.background_density != undefined ? opt.background_density : model2d.AIR_DENSITY;
     this.backgroundTemperature = opt.background_temperature != undefined ? opt.background_temperature : 0.0;
+    this.maximumHeatCapacity = -1;
 
     this.gravityType = opt.gravity_type != undefined ? opt.gravity_type : model2d.GRAVITY_UNIFORM;
 
-    this.boundary_settings = options.model.boundary || 
-        {   temperature_at_border: { upper: 0, lower: 0, left: 0, right: 0 } 
-            // by default all fluxes are zero, meaning that the borders are completely insulative
-        ,   flux_at_border: { upper: 0, lower: 0, left: 0, right: 0 } 
-            // by deefault all MassBoundary_REFLECTIVE
-        ,   mass_flow_at_border: { upper: 0, lower: 0, left: 0, right: 0 } 
-        };
-    
+//    this.boundary_settings = 
+//        {   temperature_at_border: { upper: 0, lower: 0, left: 0, right: 0 } 
+//            // by default all fluxes are zero, meaning that the borders are completely insulative
+//        ,   flux_at_border: { upper: 0, lower: 0, left: 0, right: 0 } 
+//            // by default all MassBoundary_REFLECTIVE
+//        ,   mass_flow_at_border: { upper: 0, lower: 0, left: 0, right: 0 } 
+//        };
+//    Object.assign(this.boundary_settings, options.model.boundary);
+
+    // little complication with boundary
+    this.thermalBoundary = { temperature_at_border: { upper: 0, lower: 0, left: 0, right: 0 } };
+    this.massBoundary = { mass_flow_at_border: { upper: 0, lower: 0, left: 0, right: 0 } };
+    if (options.model.boundary) {
+        if (options.model.boundary.temperature_at_border) {
+            this.thermalBoundary = { temperature_at_border: options.model.boundary.temperature_at_border };
+        }
+        if (options.model.boundary.flux_at_border) {
+            this.thermalBoundary = { flux_at_border: options.model.boundary.flux_at_border };
+        }
+        if (options.model.boundary.mass_flow_at_border) {
+            this.massBoundary = { mass_flow_at_border: options.model.boundary.mass_flow_at_border };
+        }
+    }
+      
     this.nx = model2d.NX;
     this.ny = model2d.NY;
     this.nx1 = this.nx - 1;
@@ -162,17 +179,21 @@ model2d.Model2D = function(options, array_type, svgPartsSpace) {
 
     // parts
     this.parts = [];
-    if (options.model.structure && options.model.structure.part) {
-        var parts_options = options.model.structure.part;
-        if (parts_options.constructor != Array)
-            parts_options = [parts_options];
-        this.parts = new Array(parts_options.length);
-        for (var i = 0; i < parts_options.length; i++)
-            this.parts[i] = new model2d.Part(parts_options[i], i, this);
+    if (opt.structure && opt.structure.part) {
+        opt.structure.part = (Array.isArray(opt.structure.part) ? opt.structure.part : [opt.structure.part])
+        opt.structure.part.forEach((part, idx) => {
+            this.parts.push(new model2d.Part(part, idx, this));
+        })
     }
 
     // elements e.g. Photons  
     this.particles = [];
+    if (opt.structure && opt.structure.particle) {
+        opt.structure.particle = (Array.isArray(opt.structure.particle) ? opt.structure.particle : [opt.structure.particle])
+        opt.structure.particle.forEach((particle, idx) => {
+            this.particles.push(new model2d.Particle(particle, idx, this));
+        })
+    }
     this.photons = [];
 
     // sensor 
@@ -191,16 +212,40 @@ model2d.Model2D = function(options, array_type, svgPartsSpace) {
     this.environment = opt.environment || {}; 
     // ------------------------- 
     this.clouds = []; //opt.environment && opt.environment.cloud || [];
+    if (opt.environment && opt.environment.cloud) {
+        opt.environment.cloud = (Array.isArray(opt.environment.cloud) ? opt.environment.cloud : [opt.environment.cloud])
+        opt.environment.cloud.forEach((cloud, idx) => {
+            this.clouds.push(new model2d.Cloud(cloud, idx, this));
+        })
+    }
     this.trees = []; //opt.environment && opt.environment.tree || [];
+    if (opt.environment && opt.environment.tree) {
+        opt.environment.tree = (Array.isArray(opt.environment.tree) ? opt.environment.tree : [opt.environment.tree])
+        opt.environment.tree.forEach((tree, idx) => {
+            this.trees.push(new model2d.Tree(tree, idx, this));
+        })
+    }
     this.fans = []; //opt.environment && opt.environment.fan || [];
     if (opt.environment && opt.environment.fan) {
-        var fanArr = (Array.isArray(opt.environment.fan) ? opt.environment.fan : [opt.environment.fan])
-        fanArr.forEach(fan => {
+        opt.environment.fan = (Array.isArray(opt.environment.fan) ? opt.environment.fan : [opt.environment.fan])
+        opt.environment.fan.forEach(fan => {
             this.fans.push(new model2d.Fan(fan, this));
         })
     }
     this.heliostats = []; //opt.environment && opt.environment.heliostat || [];
+    if (opt.environment && opt.environment.heliostat) {
+        opt.environment.heliostat = (Array.isArray(opt.environment.heliostat) ? opt.environment.heliostat : [opt.environment.particle_feeder])
+        opt.environment.heliostat.forEach((heliostat, idx) => {
+            this.heliostats.push(new model2d.Heliostat(heliostat, idx, this));
+        })
+    }
     this.particleFeeders = []; //opt.environment && opt.environment.particle_feeder || [];
+    if (opt.environment && opt.environment.particle_feeder) {
+        opt.environment.particle_feeder = (Array.isArray(opt.environment.particle_feeder) ? opt.environment.particle_feeder : [opt.environment.particle_feeder])
+        opt.environment.particle_feeder.forEach((particle_feeder, idx) => {
+            this.particleFeeders.push(new model2d.ParticleFeeder(particle_feeder, idx, this));
+        })
+    }
 
 
     // preparing activity of solvers
@@ -478,27 +523,17 @@ model2d.Model2D.prototype.nextStep = function() {
     // particle solver
     if (this.particles.length)
         this.particleSolver.move(this);
-//    if (this.particleFeeders.length) {
-//        synchronized (particleFeeders) {
-//            for (ParticleFeeder pf : particleFeeders) {
-            this.particleFeeders.forEach(pf =>{
-                if (this.indexOfStep % Math.round(pf.getPeriod() / this.getTimeStep()) == 0) {
-                    pf.feed(this);
-                }
-            })
-//            }
-//        }
-//    }
+
+    this.particleFeeders.forEach(pf =>{
+        if (this.indexOfStep % Math.round(pf.period / this.timeStep) == 0) {
+            pf.feed(this);
+        }
+    })
 
     // other animations
-//    if (this.clouds.length) {
-//        synchronized (clouds) {
-//            for (Cloud c : clouds)
-              this.clouds.forEach( c=> {
-                c.move(this.heatSolver.getTimeStep(), this.lx);
-              })
-//        }
-//    }
+    this.clouds.forEach( c => {
+//        c.move(this.heatSolver.timeStep, this.lx);
+    })
 
     model2d.measuring.update(null, null, this);
     this.indexOfStep++;    
@@ -553,14 +588,14 @@ model2d.Model2D.prototype.moveSun = function(sunrise, sunset) {
 }
 
 model2d.Model2D.prototype.setSunAngle = function(sunAngle) {
-    this.photonSolver.sunAngle = sunAngle;
+    this.photonSolver.setSunAngle(sunAngle);
     if (this.heliostats.length) {
         this.heliostats.forEach(h => {
             h.setAngle();           
         })
     }
     if (Math.abs(sunAngle - this.photonSolver.sunAngle) > 0.001)
-        photons.clear();
+        this.photons = [];
 }
 
 model2d.Model2D.prototype.getSunAngle = function() {
@@ -594,7 +629,7 @@ model2d.Model2D.prototype.refreshPowerArray = function() {
                     if (p.power && (jinx in p.occupationIndexes)) { //  p.contains(p.svgElement, x, y, false)) {
                         power = p.power;
                         if (p.temperature_coefficient) {
-                            power *= 1 + p.temperature_coefficient * (t[jinx] - p.reference_temperature);
+                            power *= 1 + p.temperature_coefficient * (this.t[jinx] - p.reference_temperature);
                         }
                         q[jinx] += power;
                         count++;
@@ -615,6 +650,7 @@ model2d.Model2D.prototype.refreshTemperatureBoundaryArray = function() {
     var tb = this.tb;
     
     var inx, jinx;
+    var x, y;
 
     for (var i = 0; i < nx; i++) {
         inx = i * nx;
@@ -747,4 +783,14 @@ model2d.Model2D.prototype.changePowerAt = function(x, y, power) {
     if (j < 0)
         j = 0;
     this.q[i * nx + j] = power; 
+}
+
+model2d.Model2D.prototype.changeTemperatureAt = function(x, y, increment) {
+    var i = Math.min(this.nx - 1, Math.round(x / this.deltaX));
+    if (i < 0)
+        return;
+    var j = Math.min(this.ny - 1, Math.round(y / this.deltaY));
+    if (j < 0)
+        return;
+    this.t[i *this.nx + j] += increment;
 }

@@ -79,6 +79,9 @@ input[type=tel] {
     font-size: 11px;
     font-weight: bold;
 }
+input[type=tel].shorter {
+    width:40px;   
+}
 small {
     color: black;
     font-size: 14px;
@@ -288,6 +291,21 @@ if (typeof loaderE2D != 'undefined'){ loaderE2D.LoadProjectFileE2D(event) }
         <li>
           <ul class="hlist">
             <li>
+                <fieldset name="modelIdent">
+                  <legend>Model name: </legend>
+                  <input type="text" name="model_name"/>
+                </fieldset>
+                <fieldset name="sun">
+                  <legend>Sun: </legend>
+                  <label><input type="checkbox" name="sunny" checked="checked"/> Sunn(y) Angle</label>
+                  <label><input type="button" name="sunAngleMinus" value="(M)inus"/> </label>
+                  <label><input type="tel" class="shorter" name="sunAngle" disabled="disabled" value="180" /> </label>
+                  <label><input type="button" name="sunAnglePlus" value="(P)lus"/> </label>
+                </fieldset>
+            </li>
+          </ul>
+          <ul class="hlist">
+            <li>
                 <fieldset name="simulation">
                   <legend>Simulation: </legend>
                   <label><input type="radio" name="simul" value="stop" checked="checked"/> (S)top</label>
@@ -312,9 +330,49 @@ if (typeof loaderE2D != 'undefined'){ loaderE2D.LoadProjectFileE2D(event) }
           </ul>
           <ul class="hlist">
             <li>
-              <h2 id="step_count">frame 0</h2>
+              <h2 id="step_count" style="padding:0;">frame 0</h2>
             </li>
           </ul>
+          <ul class="hlist">
+            <li>
+              <fieldset name="active_solvers">
+              <legend>Active solvers</legend>
+<table><tr><td>
+                  <label><input name="use_parts_solver" type="checkbox" checked="checked" disabled="disabled"/> Parts</label>
+</td><td>
+                  <label><input name="use_heat_solver" type="checkbox" checked="checked" disabled="disabled"/> Heat</label>
+</td><td>
+                  <label><input name="use_fluid_solver" type="checkbox" checked="checked" disabled="disabled"/> Fluid</label>
+</td><td>
+                  <label><input name="use_radiosity_solver" type="checkbox" checked="checked" disabled="disabled"/> Radiosity</label>
+</td><td>
+                  <label><input name="use_photon_solver" type="checkbox" checked="checked" disabled="disabled"/> Photon</label>
+</td><td>
+                  <label><input name="use_particle_solver" type="checkbox" checked="checked" disabled="disabled"/> Particle</label>
+</td><td>
+                  <label><input name="use_devices_solver" type="checkbox" checked="checked" disabled="disabled"/> Devices</label>
+</td></tr><tr><td>
+                  <input name="count_parts" type="tel" class="shorter" value="0" disabled="disabled"
+title="count of parts / count of clouds and trees"
+                  />
+</td><td>
+</td><td>
+</td><td>
+                  <input name="count_segments" type="tel" value="0"  disabled="disabled"
+title="count of emmitive segments / count of segment joins"
+                  />
+</td><td>
+                  <input name="count_photons" type="tel" class="shorter" value="0"  disabled="disabled"/>
+</td><td>
+                  <input name="count_particles" type="tel" class="shorter" value="0"  disabled="disabled"/>
+</td><td>
+                  <input name="count_devices" type="tel" class="shorter" value="0"  disabled="disabled"
+title="summary count of thermometers, anemometers, heatFluxSensors, thermostats, fans, heliostats and particleFeeders"
+                  />
+</td></tr></table>
+              </fieldset>
+            </li>
+          </ul>  
           <ul class="hlist">
             <li>
               <fieldset name="choose_array_type">
@@ -323,15 +381,6 @@ if (typeof loaderE2D != 'undefined'){ loaderE2D.LoadProjectFileE2D(event) }
                   <label><input type="radio" name="array" value="typed" disabled="disabled"/> Typed</label>
               </fieldset>
             </li>
-            <li>
-              <fieldset name="active_solvers">
-              <legend>Active solvers</legend>
-                  <label><input name="use_heat_solver" type="checkbox" checked="checked" disabled="disabled"/> Heat solver</label>
-                  <label><input name="use_fluid_solver" type="checkbox" checked="checked"/> Fluid solver</label>
-              </fieldset>
-            </li>
-          </ul>  
-          <ul class="hlist">
             <li>
                 <fieldset name="smoothing_options">
                   <legend>HQ smoothing</legend>
@@ -345,7 +394,7 @@ if (typeof loaderE2D != 'undefined'){ loaderE2D.LoadProjectFileE2D(event) }
                       <option value="500">500x500</option>
                       <option value="600" selected="selected">600x600</option>
                     </select>
-                    Grid dimensions
+                    Grid
                   </label>
                 </fieldset>
             </li>
@@ -442,7 +491,7 @@ if (typeof loaderE2D != 'undefined'){ loaderE2D.LoadProjectFileE2D(event) }
     </div>
 </div>
 
-<div id="alerter" style="display:none;">
+<div id="alerter" style="display:none;z-index:1000">
     <h1>TODO</h1>
 </div>
 

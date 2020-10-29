@@ -140,7 +140,7 @@
 <color_palette_type>1</color_palette_type>
 <color_palette_x>0.0</color_palette_x><color_palette_y>0.0</color_palette_y><color_palette_w>0.0</color_palette_w><color_palette_h>0.0</color_palette_h><minimum_temperature>0.0</minimum_temperature>
 <maximum_temperature>50.0</maximum_temperature>
-<graph_xlabel>Time</graph_xlabel><graph_ylabel>Wind speed (m/s)</graph_ylabel><graph_ymin>1.0414254E-5</graph_ymin><graph_ymax>0.03359133</graph_ymax><text string="Vortex street forming" face="Arial" size="14" style="0" color="ffffff" x="0.49603182" y="9.808201"/>
+<fan_rotation_speed_scale_factor>1.0</fan_rotation_speed_scale_factor><graph_xlabel>Time</graph_xlabel><graph_ylabel>Wind speed (m/s)</graph_ylabel><graph_ymin>1.0414254E-5</graph_ymin><graph_ymax>0.03359133</graph_ymax><text string="Vortex street forming" face="Arial" size="14" style="0" color="ffffff" x="0.49603182" y="9.808201"/>
 <text string="Vortex street not forming" face="Arial" size="14" style="0" color="ffffff" x="0.49603182" y="0.45634928"/>
 </view>
 </state>

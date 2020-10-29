@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <state>
 <links>
-<next_sim>chimney2.e2d</next_sim>
 </links>
 <model>
 <timestep>0.2</timestep>
@@ -11,7 +10,7 @@
 <solar_ray_speed>5.0E-4</solar_ray_speed>
 <photon_emission_interval>5</photon_emission_interval>
 <gravitational_acceleration>9.8</gravitational_acceleration>
-<thermophoretic_coefficient>0.0</thermophoretic_coefficient><particle_drag>0.01</particle_drag><particle_hardness>1.0E-6</particle_hardness><z_heat_diffusivity>0.0</z_heat_diffusivity><z_heat_diffusivity_only_for_fluid>false</z_heat_diffusivity_only_for_fluid><background_conductivity>1.0</background_conductivity>
+<thermophoretic_coefficient>0.0</thermophoretic_coefficient><particle_drag>0.01</particle_drag><particle_hardness>1.0E-6</particle_hardness><z_heat_diffusivity>0.0</z_heat_diffusivity><background_conductivity>1.0</background_conductivity>
 <background_density>1.0</background_density>
 <background_specific_heat>100.0</background_specific_heat>
 <background_viscosity>0.001</background_viscosity>
@@ -44,7 +43,7 @@
 <label>Ground</label>
 </part>
 <part>
-<rectangle x="4.4" y="3.799999" width="0.2" height="5.6"/><elasticity>1.0</elasticity>
+<rectangle x="4.5" y="3.799999" width="0.2" height="5.6"/><elasticity>1.0</elasticity>
 <thermal_conductivity>0.001</thermal_conductivity>
 <specific_heat>1300.0</specific_heat>
 <density>25.0</density>
@@ -64,7 +63,7 @@
 </texture>
 </part>
 <part>
-<rectangle x="4.7" y="8.900003" width="0.6" height="0.4"/><elasticity>1.0</elasticity>
+<rectangle x="4.7" y="9.000004" width="0.6" height="0.4"/><elasticity>1.0</elasticity>
 <thermal_conductivity>0.08</thermal_conductivity>
 <specific_heat>1300.0</specific_heat>
 <density>25.0</density>
@@ -78,7 +77,7 @@
 <constant_temperature>true</constant_temperature>
 </part>
 <part>
-<rectangle x="5.4" y="3.8" width="0.2" height="5.6"/><elasticity>1.0</elasticity>
+<rectangle x="5.3" y="3.8" width="0.2" height="5.6"/><elasticity>1.0</elasticity>
 <thermal_conductivity>0.001</thermal_conductivity>
 <specific_heat>1300.0</specific_heat>
 <density>25.0</density>
@@ -109,11 +108,9 @@
 <snap_to_grid>true</snap_to_grid>
 <grid_size>10</grid_size>
 <perimeter_step_size>0.05</perimeter_step_size>
-<border_tickmarks>true</border_tickmarks>
 <color_palette_type>1</color_palette_type>
-<control_panel>true</control_panel>
 <color_palette_x>0.0</color_palette_x><color_palette_y>0.0</color_palette_y><color_palette_w>0.0</color_palette_w><color_palette_h>0.0</color_palette_h><minimum_temperature>0.0</minimum_temperature>
 <maximum_temperature>100.0</maximum_temperature>
-<fan_rotation_speed_scale_factor>1.0</fan_rotation_speed_scale_factor><graph_xlabel>Time</graph_xlabel><graph_ylabel>Temperature (℃)</graph_ylabel><clock>false</clock>
+<graph_xlabel>Time</graph_xlabel><graph_ylabel>Temperature (℃)</graph_ylabel><clock>false</clock>
 </view>
 </state>

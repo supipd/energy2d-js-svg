@@ -264,41 +264,145 @@ model2d.Tree = function(x, y, w, h, type, model) {
 // *******************************************************
 //   Particle
 // *******************************************************
-model2d.Particle = function(x, y, model) {
+model2d.Particle = function(options, nr, model) {
 
     this.model = model;
-    
-	this.selected;
-	this.draggable = true;
-	this.visible = true;
-	this.label;
-	this.uid;
-    
-    this.x = x;
-    this.y = y;
+      
+    // from manipulable
+    Object.assign(this, {
+        selected: false
+    ,   draggable: true
+    ,   visible: true
+    ,   label: ""
+    ,   uid: `Particle_${nr}_${(new Date).valueOf()}`   // unique particle index
+    })
+
+    // SVG properties
     this.shape = null;
     this.svgElement = null;
+  
+    // setup defaults
+    Object.assign(this, {
+            mass: 0.1
+        ,   radius: 0.04
+        ,   rx: 0,   ry: 0
+        ,   vx: 0,   vy: 0
+        ,   ax: 0,   ay: 0
+        ,   fx: 0,   fy: 0
+        ,   theta: 0,   omega: 0,   alpha: 0
+        ,   temperature: NaN
+        ,   movable: true
+        ,   rx0: NaN,   ry0: NaN
+        ,   vx0: NaN,   vy0: NaN
+        ,   theta0: NaN,    omega0: NaN
+        //	private FillPattern fillPattern;
+        ,   color: '#ffffff', velocityColor: '#000000'
+    })
+
+    // ovewrite by instance definition
+    Object.assign(this, options);
+
+    this.updateShape();
+}
+model2d.Particle.prototype.distanceSq = function(x, y) {
+    var dx = this.rx - x
+    ,   dy = this.ry - y
+    ;
+    return dx * dx + dy * dy;
+}
+model2d.Particle.prototype.predict = function(dt) {
+		if (!this.movable)
+			return;
+		var dt2 = 0.5 * dt * dt;
+		this.rx += this.vx * dt + this.ax * dt2;
+		this.ry += this.vy * dt + this.ay * dt2;
+		this.vx += this.ax * dt;
+		this.vy += this.ay * dt;
+		this.theta += this.omega * dt + this.alpha * dt2;
+		this.omega += this.alpha * dt;
+		this.theta %= Math.PI * 2;
+}
+model2d.Particle.prototype.correct = function(dt) {
+		if (!this.movable)
+			return;
+		this.vx += 0.5 * dt * (this.fx - this.ax);
+		this.vy += 0.5 * dt * (this.fy - this.ay);
+		this.ax = this.fx;
+		this.ay = this.fy;
+		this.fx *= this.mass;
+		this.fy *= this.mass;
+		this.updateShape();
+		// TODO: theta and omega
+}
+//  creates / updates SVG particle
+model2d.Particle.prototype.updateShape = function() {
+    model2d.particleDrawer.update(this, this.model);
+}
+model2d.Particle.prototype.removeShape = function() {
+    model2d.particleDrawer.remove(this);
 }
 
 // *******************************************************
 //   ParticleFeeder
 // *******************************************************
-model2d.ParticleFeeder = function(x, y, model) {
+model2d.ParticleFeeder = function(options, nr, model) {
 
     this.model = model;
     
-	this.selected;
-	this.draggable = true;
-	this.visible = true;
-	this.label;
-	this.uid;
-    
-    this.x = x;
-    this.y = y;
+    // from manipulable
+    Object.assign(this, {
+        selected: false
+    ,   draggable: true
+    ,   visible: true
+    ,   label: ""
+    ,   uid: 'ParticleFeeder_' + nr
+    })
+
+    // SVG properties
     this.shape = null;
     this.svgElement = null;
-}
 
+    // setup defaults
+    Object.assign(this, {
+        period: 100 // feed a particle every $period seconds
+    ,   maximum: 100
+    ,   mass: 0.1
+    ,   radius: 0.04
+    ,   color: 'white'
+    ,   velocityColor: 'black'
+    ,   randomSpeed: 0.01
+    })
+
+    // ovewrite by instance definition
+    Object.assign(this, options);
+
+}
+model2d.ParticleFeeder.prototype.RELATIVE_WIDTH = 0.02;
+model2d.ParticleFeeder.prototype.RELATIVE_HEIGHT = 0.02;
+model2d.ParticleFeeder.prototype.feed = function(model) {
+
+    var particles = model.particles;
+    if (particles.length >= this.maximum)
+        return;
+
+    for (var i = 0; i < particles.length; i++) {
+        var p = particles[i];
+        if (p.distanceSq(this.x, this.y) <= 4 * p.radius * this.radius)
+            return;
+    }
+    var p = new model2d.Particle({
+            rx: this.x
+        ,   ry: this.y
+        ,   mass: this.mass
+        ,   radius: this.radius
+        ,   vx: (Math.random() - 0.5) * this.randomSpeed                
+        ,   vy: (Math.random() - 0.5) * this.randomSpeed
+        ,   color: this.color
+        ,   velocityColor: this.velocityColor
+    }, particles.length, model);
+
+    this.model.particles.push(p);
+}
 
 // *******************************************************
 //

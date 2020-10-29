@@ -1,3 +1,79 @@
+function arrays_speed_test() {
+    var nx = 100, ny = 100, cnt = 1000
+    ,   c
+    ,   i,j, inx, jinx
+    ,   tStart, tEnd, tDelta
+    ,   arr
+    ;
+
+    tStart = (new Date).valueOf();
+    arr = [];
+    for(c = 1; c < cnt; c++) {
+        for(i = 0; i < nx; i++) {
+            arr[i] = [];
+            for(j = 0; j < ny; j++) {
+                arr[i][j] = c;
+            }
+        }
+    }
+    tEnd = (new Date).valueOf();
+    tDelta = tEnd - tStart;
+    console.log("Regular array 2 dimensions [nx][ny]", tDelta);
+    
+    tStart = (new Date).valueOf();
+    arr = [];
+    for(c = 1; c < cnt; c++) {
+        for(i = 0; i < nx; i++) {
+            inx = i * nx;
+            for(j = 0; j < ny; j++) {
+                jinx = inx + j;
+                arr[jinx] = c;
+            }
+        }
+    }
+    tEnd = (new Date).valueOf();
+    tDelta = tEnd - tStart;
+    console.log("Regular array 1 dimensions [nx * ny]", tDelta);
+    
+    tStart = (new Date).valueOf();
+    arr = new Float64Array(nx * ny);
+    for(c = 1; c < cnt; c++) {
+        for(i = 0; i < nx; i++) {
+            inx = i * nx;
+            for(j = 0; j < ny; j++) {
+                jinx = inx + j;
+                arr[jinx] = c;
+            }
+        }
+    }
+    tEnd = (new Date).valueOf();
+    tDelta = tEnd - tStart;
+    console.log("Typed Float64Array 1 dimensions [nx * ny]", tDelta);
+
+/*
+arrays_speed_test()
+demo_starter.js:21 Regular array 2 dimensions [nx][ny] 109
+demo_starter.js:36 Regular array 1 dimensions [nx * ny] 38
+demo_starter.js:51 Typed Float64Array 1 dimensions [nx * ny] 21
+undefined
+arrays_speed_test()
+demo_starter.js:21 Regular array 2 dimensions [nx][ny] 106
+demo_starter.js:36 Regular array 1 dimensions [nx * ny] 29
+demo_starter.js:51 Typed Float64Array 1 dimensions [nx * ny] 19
+undefined
+arrays_speed_test()
+demo_starter.js:21 Regular array 2 dimensions [nx][ny] 114
+demo_starter.js:36 Regular array 1 dimensions [nx * ny] 33
+demo_starter.js:51 Typed Float64Array 1 dimensions [nx * ny] 19
+undefined
+arrays_speed_test()
+demo_starter.js:21 Regular array 2 dimensions [nx][ny] 103
+demo_starter.js:36 Regular array 1 dimensions [nx * ny] 30
+demo_starter.js:51 Typed Float64Array 1 dimensions [nx * ny] 18
+undefined
+*/
+}
+
 
   function myRequire(src, callback) {
     if (src.constructor == Array) {
@@ -85,6 +161,13 @@ e2dUI = {
         cFelems.show_layers.onchange = function(evt) {
         	me.visibilityChanger(evt);
         }
+		// sunny
+        cFelems.sun.onchange = function(evt) {
+            me.sunnyChanger(evt);
+        }
+        cFelems.sun.onclick = function(evt) {
+           me.sunnyChanger(evt);
+        }
         // simulation
         cFelems.simulation.onchange = function(evt) {
         	me.simulChanger(evt);
@@ -148,6 +231,18 @@ e2dUI = {
 	  	case 'f':    // fix cursor
             cFelems.meas_fix.checked = ! cFelems.meas_fix.checked;
 	  	    break;
+	  	case 'y':    // switch sunny
+            cFelems.sunny.checked = ! cFelems.sunny.checked;
+            this.sunnyChanger({ target: cFelems.sunny });
+	  	    break;
+	  	case 'm':    // minus sunAngle
+            cFelems.sunny.checked = ! cFelems.sunny.checked;
+            this.sunnyChanger({ target: cFelems.sunAngleMinus });
+	  	    break;
+	  	case 'p':    // plus sunAngle
+            cFelems.sunny.checked = ! cFelems.sunny.checked;
+            this.sunnyChanger({ target: cFelems.sunAnglePlus });
+	  	    break;
 	  }
 	}
 ,   fillPreparedModels: function() {
@@ -170,6 +265,32 @@ e2dUI = {
 		names_array.forEach(name => optGroupExamplesIndex.appendChild(new Option(name)) )
 		cFelems.examples_select.size = 15;    //size <= 30 ? size : 30;
 	}
+,   sunnyChanger: function(evt) {
+		var el = evt.target
+		,   name = el.name
+		,   angle = this.model && this.model.getSunAngle()
+		,   plusAngle = false
+		;
+		switch(name) {
+			case 'sunny':
+        	    this.model && this.model.setSunny(el.checked);
+				break;
+			case 'sunAnglePlus':
+			    plusAngle = true; 
+			case 'sunAngleMinus':
+			    if (plusAngle) {
+                    angle+= Math.PI / 18;
+                    angle = Math.min(angle, Math.PI);
+			    } else {
+                    angle-= Math.PI / 18;
+                    angle = Math.max(angle, 0);
+			    }
+                this.model.setSunAngle(angle);
+                cFelems.sunAngle.value = 180 * angle / Math.PI;
+                this.model.refreshPowerArray();
+				break;
+		}
+    }
 ,   visibilityChanger: function(evt) {
 		var el = evt.target
 		,   name = el.name
@@ -267,6 +388,7 @@ e2dUI = {
 			}
 		}
 	}
+// only ONE place to create model
 ,   setupModel: function(options) {
 
 		if (cFelems.choose_array_type.elements[0].checked) {
@@ -277,7 +399,7 @@ e2dUI = {
 		// ----------------
 		// clean SVG
 		svgPartsSpace.innerHTML = '';  
-		// only place to create model
+		
 		this.model = new model2d.Model2D(options, array_selection, svgPartsSpace);
 console.log(this.model);            
 
@@ -363,7 +485,10 @@ console.log(this.model);
 
 	    var model = this.model;
 
+	    this.displayModelInfo();
+
         // temperature layer always independantly on visiblity
+        // heatMapType distinction inside displayTemperatureFunc 
         this.displayTemperatureFunc(canvasTemperatureLayer, model);
 
         model2d.cleanCanvasCtx(canvasVelocityLayer, true);
@@ -372,18 +497,38 @@ console.log(this.model);
 			model2d.displayVectorField(canvasVelocityLayer, model.u, model.v, model.nx, model.ny, 4, false);
 	    }
 		if (cFelems.show_Isotherm.checked) {
-			this.rendererContourMap.render(e2dUI.model.t);
+			this.rendererContourMap.render(model.t);
 	    }
 		if (cFelems.show_HeatFlux.checked) {
-			this.rendererFieldLines.renderScalars(e2dUI.model.t,-1);
+			this.rendererFieldLines.renderScalars(model.t,-1);
 	    }
 		if (cFelems.show_Streams.checked) {
-			this.rendererFieldLines.renderVectors(e2dUI.model.u, e2dUI.model.v);
+			this.rendererFieldLines.renderVectors(model.u, model.v);
 	    }
 	    // --------------------
 		var gRadiosity = model2d.drawerViewFactorMesh.generate(this.model, false);    // not forceRedraw
         gRadiosity && (gRadiosity.style.display = (cFelems.show_Factors.checked ? '' : 'none'));
+
+/*
+		drawPictures(g);
+		drawParts(g);
+		drawFans(g);
+		drawHeliostats(g);
+		drawClouds(g);
+		drawTrees(g);
+		drawTextBoxes(g);
+		drawParticles(g);
+		drawParticleFeeders(g);
+
+		drawPhotons(g);
+		showSunOrMoon(g);
+		drawThermometers(g);
+		drawHeatFluxSensors(g);
+		drawAnemometers(g);
+*/
+        model2d.drawPhotons(model);
 	    // --------------------
+
 		if (cFelems.show_velocity_length.checked) {
 			model2d.displayVelocityLengthCanvas(canvasVelocityLenDestination, model);
 	    }
@@ -391,7 +536,30 @@ console.log(this.model);
 			model2d.displayTemperatureTable(tdata, model);
 	    }
 	}
-,   checkNANinArrays: function(model) {
+,   displayModelInfo: function() {
+        var model = this.model;
+        cFelems.model_name.value = this.model_name;
+        cFelems.sunny.checked = model.sunny;
+        cFelems.sunAngle.value = 180 * model.getSunAngle() / Math.PI;
+        cFelems.count_parts.value = model.parts.length
+            + ' / ' + ( model.clouds.length + model.trees.length )
+        ;
+        cFelems.count_segments.value = model.radiositySolver.segments.length
+            + ' / ' + model.radiositySolver.segmentJoins.length
+        ;
+        cFelems.count_photons.value = model.photons.length;
+        cFelems.count_particles.value = model.particles.length;
+        cFelems.count_devices.value = 
+              model.thermometers.length
+            + model.anemometers.length
+            + model.heatFluxSensors.length
+            + model.thermostats.length
+            + model.fans.length
+            + model.heliostats.length
+            + model.particleFeeders.length
+        ;
+    }
+,   checkNANinArrays: function() {
 
 	    var model = this.model;
 

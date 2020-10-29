@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <state>
-<links>
-<next_sim>fixed-flux-boundary.e2d</next_sim>
-</links>
 <model>
 <timestep>100.0</timestep>
 <viewupdate_interval>10</viewupdate_interval>
@@ -27,29 +24,24 @@
 <reflection>0.0</reflection>
 <absorption>1.0</absorption>
 <emissivity>0.0</emissivity>
-<temperature>30.0</temperature>
+<temperature>20.0</temperature>
 <constant_temperature>true</constant_temperature>
 </part>
 </structure>
-<environment>
-</environment>
+</model>
 <sensor>
-<thermometer x="5.0" y="1.8"/>
-<thermometer x="2.0" y="4.8"/>
+<thermometer x="4.866667" y="3.25"/>
+<thermometer x="4.9666667" y="8.433333"/>
 </sensor>
 <controller>
 </controller>
-</model>
 <view>
-<grid>true</grid>
-<snap_to_grid>true</snap_to_grid>
 <grid_size>10</grid_size>
 <isotherm>true</isotherm>
 <color_palette_type>0</color_palette_type>
-<control_panel>true</control_panel>
 <color_palette_x>0.0</color_palette_x><color_palette_y>0.0</color_palette_y><color_palette_w>0.0</color_palette_w><color_palette_h>0.0</color_palette_h><minimum_temperature>0.0</minimum_temperature>
-<maximum_temperature>50.0</maximum_temperature>
+<maximum_temperature>40.0</maximum_temperature>
 <heat_flux_line>true</heat_flux_line>
-<graph_xlabel>Time</graph_xlabel><graph_ylabel>Temperature (℃)</graph_ylabel><text string="Fixed temperature boundary" face="Arial" size="14" style="0" color="ffffff" x="0.4828" y="9.6495"/>
+<graph_xlabel>Time</graph_xlabel><text string="Zero degree temperature boundary" face="Book Antiqua" size="16" style="1" color="ffffff" x="0.7341" y="9.2394"/>
 </view>
 </state>

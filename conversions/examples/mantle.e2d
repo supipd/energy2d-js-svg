@@ -44,6 +44,7 @@
 <constant_temperature>false</constant_temperature>
 <color>ffff80</color>
 <filled>false</filled>
+<label>Core</label>
 <draggable>false</draggable>
 </part>
 </structure>
@@ -58,8 +59,6 @@
 <color_palette_type>1</color_palette_type>
 <color_palette_x>0.0</color_palette_x><color_palette_y>0.0</color_palette_y><color_palette_w>0.0</color_palette_w><color_palette_h>0.0</color_palette_h><minimum_temperature>0.0</minimum_temperature>
 <maximum_temperature>100.0</maximum_temperature>
-<graph_xlabel>Time</graph_xlabel><clock>false</clock>
-<text string="Earth core" face="Arial" size="20" style="3" color="0" x="4.3253975" y="5.224868"/>
-<text string="Surface" face="Arial" size="20" style="3" color="ffffff" x="0.84656084" y="9.047619"/>
+<clock>false</clock>
 </view>
 </state>

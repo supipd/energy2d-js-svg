@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<state>
+<links>
+</links>
+<model>
+<timestep>0.5</timestep>
+<viewupdate_interval>15</viewupdate_interval>
+<sun_angle>1.5707964</sun_angle>
+<solar_power_density>100000.0</solar_power_density>
+<solar_ray_count>24</solar_ray_count>
+<solar_ray_speed>0.001</solar_ray_speed>
+<photon_emission_interval>25</photon_emission_interval>
+<gravitational_acceleration>9.8</gravitational_acceleration>
+<thermophoretic_coefficient>0.0</thermophoretic_coefficient><particle_drag>0.01</particle_drag><particle_hardness>1.0E-6</particle_hardness><z_heat_diffusivity>0.0</z_heat_diffusivity><background_viscosity>1.0E-4</background_viscosity>
+<thermal_expansion_coefficient>2.5E-4</thermal_expansion_coefficient>
+<buoyancy_approximation>0</buoyancy_approximation>
+<boundary>
+<temperature_at_border upper="0.0" lower="0.0" left="0.0" right="0.0"/>
+<mass_flow_at_border upper="1" lower="1" left="1" right="1"/>
+</boundary>
+<structure>
+</structure>
+<environment>
+<particle_feeder velocity_color="ffffff" radius="0.2" mass="0.01" x="3.5000005" y="9.400001" maximum="100" period="10.0"/><particle_feeder color="ffffc0" velocity_color="ffffc0" radius="0.2" mass="0.01" x="4.5" y="9.400001" maximum="100" period="10.0"/><particle_feeder color="ffff80" velocity_color="ffff80" radius="0.1" mass="1.0E-6" x="5.0" y="9.400001" maximum="100" period="10.0"/><particle_feeder color="ffc0ff" velocity_color="ffc0ff" radius="0.16" mass="1.0E-4" x="4.000002" y="9.400001" maximum="100" period="10.0"/><particle_feeder color="ffc080" velocity_color="ffc080" radius="0.2" mass="0.01" x="5.4999995" y="9.400001" maximum="100" period="10.0"/><particle_feeder color="c080ff" velocity_color="c080ff" radius="0.25" mass="0.03" x="6.0" y="9.400001" maximum="100" period="10.0"/></environment>
+<sensor>
+</sensor>
+<controller>
+</controller>
+</model>
+<view>
+<grid>true</grid>
+<snap_to_grid>true</snap_to_grid>
+<grid_size>10</grid_size>
+<perimeter_step_size>0.05</perimeter_step_size>
+<border_tickmarks>true</border_tickmarks>
+<color_palette_type>0</color_palette_type>
+<color_palette_x>0.0</color_palette_x><color_palette_y>0.0</color_palette_y><color_palette_w>0.0</color_palette_w><color_palette_h>0.0</color_palette_h><minimum_temperature>0.0</minimum_temperature>
+<maximum_temperature>40.0</maximum_temperature>
+<fan_rotation_speed_scale_factor>2.0</fan_rotation_speed_scale_factor><graph_xlabel>Time</graph_xlabel><graph_ylabel>Temperature (℃)</graph_ylabel><clock>false</clock>
+</view>
+</state>

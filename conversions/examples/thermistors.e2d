@@ -24,7 +24,8 @@
 </boundary>
 <structure>
 <part>
-<rectangle x="0.050000004" y="0.3" width="0.2" height="0.4"/><thermal_conductivity>0.1</thermal_conductivity>
+<rectangle x="0.050000004" y="0.3" width="0.2" height="0.4"/><elasticity>1.0</elasticity>
+<thermal_conductivity>0.1</thermal_conductivity>
 <specific_heat>1000.0</specific_heat>
 <density>10.0</density>
 <transmission>0.0</transmission>
@@ -41,7 +42,8 @@
 <label>PTC</label>
 </part>
 <part>
-<rectangle x="0.4" y="0.3" width="0.2" height="0.4"/><thermal_conductivity>0.1</thermal_conductivity>
+<rectangle x="0.4" y="0.3" width="0.2" height="0.4"/><elasticity>1.0</elasticity>
+<thermal_conductivity>0.1</thermal_conductivity>
 <specific_heat>1000.0</specific_heat>
 <density>10.0</density>
 <transmission>0.0</transmission>
@@ -58,7 +60,8 @@
 <label>Constant Power</label>
 </part>
 <part>
-<rectangle x="0.75" y="0.3" width="0.2" height="0.4"/><thermal_conductivity>0.1</thermal_conductivity>
+<rectangle x="0.75" y="0.3" width="0.2" height="0.4"/><elasticity>1.0</elasticity>
+<thermal_conductivity>0.1</thermal_conductivity>
 <specific_heat>1000.0</specific_heat>
 <density>10.0</density>
 <transmission>0.0</transmission>
@@ -90,10 +93,11 @@
 <grid>true</grid>
 <snap_to_grid>true</snap_to_grid>
 <grid_size>10</grid_size>
+<perimeter_step_size>0.05</perimeter_step_size>
 <color_palette_type>1</color_palette_type>
 <color_palette_x>0.0</color_palette_x><color_palette_y>0.0</color_palette_y><color_palette_w>0.0</color_palette_w><color_palette_h>0.0</color_palette_h><minimum_temperature>0.0</minimum_temperature>
 <maximum_temperature>100.0</maximum_temperature>
-<graph>true</graph>
+<fan_rotation_speed_scale_factor>1.0</fan_rotation_speed_scale_factor><graph>true</graph>
 <graph_xlabel>Time</graph_xlabel><graph_ylabel>Temperature (℃)</graph_ylabel><text string="Thermistors" face="Arial" size="14" style="0" color="ffffff" x="0.035" y="0.97"/>
 </view>
 </state>

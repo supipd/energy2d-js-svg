@@ -179,18 +179,59 @@ model2d.displayTemperatureCanvas = function(canvas, model, clean = true) {
     var max = model.view.settings.maximum_temperature;    //model2d.MAX_DISPLAY_TEMP; //model2d.getMaxAnyArray(t);
     
     var scale = max_hue / (max - min);
-    var hue;
+    var hue, dValue;
     var imageData = ctx.getImageData(0, 0, nx, ny);
     var data = imageData.data;
-    var t = model.t;
+/*
+	private void drawTemperatureField(Graphics2D g) {
+		temperatureRenderer.render(this, g, model.getTemperature());
+	}
+
+	private void drawThermalEnergyField(Graphics2D g) {
+		float[][] density = model.getDensity();
+		float[][] specificHeat = model.getSpecificHeat();
+		float[][] temperature = model.getTemperature();
+		int nx = temperature.length;
+		int ny = temperature[0].length;
+		if (distribution == null)
+			distribution = new float[nx][ny];
+		float factor = 1f / model.getMaximumHeatCapacity();
+		for (int i = 0; i < nx; i++) {
+			for (int j = 0; j < ny; j++) {
+				distribution[i][j] = factor * density[i][j] * specificHeat[i][j] * temperature[i][j];
+			}
+		}
+		thermalEnergyRenderer.render(this, g, distribution);
+	}
+*/  
+    var factor = 1 / model.maximumHeatCapacity; // min = ?
+      
+    var t = model.t;    // drawTemperatureField
+    var density = model.density // drawThermalEnergyField
+    ,   specificHeat = model.specificHeat
+    ;
+
     var iny;
     var pix_index = 0;
     var pix_stride = 4 * nx;
+ 
     for (var i = 0; i < nx; i++) {
         iny = i * ny;
         pix_index = 4 * i;
         for (var j = 0; j < ny; j++) {
-            hue =  max_hue - Math.round(scale * (t[iny + j] - min));
+/*            switch(model.view.settings.heat_map) {
+                case model2d.View2D.prototype.CONST.HEATMAP_TEMPERATURE:
+                    dValue = t[iny + j];
+                    break;
+                case model2d.View2D.prototype.CONST.HEATMAP_THERMAL_ENERGY:
+                    dValue = factor * density[iny + j] * specificHeat[iny + j] * t[iny + j];
+                    break;
+                default:
+                    dValue = 0;
+                    break;
+            }   */
+                    dValue = t[iny + j];
+            hue =  max_hue - Math.round(scale * (/*t[iny + j]*/dValue - min));
             if (hue < 0) hue = 0;
             else if (hue > max_hue) hue = max_hue;
             data[pix_index]     = red_color_table[hue];
@@ -469,7 +510,7 @@ model2d.ContourMap = function(canvas, model, clean = true) {
     this.canvas_ctx.lineWidth = 0.3;
 
     this.resolution = 1;
-    this.color = 'black';
+    this.color = '#000000';
     this.canvas_ctx.strokeStyle = this.color;
     this.canvas_ctx.stroke();
 
@@ -552,7 +593,7 @@ model2d.FieldLines = function(canvas, model, clean = true) {
     this.canvas_ctx = model2d.cleanCanvasCtx(canvas, clean);
     this.canvas_ctx.lineWidth = 0.3;
 
-    this.color = 'black';
+    this.color = '#000000';
     this.canvas_ctx.strokeStyle = this.color;
     this.canvas_ctx.stroke();
 

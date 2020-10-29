@@ -3,7 +3,7 @@
 <model>
 <model_width>1.0</model_width>
 <model_height>1.0</model_height>
-<timestep>1.0</timestep>
+<measurement_interval>100</measurement_interval>
 <viewupdate_interval>10</viewupdate_interval>
 <sun_angle>1.5707964</sun_angle>
 <solar_power_density>2000.0</solar_power_density>
@@ -65,8 +65,6 @@
 <thermometer label="T2" x="0.6" y="0.8"/>
 <thermometer label="T1" x="0.6" y="0.19999999"/>
 </sensor>
-<controller>
-</controller>
 <view>
 <grid>true</grid>
 <grid_size>10</grid_size>
@@ -75,7 +73,6 @@
 <maximum_temperature>40.0</maximum_temperature>
 <heat_flux_line>true</heat_flux_line>
 <graph>true</graph>
-<graph_xlabel>Time</graph_xlabel><clock>false</clock>
-<text string="The Zeroth Law of Thermodynamics" face="Arial" size="14" style="0" color="ffffff" x="0.49801585" y="0.52182543"/>
+<clock>false</clock>
 </view>
 </state>

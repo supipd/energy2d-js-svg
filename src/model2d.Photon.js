@@ -12,6 +12,7 @@ model2d.Photon = function(rx, ry, energy, angle, c) {
     this.ry = ry;
     this.energy = energy;
     this.c = c;
+    this.angle = angle;
     this.setAngle(angle);
 };
 

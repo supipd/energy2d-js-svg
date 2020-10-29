@@ -21,7 +21,7 @@ model2d.HeatSolver2D = function(/*nx, ny,*/ model) {
     this.u = model.u;
     this.v = model.v;
     this.tb = model.tb;
-    this.power = model.q;
+    this.q = model.q;
     
     // Boolean array
     this.fluidity = model.fluidity;
@@ -46,10 +46,10 @@ model2d.HeatSolver2D.prototype.activate = function() {
 
     this.timeStep = model.timeStep;
 
-    if (model.boundary_settings.temperature_at_border)
-        this.boundary = new model2d.DirichletHeatBoundary(model.boundary_settings);
+    if (model.thermalBoundary.temperature_at_border)
+        this.boundary = new model2d.DirichletHeatBoundary(model.thermalBoundary);
     else
-        this.boundary = new model2d.NeumannHeatBoundary(model.boundary_settings);
+        this.boundary = new model2d.NeumannHeatBoundary(model.thermalBoundary);
 }
 
 model2d.HeatSolver2D.prototype.setGridCellSize = function(deltaX, deltaY) {
@@ -99,6 +99,9 @@ model2d.HeatSolver2D.prototype.solve = function(convective, t, q) {
                     bxij = hx * (rij + conductivity[jinx_plus_nx]);
                     ayij = hy * (rij + conductivity[jinx_minus_1]);
                     byij = hy * (rij + conductivity[jinx_plus_1]);
+if ((jinx == 9680) && (q[jinx]>0)) {
+    jinx = jinx;
+}
                     t[jinx] = ( t0[jinx] * sij 
                                 + q[jinx] 
                                 + axij * t[jinx_minus_nx] 
@@ -106,6 +109,9 @@ model2d.HeatSolver2D.prototype.solve = function(convective, t, q) {
                                 + ayij * t[jinx_minus_1] 
                                 + byij * t[jinx_plus_1]
                               ) / (sij + axij + bxij + ayij + byij);
+if ((jinx == 9680) && (q[jinx]>0)) {
+    jinx = jinx;
+}
                     // use a simple proportional control only at the last step of relaxation if applicable
                     if (solveZ && k == this.relaxationSteps - 1) {
                         if (!this.zHeatDiffusivityOnlyForFluid || (this.zHeatDiffusivityOnlyForFluid && this.fluidity[jinx]))
@@ -227,11 +233,11 @@ model2d.HeatSolver2D.prototype.applyBoundary  = function(t) {
 };
 
 //  This is a simple Dirichlet thermal boundary that has the same temperature on each side.
-model2d.DirichletHeatBoundary = function(boundary_settings) {
+model2d.DirichletHeatBoundary = function(thermalBoundary) {
     // by default all temperatures are zero
     var settings;
-    if (boundary_settings) {
-        settings = boundary_settings.temperature_at_border;
+    if (thermalBoundary) {
+        settings = thermalBoundary.temperature_at_border;
     } else {
         settings = { upper: 0, lower: 0, left: 0, right: 0 };
     }
@@ -241,13 +247,11 @@ model2d.DirichletHeatBoundary = function(boundary_settings) {
     this.setTemperatureAtBorder(model2d.Boundary_LEFT, settings.left);
     this.setTemperatureAtBorder(model2d.Boundary_RIGHT, settings.right);
 };
-
 model2d.DirichletHeatBoundary.prototype.getTemperatureAtBorder  = function(side) {
     if (side < model2d.Boundary_UPPER || side > model2d.Boundary_LEFT)
         throw ("side parameter illegal");
     return this.temperature_at_border[side];
 };
-
 model2d.DirichletHeatBoundary.prototype.setTemperatureAtBorder  = function(side, value) {
     if (side < model2d.Boundary_UPPER || side > model2d.Boundary_LEFT)
         throw ("side parameter illegal");
@@ -266,7 +270,6 @@ model2d.ComplexDirichletThermalBoundary = function(nx, ny) {
     this.setTemperatureAtBorder(model2d.Boundary_LEFT, settings.left);
     this.setTemperatureAtBorder(model2d.Boundary_RIGHT, settings.right);
 };
-
 model2d.ComplexDirichletThermalBoundary.prototype.getTemperatureAtBorder  = function(side) {
     if (side < model2d.Boundary_UPPER || side > model2d.Boundary_LEFT)
         throw ("side parameter illegal");
@@ -281,7 +284,6 @@ model2d.ComplexDirichletThermalBoundary.prototype.getTemperatureAtBorder  = func
         return this.temperatureLower;
     }
 };
-
 model2d.ComplexDirichletThermalBoundary.prototype.setTemperatureAtBorder  = function(side, values) {
     if (side < model2d.Boundary_UPPER || side > model2d.Boundary_LEFT)
         throw ("side parameter illegal");
@@ -314,10 +316,10 @@ model2d.ComplexDirichletThermalBoundary.prototype.setTemperatureAtBorder  = func
 };
 
 
-model2d.NeumannHeatBoundary = function(boundary_settings) {
+model2d.NeumannHeatBoundary = function(thermalBoundary) {
     var settings;
-    if (boundary_settings) {
-        settings = boundary_settings.flux_at_border;
+    if (thermalBoundary) {
+        settings = thermalBoundary.flux_at_border;
     } else {
         settings = { upper: 0, lower: 0, left: 0, right: 0 };
     }
@@ -327,13 +329,11 @@ model2d.NeumannHeatBoundary = function(boundary_settings) {
     this.setFluxAtBorder(model2d.Boundary_LEFT, settings.left);
     this.setFluxAtBorder(model2d.Boundary_RIGHT, settings.right);
 };
-
 model2d.NeumannHeatBoundary.prototype.getFluxAtBorder  = function(side) {
     if (side < model2d.Boundary_UPPER || side > model2d.Boundary_LEFT)
         throw ("side parameter illegal");
     return this.flux_at_border[side];
 };
-
 model2d.NeumannHeatBoundary.prototype.setFluxAtBorder  = function(side, value) {
     if (side < model2d.Boundary_UPPER || side > model2d.Boundary_LEFT)
         throw ("side parameter illegal");

@@ -37,7 +37,7 @@ model2d.FluidSolver2D = function(/*nx, ny,*/ model) {
     this.nx2 = this.nx - 2;
     this.ny2 = this.ny - 2;
 
-    this.boundary = model.boundary_settings.mass_flow_type;
+    this.boundary = model.massBoundary;
     
     this.u0 = createArray(model2d.ARRAY_SIZE, 0);
     this.v0 = createArray(model2d.ARRAY_SIZE, 0);
@@ -99,6 +99,8 @@ model2d.FluidSolver2D.prototype.applyBoundary = function(direction, f) {
     var horizontal = direction == 1;
     var vertical = direction == 2;
     
+    var boundary = this.boundary;
+
     var nx = this.nx;
     var nx1 = this.nx1;
     var ny1 = this.ny1;
@@ -109,13 +111,12 @@ model2d.FluidSolver2D.prototype.applyBoundary = function(direction, f) {
 
     var inx_plus1, inx_plus_ny1, inx_plus_ny2;
     var nx_plusj;
-    var nx1nx, nx2nx;
+    var nx1nx, nx2nx, nx1nx_plus_j, nx2nx_plus_j;
     
     nx1nx = nx1 * nx;
     nx2nx = nx2 * nx;
     
     for (var i = 1; i < nx1; i++) {
-/*
         inx = i * nx;
         inx_plus1 = inx + 1;
         inx_plus_ny1 = inx + ny1;
@@ -123,49 +124,63 @@ model2d.FluidSolver2D.prototype.applyBoundary = function(direction, f) {
 
         // upper side
         if (vertical) {
-            switch (b.getFlowTypeAtBorder(Boundary.UPPER)) {
-            case MassBoundary.STOP:
-                f[i][0] = 0;
+            switch (boundary.mass_flow_at_border.upper) {
+            case model2d.MassBoundary_STOP:
+                f[inx] = 0;
                 break;
-            case MassBoundary.REFLECTIVE:
-                f[i][0] = -f[i][1];
+            case model2d.MassBoundary_REFLECTIVE:
+                f[inx] = -f[inx_plus1];
                 break;
             }
         } else {
-            f[i][0] = f[i][1];
+            f[inx] = f[inx_plus1];
         }
         // lower side
         if (vertical) {
-            switch (b.getFlowTypeAtBorder(Boundary.LOWER)) {
-            case MassBoundary.STOP:
-                f[i][ny1] = 0;
+            switch (boundary.mass_flow_at_border.lower) {
+            case model2d.MassBoundary_STOP:
+                f[inx_plus_ny1] = 0;
                 break;
-            case MassBoundary.REFLECTIVE:
-                f[i][ny1] = -f[i][ny2];
+            case model2d.MassBoundary_REFLECTIVE:
+                f[inx_plus_ny1] = -f[inx_plus_ny2];
                 break;
             }
         } else {
-            f[i][ny1] = f[i][ny2];
+            f[inx_plus_ny1] = f[inx_plus_ny2];
         }
-*/
-
-        inx = i * nx;
-        inx_plus1 = inx + 1;
-        inx_plus_ny1 = inx + ny1;
-        inx_plus_ny2 = inx + ny2;
-        // upper side
-        f[inx] = vertical ? -f[inx_plus1] : f[inx_plus1];
-        // lower side
-        f[inx_plus_ny1] = vertical ? -f[inx_plus_ny2] : f[inx_plus_ny2];
     }
     for (var j = 1; j < ny1; j++) {
-        // left side
         nx_plusj = nx + j;
-        f[j] = horizontal ? -f[nx_plusj] : f[nx_plusj];
+        nx1nx_plus_j = nx1nx + j;
+        nx2nx_plus_j = nx2nx + j;
+
+        // left side
+        if (horizontal) {
+            switch (boundary.mass_flow_at_border.left) {
+            case model2d.MassBoundary_STOP:
+                f[j] = 0;
+                break;
+            case model2d.MassBoundary_REFLECTIVE:
+                f[j] = -f[nx_plusj];
+                break;
+            }
+        } else {
+            f[j] = f[nx_plusj];
+        }
         // right side
-        f[nx1nx + j] = horizontal ? -f[nx2nx + j] : f[nx2nx + j];
+        if (horizontal) {
+            switch (boundary.mass_flow_at_border.right) {
+            case model2d.MassBoundary_STOP:
+                f[nx1nx_plus_j] = 0;
+                break;
+            case model2d.MassBoundary_REFLECTIVE:
+                f[nx1nx_plus_j] = -f[nx2nx_plus_j];
+                break;
+            }
+        } else {
+            f[nx1nx_plus_j] = f[nx2nx_plus_j];
+        }
     }
-    
     // upper-left corner
     f[0] = 0.5 * (f[nx] + f[1]);
     // upper-right corner

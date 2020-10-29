@@ -26,35 +26,11 @@ model2d.setSvgParams = function(model) {
     ,   scale_x = (svg_width - 1) / scene_width
     ,   scale_y = (svg_height - 1) / scene_height
     ;
-
     model.svg.scale_x = scale_x;
     model.svg.scale_y = scale_y;
-    // svg = model.svg ... javascript object automatics
-
-
 // ------------------------------------
-    // Find your root SVG element
-    var svgRoot = svgG.ownerSVGElement;  //document.querySelector('svg');
+    var svgRoot = svgG.ownerSVGElement;
 
-/*    if (! svgRoot.dataset.measured) {
-        // Create an SVGPoint for future math
-        var pt = svgRoot.createSVGPoint();
-
-        // Get point in global SVG space
-        function cursorPoint(evt){
-          pt.x = evt.clientX; pt.y = evt.clientY;
-          return pt.matrixTransform(svgRoot.getScreenCTM().inverse());
-        }
-
-        svgRoot.addEventListener('mousemove',function(evt){
-          var loc = cursorPoint(evt);
-          // Use loc.x and loc.y here
-            model2d.measuring.update(loc.x,loc.y, model);
-        },false);
-
-        svgRoot.dataset.measured = true;
-    }
-*/
     svgRoot.removeEventListener('mousemove', model2d.measuring.listen);
     model2d.measuring.model = model;
     svgRoot.addEventListener('mousemove', model2d.measuring.listen);
@@ -201,7 +177,7 @@ model2d.G = {
 //        ;       
 //        return (CCW(p1, p3, p4) != CCW(p2, p3, p4)) && (CCW(p1, p2, p3) != CCW(p1, p2, p4));
 //    }
-,   intersection: function (line1, line2) {
+,   intersection: function (line1, line2, countIntersectionPoint = false) {
         var CCW = function (p1, p2, p3) {
                 return (p3.y - p1.y) * (p2.x - p1.x) /*>*/- (p2.y - p1.y) * (p3.x - p1.x);
             }
@@ -211,14 +187,71 @@ model2d.G = {
         ,   p4 = line2.e
         ,   c1on34 = CCW(p1, p3, p4)
         ,   c2on34 = CCW(p2, p3, p4)
+        ,   c1on23 = CCW(p1, p2, p3)
+        ,   c1on24 = CCW(p1, p2, p4)
         ,   colinear = (c1on34 == 0) && (c2on34 == 0)
         ,   b1on34 = c1on34 > 0
         ,   b2on34 = c2on34 > 0
-        ,   b1on23 = CCW(p1, p2, p3) > 0
-        ,   b1on24 = CCW(p1, p2, p4) > 0
+        ,   b1on23 = c1on23 > 0
+        ,   b1on24 = c1on24 > 0
         ,   intersect = (b1on34 != b2on34) && (b1on23 != b1on24)
-        ;       
-        return { colinear: colinear, intersect : intersect };
+
+        ,   result = null;
+        ;
+        //  http://jsfiddle.net/justin_c_rounds/Gd2S2/light/
+        if (countIntersectionPoint) {
+            // if the lines intersect, the result contains the x and y of the intersection 
+            // (treating the lines as infinite) 
+            // and booleans for whether line segment 1 or line segment 2 contain the point
+            var denominator, a, b, numerator1, numerator2;
+            result = {
+                x: null,
+                y: null,
+                onLine1: false,
+                onLine2: false
+            };
+            denominator = ((line2.e.y - line2.s.y) * (line1.e.x - line1.s.x)) - ((line2.e.x - line2.s.x) * (line1.e.y - line1.s.y));// test:
+// test: ... needed more time to analyze ...
+//if (denominator != c1on24) {
+//    console.log("denominator != c1on24");
+//}
+            if (denominator == 0) {
+                return result;
+            }
+            a = line1.s.y - line2.s.y;
+            b = line1.s.x - line2.s.x;
+            numerator1 = ((line2.e.x - line2.s.x) * a) - ((line2.e.y - line2.s.y) * b);
+            numerator2 = ((line1.e.x - line1.s.x) * a) - ((line1.e.y - line1.s.y) * b);
+// test: ... needed more time to analyze ...
+//if (numerator1 != c1on34) {
+//    console.log("numerator1 != c1on34");
+//}
+//if (numerator2 != c1on23) {
+//    console.log("numerator2 != c1on23");
+//}
+            a = numerator1 / denominator;
+            b = numerator2 / denominator;
+
+            // if we cast these lines infinitely in both directions, they intersect here:
+            result.x = line1.s.x + (a * (line1.e.x - line1.s.x));
+            result.y = line1.s.y + (a * (line1.e.y - line1.s.y));
+
+        //        // it is worth noting that this should be the same as:
+        //        x = line2.s.x + (b * (line2.e.x - line2.s.x));
+        //        y = line2.s.x + (b * (line2.e.y - line2.s.y));
+        //        
+            // if line1 is a segment and line2 is infinite, they intersect if:
+            if (a > 0 && a < 1) {
+                result.onLine1 = true;
+            }
+            // if line2 is a segment and line1 is infinite, they intersect if:
+            if (b > 0 && b < 1) {
+                result.onLine2 = true;
+            }
+            // if line1 and line2 are segments, they intersect if both of the above are true
+        }
+               
+        return { colinear: colinear, intersect : intersect, result: result };
     }
 ,   viewFactor(line1, line2) {
 		// calculate the center of this segment
@@ -234,6 +267,10 @@ model2d.G = {
 		n2 = this.normalize(n2);
 		var dot = -this.dotProduct(r, n1) * this.dotProduct(r, n2);
 		dot = Math.abs(dot); // Force this to be positive because sometimes the normal vectors might not point outwards
+		var vf = dot * this.lineLength(line2) / (Math.PI * Math.sqrt(r2)); // view factor equation is different in 2D    
+if (isNaN(vf))  {
+    console.log('vf NaN');
+}          
 		return dot * this.lineLength(line2) / (Math.PI * Math.sqrt(r2)); // view factor equation is different in 2D    
     }
 }
@@ -417,7 +454,7 @@ A${pia} ${pib} 0 0 1 ${px} ${py - pib} Z
     return svgElement;
 }
 
-model2d.DIST_RESOLUTION = 0.001;
+model2d.DIST_RESOLUTION = 0.01;
 model2d.segmentizeShapePerimeter = function(part, model, groupIt = false) {
 
     var G = this.G;
@@ -428,6 +465,7 @@ model2d.segmentizeShapePerimeter = function(part, model, groupIt = false) {
     ,   scale_x = model.svg.scale_x
     ,   scale_y = model.svg.scale_y
     ,   svgElement = part.svgElement
+    ,   area = 0;
     ;
 
     var offset = 0
@@ -444,6 +482,9 @@ TODO
     pt0 = svgElement.getPointAtLength(offset);
     var d =`M${pt0.x} ${pt0.y}`;
     do {        
+        if (delta == 0) {   // ???
+            throw 'segmentizeShapePerimeter ... Delta goes to 0';
+        }
         pt1 = svgElement.getPointAtLength(offset + delta / 2);
         pt2 = svgElement.getPointAtLength(offset + delta);
         lineSvg = {   s:{x: pt0.x, y: pt0.y}
@@ -456,8 +497,20 @@ TODO
                 };
         distance = G.distToSegment(pt1, lineSvg);   // in svg units 
         if (distance < model2d.DIST_RESOLUTION * scale_x) {
-            d+=`L${pt2.x} ${pt2.y}`;
-            segments.push(line);
+            var len = G.lineLength(line);
+            if (len > 0) {  //< model2d.MINIMAL_SEGMENT_RATIO * lx) {
+                d+=`L${pt2.x} ${pt2.y}`;
+                segments.push(line);
+//  https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order
+//  Sum over the edges, (x2 - x1)(y2 + y1). 
+//  If the result is positive the curve is clockwise, 
+//  if it's negative the curve is counter-clockwise. 
+//  (The result is twice the enclosed area, with a +/- convention.)
+//  A minor caveat: this answer assumes a normal Cartesian coordinate system
+                area+= (pt2.x - pt0.x) * (pt2.y + pt0.y);
+            } else {
+console.log('segment length = 0 ! Why ?')
+            }
             pt0 = pt2;
             offset+= delta;
             delta = Math.min(patchSize, totalLength - offset);
@@ -482,7 +535,7 @@ TODO
             line.setAttribute('marker-end', "url(#EndMarker)");
         })
     }
-    return {d: d, segments: segments};
+    return {d: d, segments: segments, area: Math.abs(area / 2), clockwise: area < 0};
 }
 
 model2d.drawerViewFactorMesh = {    // SINGLETON
@@ -495,13 +548,13 @@ model2d.drawerViewFactorMesh = {    // SINGLETON
         this.scale_x = this.model.svg.scale_x;
         this.scale_y = this.model.svg.scale_y;
 
-        var gSVG = this.model.svg.group
-        ,	gRadiosity = gSVG.querySelector('#radiosity')
-                        || gSVG.appendChild(gSVG.ownerDocument.createElementNS(svgNS,'g'))
+        var svgG = this.model.svg.group
+        ,	gRadiosity = svgG.querySelector('#radiosity')
+                        || svgG.appendChild(svgG.ownerDocument.createElementNS(svgNS,'g'))
         ,	gSegments = gRadiosity.querySelector('#segments')
-                        || gRadiosity.appendChild(gSVG.ownerDocument.createElementNS(svgNS,'g'))
+                        || gRadiosity.appendChild(svgG.ownerDocument.createElementNS(svgNS,'g'))
         ,	gSegmentsJoins = gRadiosity.querySelector('#segmentsJoins')
-                        || gRadiosity.appendChild(gSVG.ownerDocument.createElementNS(svgNS,'g'))
+                        || gRadiosity.appendChild(svgG.ownerDocument.createElementNS(svgNS,'g'))
         ;
         gSegments.innerHTML = "";
         gSegmentsJoins.innerHTML = "";
@@ -588,7 +641,9 @@ model2d.containsLine = function(svgElement, centerLine, model) {
         return false;
     }
     var d = this.G.lineLength(centerLine)
-    ,   t = 100 * model2d.DIST_RESOLUTION * d   // FIXME ... distance delta recognition
+    ,   delta = model.lx / model.nx // in model scale 1 computational grid box size 
+    ,   t = delta / d   // from line start
+// FIXME ... distance delta recognition
     ,   point = svgElement.ownerSVGElement.createSVGPoint()
     ;
     point.x = ((1-t)*centerLine.s.x + t*centerLine.e.x) * model.svg.scale_x; 
@@ -596,7 +651,7 @@ model2d.containsLine = function(svgElement, centerLine, model) {
     if (svgElement.isPointInFill(point)) {
         return true;
     }
-    t = ( 1 - 2 * model2d.DIST_RESOLUTION ) * d;
+    t = (d - delta) / d;  // from line end
     point.x = ((1-t)*centerLine.s.x + t*centerLine.e.x) * model.svg.scale_x; 
     point.y = ((1-t)*centerLine.s.y + t*centerLine.e.y) * model.svg.scale_y;
     return  svgElement.isPointInFill(point);
@@ -1102,4 +1157,67 @@ model2d.generateBlobPathD = function( x, y ) {
 	    }
     }
     return d;
+}
+
+
+model2d.drawPhotons = function(model) {
+    if (model.photons.length) {
+
+        var svgG = model.svg.group
+        ,   scale_x = model.svg.scale_x
+        ,   scale_y = model.svg.scale_y
+        ,   gPhotons = svgG.querySelector("g#photons") 
+        ,   photons = model.photons
+        ,   photonLength = model.photonSolver.spacing //Math.max(5, model.timeStep * 0.1)    // ???
+        ,   x,y,r 
+        ;
+        if (!gPhotons) {
+            gPhotons = svgG.appendChild(svgG.ownerDocument.createElementNS(svgNS,'g'));
+            gPhotons.id = "photons";
+            gPhotons.setAttribute('style','stroke-width:0.5;stroke:aliceblue;opacity:0.5;');
+        }
+        gPhotons.innerHTML = "";    // TODO ... instead creating move lines !
+
+        photons.forEach( photon => {
+            var line = gPhotons.appendChild(gPhotons.ownerDocument.createElementNS(svgNS,'line'))
+            ;
+            r = 1.0 / Math.hypot(photon.vx, photon.vy);
+
+            line.setAttribute('x1', (photon.rx - photonLength * photon.vx * r) * scale_x);
+            line.setAttribute('y1', (photon.ry - photonLength * photon.vy * r) * scale_y);
+            line.setAttribute('x2', photon.rx * scale_x);
+            line.setAttribute('y2', photon.ry * scale_y);
+        })
+
+    }
+}
+
+model2d.particleDrawer = {
+    update: function(particle, model) {
+        var svgG = model.svg.group
+        ,   scale_x = model.svg.scale_x
+        ,   scale_y = model.svg.scale_y
+        ,   gParticles = svgG.querySelector("g#particles") 
+        ;
+        if (!gParticles) {
+            gParticles = svgG.appendChild(svgG.ownerDocument.createElementNS(svgNS,'g'));
+            gParticles.id = "particles";
+    //        gParticles.setAttribute('style','stroke-width:0.5;stroke:aliceblue;opacity:0.5;');
+        }
+        var svgElement = gParticles.querySelector(`circle[data-name=${particle.uid}]`);
+        if (!svgElement) {
+            svgElement = gParticles.appendChild(svgG.ownerDocument.createElementNS(svgNS,'circle'));
+            svgElement.setAttribute('style',`stroke:${particle.color};fill:${particle.color}`);   
+            svgElement.dataset.name = particle.uid;
+            particle.svgElement = svgElement;
+        }
+        svgElement.setAttribute('cx',particle.rx * scale_x);
+        svgElement.setAttribute('cy',particle.ry * scale_y);
+        svgElement.setAttribute('r',particle.radius * scale_x);
+    }
+,   remove: function(particle) {
+        if (particle.svgElement) {
+            particle.svgElement.parentNode.removeChild(particle.svgElement);
+        }
+    }
 }
